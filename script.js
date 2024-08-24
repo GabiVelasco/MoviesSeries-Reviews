@@ -1,39 +1,46 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const API_KEY = 'your_api_key'; // Ersetzen Sie 'your_api_key' durch Ihren tatsächlichen API-Schlüssel
-    const contentDiv = document.getElementById('content');
-
-    function fetchMovies(query) {
-        const url = `http://www.omdbapi.com/?s=${query}&apikey=${API_KEY}`;
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data.Response === 'True') {
-                    displayMovies(data.Search);
-                } else {
-                    contentDiv.innerHTML = `<p>Keine Filme oder Serien gefunden.</p>`;
-                }
-            })
-            .catch(error => console.error('Error:', error));
+document.getElementById('uploadButton').addEventListener('click', function() {
+    const input = document.getElementById('csvFileInput');
+    if (!input.files.length) {
+        alert('Please select a CSV file first.');
+        return;
     }
 
-    function displayMovies(movies) {
-        contentDiv.innerHTML = ''; // Clear previous content
-
-        movies.forEach(movie => {
-            const movieCard = document.createElement('div');
-            movieCard.className = 'movie-card';
-
-            movieCard.innerHTML = `
-                <img src="${movie.Poster}" alt="${movie.Title}">
-                <h3>${movie.Title}</h3>
-                <p>${movie.Year}</p>
-            `;
-
-            contentDiv.appendChild(movieCard);
-        });
-    }
-
-    // Beispiel: Suche nach dem Begriff "Batman"
-    fetchMovies('Batman');
+    const file = input.files[0];
+    Papa.parse(file, {
+        header: true, // Uses the first row of the CSV as the headers
+        complete: function(results) {
+            const data = results.data;
+            uploadToPocketBase(data);
+        },
+        error: function(error) {
+            console.error('Error parsing CSV file:', error);
+        }
+    });
 });
+
+async function uploadToPocketBase(data) {
+    const filteredData = data.map(row => {
+        return {
+            id: row.id,
+            title: row.title,
+            genre: row.genres,
+            overview: row.overview
+        };
+    });
+
+    for (const item of filteredData) {
+        try {
+            await fetch('http://localhost:8090/api/collections/Movies/records', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer YOUR_API_TOKEN'
+                },
+                body: JSON.stringify(item)
+            });
+            console.log(`Uploaded: ${item.title}`);
+        } catch (error) {
+            console.error('Error uploading to PocketBase:', error);
+        }
+    }
+}
