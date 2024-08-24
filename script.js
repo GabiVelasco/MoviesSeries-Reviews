@@ -1,5 +1,7 @@
 document.getElementById('uploadButton').addEventListener('click', function() {
     const input = document.getElementById('csvFileInput');
+    const statusMessage = document.getElementById('statusMessage');
+    
     if (!input.files.length) {
         alert('Please select a CSV file first.');
         return;
@@ -7,41 +9,61 @@ document.getElementById('uploadButton').addEventListener('click', function() {
 
     const file = input.files[0];
     Papa.parse(file, {
-        header: true, // Uses the first row of the CSV as the headers
+        header: true,
         complete: function(results) {
             const data = results.data;
-            uploadToPocketBase(data);
+            uploadToPocketBase(data, statusMessage);
         },
         error: function(error) {
             console.error('Error parsing CSV file:', error);
+            statusMessage.textContent = 'Error parsing CSV file. Please check the console for details.';
         }
     });
 });
 
-async function uploadToPocketBase(data) {
-    // Adjust the field mapping to align with PocketBase schema
+async function uploadToPocketBase(data, statusMessage) {
     const filteredData = data.map(row => {
+        // Parse the genre field to extract only the genre names
+        let genreNames = [];
+        try {
+            const genresArray = JSON.parse(row.genres);  // Adjust this if the field name is different in your CSV
+            genreNames = genresArray.map(genre => genre.name).join(', '); // Join multiple genres into a string
+        } catch (error) {
+            console.error('Error parsing genre JSON:', error);
+        }
+
         return {
-            movie_id: row.id,  // Map CSV `id` to PocketBase `movie_id`
+            movie_id: row.id,  // Adjust this if the CSV header is different
             title: row.title,
-            genre: row.genres,
+            genre: genreNames, // Use the parsed genre names
             overview: row.overview
         };
     });
 
+    statusMessage.textContent = 'Uploading data...';
+
     for (const item of filteredData) {
         try {
-            await fetch('http://localhost:8090/api/collections/Movies/records', {
+            const response = await fetch('http://localhost:8090/api/collections/Movies/records', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer 120'
+                    'Authorization': 'Bearer 120' // Replace with a valid token
                 },
                 body: JSON.stringify(item)
             });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
             console.log(`Uploaded: ${item.title}`);
         } catch (error) {
             console.error('Error uploading to PocketBase:', error);
+            statusMessage.textContent = `Error uploading some data. Please check the console for details.`;
+            return;
         }
     }
+
+    statusMessage.textContent = 'All data uploaded successfully!';
 }
