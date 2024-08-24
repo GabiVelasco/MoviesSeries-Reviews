@@ -19,9 +19,10 @@ document.getElementById('uploadButton').addEventListener('click', function() {
 });
 
 async function uploadToPocketBase(data) {
+    // Adjust the field mapping to align with PocketBase schema
     const filteredData = data.map(row => {
         return {
-            id: row.id,
+            movie_id: row.id,  // Map CSV `id` to PocketBase `movie_id`
             title: row.title,
             genre: row.genres,
             overview: row.overview
@@ -34,7 +35,7 @@ async function uploadToPocketBase(data) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer YOUR_API_TOKEN'
+                    'Authorization': 'Bearer 120'
                 },
                 body: JSON.stringify(item)
             });

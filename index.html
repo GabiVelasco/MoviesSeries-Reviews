@@ -2,14 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSV to PocketBase</title>
+    <title>CSV Upload to PocketBase</title>
 </head>
 <body>
-    <input type="file" id="csvFileInput" accept=".csv" />
+    <h1>Upload CSV to PocketBase</h1>
+    <!-- File input for selecting CSV -->
+    <input type="file" id="csvFileInput" accept=".csv">
+    <!-- Button to trigger the upload process -->
     <button id="uploadButton">Upload to PocketBase</button>
+
+    <!-- Include PapaParse for CSV parsing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <!-- Include your JavaScript file -->
     <script src="script.js"></script>
 </body>
 </html>
