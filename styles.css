@@ -39,3 +39,15 @@ main {
     margin-top: 10px;
     font-size: 18px;
 }
+
+.movie-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+
+.filter-section {
+    margin-bottom: 20px;
+}
