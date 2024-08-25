@@ -57,18 +57,26 @@ document.addEventListener('DOMContentLoaded', () => {
         populateFilters();
         filterMovies(); // Apply filters after fetching all movies
     }
-
     function extractGenresAndTitles() {
         allMovies.forEach(movie => {
             // Handle genres
-            let genres = movie.genre ? movie.genre.split(',') : [];
-            genres.forEach(g => {
-                const trimmedGenre = g.trim();
-                if (trimmedGenre.length > 0) {
-                    uniqueGenres.add(trimmedGenre); // Add valid genres to the set
-                }
-            });
-
+            let genres = movie.genre ? movie.genre.split(',').map(g => g.trim()) : [];
+            
+            // Check if genres are empty or any genre has fewer than 3 characters
+            if (genres.length === 0 || genres.every(g => g.length < 3)) {
+                movie.genre = 'Not Specified'; // Replace with "Not Specified"
+                uniqueGenres.add('Not Specified');
+            } else {
+                // Replace genres with "Not Specified" if any genre is invalid
+                genres = genres.map(g => g.length < 3 ? 'Not Specified' : g);
+                movie.genre = genres.join(', '); // Update movie.genre with new genres
+                genres.forEach(g => {
+                    if (g.length > 0) {
+                        uniqueGenres.add(g);
+                    }
+                });
+            }
+            
             // Handle titles
             if (movie.title) {
                 uniqueTitles.add(movie.title.trim());
@@ -110,8 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const movieRow = document.createElement('tr');
             movieRow.innerHTML = `
                 <td>${movie.title}</td>
-                <td>${movie.movie_id}</td>
-                <td>${movie.id}</td>
                 <td>${movie.genre}</td>
                 <td>${movie.overview}</td>
             `;
@@ -128,9 +134,15 @@ document.addEventListener('DOMContentLoaded', () => {
             return movies;
         }
     
+        if (selectedGenre === 'Not Specified') {
+            return movies.filter(movie => {
+                // Check if the genre is "Not Specified"
+                return movie.genre === 'Not Specified';
+            });
+        }
+    
         // Normalize selected genre
         const normalizedGenre = selectedGenre.toLowerCase().trim();
-        console.log('Selected genre:', normalizedGenre);
     
         return movies.filter(movie => {
             if (!movie.genre) {
@@ -139,7 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
             // Normalize movie genre string
             const normalizedMovieGenres = movie.genre.split(',').map(g => g.trim().toLowerCase());
-            console.log('Movie genres:', normalizedMovieGenres);
     
             // Check if the normalized movie genres contain the selected genre
             return normalizedMovieGenres.some(genre => genre.includes(normalizedGenre));
@@ -166,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const searchTitle = document.getElementById('filterTitle').value.toLowerCase();
 
         let filteredMovies = allMovies;
-    
+
         // Apply genre filter
         filteredMovies = filterByGenre(filteredMovies, selectedGenre);
         console.log('Movies after genre filter:', filteredMovies); // Debugging log
