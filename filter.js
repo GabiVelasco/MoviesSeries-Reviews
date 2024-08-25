@@ -12,8 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let uniqueTitles = new Set();
     const itemsPerPage = 30; // Number of items per page
 
-
-
     async function fetchMovies() {
         let page = 1;
         let totalPages = 1; // Set a default value for totalPages
@@ -50,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('All movies:', allMovies); // Log to see all movies
 
         if (allMovies.length === 0) {
-            movieList.innerHTML = '<p>No movies found.</p>';
+            movieList.innerHTML = '<tr><td colspan="5">No movies found.</td></tr>';
             resultsInfo.innerHTML = 'No results found.';
             return;
         }
@@ -99,35 +97,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayMovies(movies) {
-        const movieList = document.getElementById('movieList');
-        const resultsInfo = document.getElementById('resultsInfo');
-
         movieList.innerHTML = ''; // Clear current movies
         resultsInfo.innerHTML = ''; // Clear any previous results info
 
-
         if (movies.length === 0) {
-            movieList.innerHTML = '<p>No movies found.</p>';
+            movieList.innerHTML = '<tr><td colspan="5">No movies found.</td></tr>';
             resultsInfo.innerHTML = 'No results found.';
             return;
         }
 
         movies.forEach(movie => {
-            const movieItem = document.createElement('div');
-            movieItem.className = 'movie-item';
-            movieItem.innerHTML = `
-                <h2>${movie.title}</h2>
-                <p><strong>Movie ID:</strong> ${movie.movie_id}</p>
-                <p><strong>ID:</strong> ${movie.id}</p>
-                <p><strong>Genre:</strong> ${movie.genre}</p>
-                <p><strong>Overview:</strong> ${movie.overview}</p>
+            const movieRow = document.createElement('tr');
+            movieRow.innerHTML = `
+                <td>${movie.title}</td>
+                <td>${movie.movie_id}</td>
+                <td>${movie.id}</td>
+                <td>${movie.genre}</td>
+                <td>${movie.overview}</td>
             `;
-            movieList.appendChild(movieItem);
+            movieList.appendChild(movieRow);
         });
 
         // Calculate total pages for filtered results
         const totalFilteredPages = Math.ceil(movies.length / itemsPerPage);
-        console.log('Total pages for filtered results:', totalFilteredPages);
         resultsInfo.innerHTML = `Showing ${movies.length} results. Total pages: ${totalFilteredPages}.`;
     }
 
@@ -154,8 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    
-
     function filterByTitle(movies, searchTitle) {
         if (!searchTitle) {
             return movies;
@@ -194,6 +184,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchMovies(); // Initial fetch
 });
-
-
-

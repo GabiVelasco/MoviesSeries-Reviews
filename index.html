@@ -1,51 +1,66 @@
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Movie List</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-    .filter-section {
-        margin-bottom: 20px;
-    }
-    .movie-item {
-        border: 1px solid #ddd;
-        padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 5px;
-    }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies Check-List</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Upload CSV to PocketBase</h1>
-    <input type="file" id="csvFileInput" accept=".csv">
-    <button id="uploadButton">Upload to PocketBase</button>
-    <!-- Display area for upload status -->
-    <div id="statusMessage"></div>
+    <!-- Header -->
+    <header>
+        <h1>Movies Check-List</h1>
+    </header>
 
-      <h1>Movie List</h1>
-    
-    <div class="filter-section">
-        <label for="filterGenre">Filter by Genre:</label>
-        <select id="filterGenre">
-            <option value="">All</option>
-            <!-- Options will be populated dynamically -->
-        </select>
-        
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Reviews</a></li>
+            <li><a href="#">Genres</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
 
-        
-        <label for="filterTitle">Filter by Title:</label>
-        <input type="text" id="filterTitle" placeholder="Search by title">
-    </div>
-    <div id="resultsInfo">Result Infos</div>
-    <div id="movieList">
-        <!-- Movies will be displayed here -->
-    </div>
-    <div id="movies-container"></div>
-    
+    <!-- Main Content -->
+    <main>
+        <div class="filter-section">
+            <label for="filterGenre">Filter by Genre:</label>
+            <select id="filterGenre">
+                <option value="">All</option>
+                <!-- Options will be populated dynamically -->
+            </select>
+
+            <label for="filterTitle">Filter by Title:</label>
+            <input type="text" id="filterTitle" placeholder="Search by title">
+        </div>
+        <div id="resultsInfo">Result Infos</div>
+
+        <!-- Movie List Table -->
+        <table id="movieTable" border="1">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Movie ID</th>
+                    <th>ID</th>
+                    <th>Genre</th>
+                    <th>Overview</th>
+                </tr>
+            </thead>
+            <tbody id="movieList">
+                <!-- Movies will be displayed here as table rows -->
+            </tbody>
+        </table>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Movie Site. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pocketbase@latest/dist/pocketbase.min.js"></script>
     <script src="filter.js"></script>
-
 </body>
 </html>
