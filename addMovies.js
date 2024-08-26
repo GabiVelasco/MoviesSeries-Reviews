@@ -36,7 +36,12 @@ async function uploadToPocketBase(data, statusMessage) {
             movie_id: row.id,  // Adjust this if the CSV header is different
             title: row.title,
             genre: genreNames, // Use the parsed genre names
-            overview: row.overview
+            overview: row.overview,
+            original_language: row.original_language,
+            release_date: row.release_date,
+            minutes: row.runtime,
+            homepage: row.homepage
+
         };
     });
 
