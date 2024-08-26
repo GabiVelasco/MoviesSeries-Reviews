@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
             const movieRow = document.createElement('tr');
             movieRow.innerHTML = `
-                <td>${movie.title || ''}</td>
+                <td><strong>${movie.title || ''}</strong></td>
                 <td>${movie.genre || ''}</td>
                 <td class="justify" >${movie.overview || ''}</td>
                 <td>${movie.original_language || ''}</td>
