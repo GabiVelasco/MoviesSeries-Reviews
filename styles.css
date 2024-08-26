@@ -69,73 +69,6 @@ main {
 /* Movie Table */
 /* Movie Table */
 /* Movie Table */
-.movietable, #movieTable, table, thead {
-    width: 100%;
-    margin-top: 20px;
-    z-index: 1;
-    border: none;
-}
-
-.border-left {
-    border-radius: 30px 0 0 0 !important;
-    border: 1px solid #eee;
-
-}
-
-.border-right {
-    border-radius: 0  30px  0 0 !important;
-    border: 1px solid #eee !important;
-
-}
-
-th, td {
-    padding: 20px !important;
-    text-align: left!important;
-    border-bottom: 1px solid #ddd !important;
-    margin: fit-content !important;
-    border: 1px solid #eee !important;
-    
-   
-}
-
-th {
-    background-color : #333 !important;
-    color: white !important;
-    position: relative !important; /* Position relative for sorting indicator */
-    cursor: pointer !important; /* Change cursor to pointer to indicate clickable */
-    min-width: fit-content !important;
-    
-}
-table, thead, tr {border-radius: 30px !important;}
-
-/* Style for sorting indicators */
-th::after {
-    content: '' !important; /* Empty content for sorting indicator */
-    position: absolute !important; /* Absolute positioning */
-    right: 10px !important; /* Position indicator to the right */
-    top: 50% !important; /* Center vertically */
-    transform: translateY(-50%) !important; /* Adjust for vertical centering */
-    border: 5px solid transparent !important; /* Transparent border for arrows */
-}
-
-/* Arrow for ascending sort */
-th.asc::after {
-    border-width: 0 5px 5px 5px !important; /* Create a downward arrow */
-    border-style: solid !important; /* Make it solid */
-    border-color: transparent transparent white transparent !important; /* Set arrow color */
-}
-
-/* Arrow for descending sort */
-th.desc::after {
-    border-width: 5px 5px 0 5px !important; /* Create an upward arrow */
-    border-style: solid !important; /* Make it solid */
-    border-color: white transparent transparent transparent !important; /* Set arrow color */
-}
-
-/* Ensures table header and rows are consistent with existing style */
-td {
-    border: 0.5px solid #ddd !important;
-}
 
 
 /* Footer Styles */
@@ -233,3 +166,130 @@ select{
     background-color: rgb(81, 142, 177) !important;
 
 }
+
+
+.movietable, #movieTable, table, thead {
+    width: 100% !important;
+    margin-top: 20px!important;
+    border: none !important;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    
+}
+
+.border-left {
+    border-radius: 30px 0 0 0 !important;
+    border: 1px solid #eee;
+
+}
+
+.border-right {
+    border-radius: 0  30px  0 0 !important;
+    border: 1px solid #eee !important;
+
+}
+
+th, td {
+    padding: 20px !important;
+    text-align: left!important;
+    border-bottom: 1px solid #ddd !important;
+    margin: fit-content !important;
+    border: 1px solid #eee !important;
+
+    
+   
+}
+
+th {
+    background-color : #333 !important;
+    color: white !important;
+    position: relative !important; /* Position relative for sorting indicator */
+    cursor: pointer !important; /* Change cursor to pointer to indicate clickable */
+    min-width: fit-content !important;
+    
+    
+}
+table, thead, tr {border-radius: 30px !important;}
+
+
+
+/* DARK MODUS */
+ /* Dark mode styles */
+ body.dark-mode {
+    background-color: #1212128e; /* Dark background for dark mode */
+    color: #ffffff; /* Light text color for dark mode */
+    border-radius: 30px !important;
+}
+
+body.dark-mode table {
+    border-color: #333; /* Darker border for dark mode */
+    border-radius: 30px !important;
+}
+
+body.dark-mode th {
+    background-color: #444; /* Darker header background */
+    color: #ffffff; /* Light text color for headers in dark mode */
+    border-radius: 30px !important;
+}
+
+body.dark-mode td {
+    background-color: #222; /* Darker cell background */
+}
+
+body.dark-mode th.asc::after {
+    border-color: transparent transparent #ffffff transparent; /* White arrow for dark mode */
+    border-radius: 30px !important;
+}
+
+body.dark-mode th.desc::after {
+    border-color: #ffffff transparent transparent transparent; /* White arrow for dark mode */
+}
+
+/* Add transition for smooth mode change */
+body, table, th, td {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode .border-left {
+    border-radius: 30px 0 0 0 !important;
+    border: 1px solid #eeeeee00 !important;
+    z-index: 1;
+
+}
+
+.dark-mode .border-right {
+    border-radius: 0  30px  0 0 !important;
+    border: 1px solid #eeeeee00 !important;
+    z-index: 1;
+
+}
+
+[data-bs-theme=dark] .element {
+    color: var(--bs-primary-text-emphasis);
+    background-color: var(--bs-primary-bg-subtle);
+    
+  }
+
+  [data-bs-theme=dark] table, tr {border-radius: 30px;}
+/*  DARK MODUS ENDE */
+
+.darkmodus { padding: 20px;
+ margin: 20px;}
+
+ tr {border-radius: 30px !important;}
+
+ /* Movie Table */
+
+
+
+
+
+/* Apply border-radius to the first and last cells of each row */
+tbody tr:first-child td:first-child {
+    border-top-left-radius: 30px;
+}
+tbody tr:first-child td:last-child {
+    border-top-right-radius: 30px;
+}
+
+
