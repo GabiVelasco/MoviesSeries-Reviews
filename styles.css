@@ -47,6 +47,13 @@ main {
     padding: 20px;
 }
 
+.container { 
+    width: 70%; 
+    margin: 0 auto; 
+    justify-content: center;
+    text-align: justify;
+}
+
 .filter-section {
     margin-bottom: 20px;
 }
