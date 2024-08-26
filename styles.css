@@ -1,9 +1,11 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    letter-spacing: 2px;
+    font-weight: lighter;
 }
 
 header {
@@ -11,6 +13,9 @@ header {
     color: #fff;
     padding: 10px 0;
     text-align: center;
+}
+header h1 {
+ color:aqua
 }
 
 /* Navigation Styles */
@@ -58,18 +63,17 @@ main {
 
 .filter-section {
     margin-bottom: 20px;
+    letter-spacing: 2px;
 }
 
 /* Movie Table */
 /* Movie Table */
 /* Movie Table */
-#movieTable table, thead {
+.movietable, #movieTable, table, thead {
     width: 100%;
-    border-collapse: collapse;
     margin-top: 20px;
-
-    
     z-index: 1;
+    border: none;
 }
 
 .border-left {
@@ -80,55 +84,57 @@ main {
 
 .border-right {
     border-radius: 0  30px  0 0 !important;
-    border: 1px solid #eee;
+    border: 1px solid #eee !important;
 
 }
 
 th, td {
-    padding: 20px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    margin: fit-content;
+    padding: 20px !important;
+    text-align: left!important;
+    border-bottom: 1px solid #ddd !important;
+    margin: fit-content !important;
+    border: 1px solid #eee !important;
+    
    
 }
 
 th {
-    background-color: #333;
-    color: white;
-    position: relative; /* Position relative for sorting indicator */
-    cursor: pointer; /* Change cursor to pointer to indicate clickable */
-    min-width: fit-content;
+    background-color : #333 !important;
+    color: white !important;
+    position: relative !important; /* Position relative for sorting indicator */
+    cursor: pointer !important; /* Change cursor to pointer to indicate clickable */
+    min-width: fit-content !important;
     
 }
-table, thead {border-radius: 30px !important;}
+table, thead, tr {border-radius: 30px !important;}
 
 /* Style for sorting indicators */
 th::after {
-    content: ''; /* Empty content for sorting indicator */
-    position: absolute; /* Absolute positioning */
-    right: 10px; /* Position indicator to the right */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Adjust for vertical centering */
-    border: 5px solid transparent; /* Transparent border for arrows */
+    content: '' !important; /* Empty content for sorting indicator */
+    position: absolute !important; /* Absolute positioning */
+    right: 10px !important; /* Position indicator to the right */
+    top: 50% !important; /* Center vertically */
+    transform: translateY(-50%) !important; /* Adjust for vertical centering */
+    border: 5px solid transparent !important; /* Transparent border for arrows */
 }
 
 /* Arrow for ascending sort */
 th.asc::after {
-    border-width: 0 5px 5px 5px; /* Create a downward arrow */
-    border-style: solid; /* Make it solid */
-    border-color: transparent transparent white transparent; /* Set arrow color */
+    border-width: 0 5px 5px 5px !important; /* Create a downward arrow */
+    border-style: solid !important; /* Make it solid */
+    border-color: transparent transparent white transparent !important; /* Set arrow color */
 }
 
 /* Arrow for descending sort */
 th.desc::after {
-    border-width: 5px 5px 0 5px; /* Create an upward arrow */
-    border-style: solid; /* Make it solid */
-    border-color: white transparent transparent transparent; /* Set arrow color */
+    border-width: 5px 5px 0 5px !important; /* Create an upward arrow */
+    border-style: solid !important; /* Make it solid */
+    border-color: white transparent transparent transparent !important; /* Set arrow color */
 }
 
 /* Ensures table header and rows are consistent with existing style */
-th, td {
-    border: 1px solid #ddd;
+td {
+    border: 0.5px solid #ddd !important;
 }
 
 
@@ -151,4 +157,79 @@ footer {
 .justify {
     text-align: justify !important;
   
+}
+
+input {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    margin: 20px auto;
+    padding:5px;
+
+
+}
+
+label{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    margin: 20px auto;
+    padding:5px;
+
+
+}
+
+option {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    margin: 20px auto;
+    padding:5px;
+
+
+}
+
+option:hover {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    margin: 20px auto;
+    padding:5px;
+    background-color: rgb(81, 142, 177) !important;
+
+
+}
+
+label:hover {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    margin: 20px auto;
+    padding:5px;
+    background-color: rgb(81, 142, 177) !important;
+
+
+}
+
+select{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    margin: 20px auto;
+    padding:5px;
+    width: 50%;
+    background-color: rgb(81, 142, 177) !important;
+
+
+}
+
+#resultsInfo:hover {
+    background-color: rgb(81, 142, 177) !important;
+
 }
