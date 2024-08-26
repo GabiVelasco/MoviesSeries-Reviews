@@ -107,31 +107,46 @@ document.addEventListener('DOMContentLoaded', () => {
     function displayMovies(movies) {
         movieList.innerHTML = ''; // Clear current movies
         resultsInfo.innerHTML = ''; // Clear any previous results info
-
+    
         if (movies.length === 0) {
             movieList.innerHTML = '<tr><td colspan="5">No movies found.</td></tr>';
             resultsInfo.innerHTML = 'No results found.';
             return;
         }
-
+    
         movies.forEach(movie => {
+            // Format the release date
+            const formattedDate = movie.release_date ? formatReleaseDate(movie.release_date) : '';
+    
             const movieRow = document.createElement('tr');
             movieRow.innerHTML = `
                 <td>${movie.title || ''}</td>
                 <td>${movie.genre || ''}</td>
                 <td>${movie.overview || ''}</td>
                 <td>${movie.original_language || ''}</td>
-                <td>${movie.release_date || ''}</td>
+                <td>${formattedDate}</td>
                 <td>${movie.minutes || ''}</td>
                 <td><a href="${movie.homepage || '#'}">${movie.homepage ? 'Link' : ''}</a></td>
             `;
-;
             movieList.appendChild(movieRow);
         });
-
+    
         // Calculate total pages for filtered results
         const totalFilteredPages = Math.ceil(movies.length / itemsPerPage);
         resultsInfo.innerHTML = `Showing ${movies.length} results. Total pages: ${totalFilteredPages}.`;
+    }
+    
+    // Function to format the release date
+    function formatReleaseDate(dateString) {
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) {
+            return ''; // Return an empty string if the date is invalid
+        }
+        // Format the date to YYYY-MM-DD
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}`;
     }
 
     function filterByGenre(movies, selectedGenre) {
