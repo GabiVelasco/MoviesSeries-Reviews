@@ -46,7 +46,7 @@
             <select id="filterGenre">
                 <option value="">All</option>
                 <!-- Options will be populated dynamically -->
-            </select>
+            </select> <br><br>
 
             <label for="filterTitle">Filter by Title:</label>
             <input type="text" id="filterTitle" placeholder="Search by title">
@@ -57,13 +57,13 @@
         <table id="movieTable" border="1">
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Genre</th>
-                    <th>Overview</th>
-                    <th>Original Language</th>
-                    <th>Release Date</th>
-                    <th>Minutes</th>
-                    <th>Homepage</th>
+                    <th data-sort="title">Title <img src="up-down2.png" alt="" width="20px;"></th>
+                    <th data-sort="genre">Genre <img src="up-down2.png" alt="" width="20px;"></th>
+                    <th data-sort="overview">Overview <img src="up-down2.png" alt="" width="20px;"></th>
+                    <th data-sort="original_language">Original Language <img src="up-down2.png" alt="" width="20px;"></th>
+                    <th data-sort="release_date">Release Date <img src="up-down2.png" alt="" width="20px;"></th>
+                    <th data-sort="minutes">Minutes <img src="up-down2.png" alt="" width="20px;"></th>
+                    <th data-sort="homepage">Homepage <img src="up-down2.png" alt="" width="20px;"></th>
                 </tr>
             </thead>
             <tbody id="movieList">

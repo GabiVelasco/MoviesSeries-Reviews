@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let uniqueTitles = new Set();
     const itemsPerPage = 30; // Number of items per page
 
+    let currentSort = {column: 'title', direction: 'acs' };
+
     async function fetchMovies() {
         let page = 1;
         let totalPages = 1; // Set a default value for totalPages
@@ -48,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('All movies:', allMovies); // Log to see all movies
 
         if (allMovies.length === 0) {
-            movieList.innerHTML = '<tr><td colspan="5">No movies found.</td></tr>';
+            movieList.innerHTML = '<tr><td colspan="7">No movies found.</td></tr>';
             resultsInfo.innerHTML = 'No results found.';
             return;
         }
@@ -122,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             movieRow.innerHTML = `
                 <td>${movie.title || ''}</td>
                 <td>${movie.genre || ''}</td>
-                <td>${movie.overview || ''}</td>
+                <td class="justify" >${movie.overview || ''}</td>
                 <td>${movie.original_language || ''}</td>
                 <td>${formattedDate}</td>
                 <td>${movie.minutes || ''}</td>
@@ -148,6 +150,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const day = String(date.getDate()).padStart(2, '0');
         return `${year}`;
     }
+
+
+    function sortMovies(movies, column, direction) {
+        return movies.slice().sort((a,b) => {
+            const aValue = a[column];
+            const bValue = b[column];
+            if (direction === 'asc' ) {
+                return compareValues(aValue, bValue); }
+                 else {
+                    return compareValues(bValue, aValue);
+                 }
+            });
+        }
+    
+        function compareValues(a, b) {
+            if (typeof a === 'string') {
+                return a.localeCompare(b, undefined, { sensitivity: 'base' });
+            }
+            if (typeof a === 'number') {
+                return a-b;
+            }
+            return 0;
+        }
+
+        function handleSort(event) {
+            const column = event.target.getAttribute('data-sort');
+            const newDirection = currentSort.direction === 'asc' ? 'desc' : 'asc';
+            currentSort = {column, direction: newDirection};
+
+            const sortedMovies = sortMovies(allMovies, column, newDirection);
+            displayMovies(sortedMovies);
+        }
 
     function filterByGenre(movies, selectedGenre) {
         if (!selectedGenre || selectedGenre === "") {
@@ -212,6 +246,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     filterGenre.addEventListener('change', filterMovies);
     filterTitle.addEventListener('input', filterMovies);
+
+    document.querySelectorAll('th[data-sort]').forEach(header => {
+        header.addEventListener('click', handleSort);
+    });
 
     fetchMovies(); // Initial fetch
 });

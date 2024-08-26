@@ -59,6 +59,8 @@ main {
 }
 
 /* Movie Table */
+/* Movie Table */
+/* Movie Table */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -66,20 +68,50 @@ table {
 }
 
 th, td {
-    padding: 10px;
+    padding: 20px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    margin:fit-content;
+    margin: fit-content;
 }
 
 th {
     background-color: #333;
     color: white;
+    position: relative; /* Position relative for sorting indicator */
+    cursor: pointer; /* Change cursor to pointer to indicate clickable */
+    min-width: fit-content;
+    
 }
 
-td {
-    background-color: white;
+/* Style for sorting indicators */
+th::after {
+    content: ''; /* Empty content for sorting indicator */
+    position: absolute; /* Absolute positioning */
+    right: 10px; /* Position indicator to the right */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    border: 5px solid transparent; /* Transparent border for arrows */
 }
+
+/* Arrow for ascending sort */
+th.asc::after {
+    border-width: 0 5px 5px 5px; /* Create a downward arrow */
+    border-style: solid; /* Make it solid */
+    border-color: transparent transparent white transparent; /* Set arrow color */
+}
+
+/* Arrow for descending sort */
+th.desc::after {
+    border-width: 5px 5px 0 5px; /* Create an upward arrow */
+    border-style: solid; /* Make it solid */
+    border-color: white transparent transparent transparent; /* Set arrow color */
+}
+
+/* Ensures table header and rows are consistent with existing style */
+th, td {
+    border: 1px solid #ddd;
+}
+
 
 /* Footer Styles */
 footer {
@@ -94,4 +126,10 @@ footer {
 
 .uploadcsv {
     padding: 20px;
+}
+
+
+.justify {
+    text-align: justify !important;
+  
 }
