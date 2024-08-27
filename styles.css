@@ -15,7 +15,7 @@ header {
     text-align: center;
 }
 header h1 {
- color:aqua
+ color:#518EB1;
 }
 
 /* Navigation Styles */
@@ -273,14 +273,14 @@ body, table, th, td {
   [data-bs-theme=dark] table, tr {border-radius: 30px;}
 /*  DARK MODUS ENDE */
 
-.darkmodus { padding: 20px;
- margin: 20px;}
+.darkmodus { 
+ }
 
  tr {border-radius: 30px !important;}
 
  /* Movie Table */
 
-
+.transparent { background-color: transparent; border: none;}
 
 
 
