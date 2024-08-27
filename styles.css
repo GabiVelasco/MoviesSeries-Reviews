@@ -64,7 +64,12 @@ main {
 .filter-section {
     margin-bottom: 20px;
     letter-spacing: 2px;
+    display: flex;
+    flex-direction: row;
 }
+
+#filterGenre { display: inline-block;
+margin: 0 auto;}
 
 /* Movie Table */
 /* Movie Table */
@@ -99,6 +104,8 @@ input {
     border-radius: 30px;
     margin: 20px auto;
     padding:5px;
+    display: inline-block;
+    -ms-overflow-style: none; /* Hides scrollbars in IE and Edge */
 
 
 }
@@ -110,6 +117,7 @@ label{
     border-radius: 30px;
     margin: 20px auto;
     padding:5px;
+    display: inline-block;
 
 
 }
@@ -121,6 +129,7 @@ option {
     border-radius: 30px;
     margin: 20px auto;
     padding:5px;
+    display: inline-block;
 
 
 }
@@ -137,17 +146,17 @@ option:hover {
 
 }
 
-label:hover {
+/* label:hover {
     text-align: center;
     justify-content: center;
     align-items: center;
     border-radius: 30px;
     margin: 20px auto;
     padding:5px;
-    background-color: rgb(81, 142, 177) !important;
+    background-color: rgb(81, 142, 177) !important; }*/
 
 
-}
+
 
 select{
     text-align: center;
@@ -163,7 +172,7 @@ select{
 }
 
 #resultsInfo:hover {
-    background-color: rgb(81, 142, 177) !important;
+    /* background-color: rgb(81, 142, 177) !important; */
 
 }
 

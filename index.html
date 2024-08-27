@@ -45,16 +45,23 @@
 
    
     <main class="container">
-        <div class="filter-section">
-            <label for="filterGenre">Filter by Genre:</label>
-            <select  id="filterGenre">
-                <option value="">All</option>
-                <!-- Options will be populated dynamically -->
-            </select> <br><br>
+            <div class="filter-section">
+                <section>
+                    <label for="filterGenre">Filter by Genre:</label>
+                    <select  id="filterGenre">
+                        <option value="">All</option>
+                        <!-- Options will be populated dynamically -->
+                    </select> <br><br>
+        
+                </section>
+          
+                <section>
+                        <label for="filterTitle">Filter by Title:</label><br>
+                        <input type="text" id="filterTitle" placeholder="Search by title">
+                </section>
+                </div>
+                
 
-            <label for="filterTitle">Filter by Title:</label>
-            <input type="text" id="filterTitle" placeholder="Search by title">
-        </div>
         <div id="resultsInfo">Result Infos</div>
 
         <!-- Movie List Table -->
