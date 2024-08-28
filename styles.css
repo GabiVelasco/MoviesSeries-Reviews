@@ -337,16 +337,6 @@ body, table, th, td {
 .transparent { background-color: transparent; border: none;}
 
 
-
-/* Apply border-radius to the first and last cells of each row */
-tbody tr:first-child td:first-child {
-    /* border-top-left-radius: 30px; */
-}
-tbody tr:first-child td:last-child {
-    /* border-top-right-radius: 30px; */
-}
-
-
 /* Apply border-radius to the entire table */
 #movieTable {
     border-radius: 30px !important;
