@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
         // Calculate total pages for filtered results
         const totalFilteredPages = Math.ceil(movies.length / itemsPerPage);
-        resultsInfo.innerHTML = `Showing ${movies.length} results. Total pages: ${totalFilteredPages}.`;
+        resultsInfo.innerHTML = `Showing ${movies.length} results`;
     }
     
     // Function to format the release date
