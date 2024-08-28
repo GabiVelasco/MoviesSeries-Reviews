@@ -76,7 +76,8 @@ main {
 }
 
 #filterGenre { display: inline-block;
-margin: 0 auto;}
+margin: 0 auto;     color:rgb(0, 0, 0) !important;
+}
 
 /* Movie Table */
 /* Movie Table */
@@ -114,13 +115,14 @@ input {
     display: inline-block;
     -ms-overflow-style: none; /* Hides scrollbars in IE and Edge */
     background-color: rgb(81, 142, 177) !important;
-    color:white;
+    color:rgb(0, 0, 0) !important;
 
 
 }
 
 ::placeholder {
-    color: white;
+    color:rgb(0, 0, 0) !important;
+
 }
 
 label{
@@ -135,6 +137,14 @@ label{
 
 }
 
+/* Ensures all dropdown options are white */
+select option {
+    color:rgb(0, 0, 0) !important;
+
+    background-color: rgb(81, 142, 177) !important; /* Optional: Maintain consistency */
+}
+
+
 option {
     text-align: left;
     justify-content: center;
@@ -143,7 +153,8 @@ option {
     margin: 20px auto;
     padding:5px;
     display: inline-block;
-    color:white;
+    color:rgb(0, 0, 0) !important;
+    
 
 
 }
@@ -252,7 +263,7 @@ body.dark-mode table {
 body.dark-mode th {
     background-color: #444; /* Darker header background */
     color: #ffffff; /* Light text color for headers in dark mode */
-    border-radius: 30px !important;
+    /* border-radius: 30px !important; */
 }
 
 body.dark-mode td {
@@ -261,8 +272,8 @@ body.dark-mode td {
 
 body.dark-mode th.asc::after {
     border-color: transparent transparent #ffffff transparent; /* White arrow for dark mode */
-    border-radius: 30px !important;
-}
+    /* border-radius: 30px !important;*/
+} 
 
 body.dark-mode th.desc::after {
     border-color: #ffffff transparent transparent transparent; /* White arrow for dark mode */
@@ -309,10 +320,18 @@ body, table, th, td {
 
 /* Apply border-radius to the first and last cells of each row */
 tbody tr:first-child td:first-child {
-    border-top-left-radius: 30px;
+    /* border-top-left-radius: 30px; */
 }
 tbody tr:first-child td:last-child {
-    border-top-right-radius: 30px;
+    /* border-top-right-radius: 30px; */
+}
+
+
+/* Apply border-radius to the entire table */
+#movieTable {
+    border-radius: 30px !important;
+    overflow: hidden; /* Ensure rounded corners are visible */
+    border-collapse: separate; /* Prevents border radius issues */
 }
 
 
