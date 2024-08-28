@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function populateFilters() {
         // Populate genre filter
-        filterGenre.innerHTML = '<option value="">All Genres</option>'; // Add "All Genres" option
+        filterGenre.innerHTML = '<option style="color:white !important" value="">All Genres</option>'; // Add "All Genres" option
         uniqueGenres.forEach(genre => {
             const option = document.createElement('option');
             option.value = genre;

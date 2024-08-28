@@ -6,7 +6,14 @@ body {
     background-color: #f4f4f4;
     letter-spacing: 2px;
     font-weight: lighter;
+
+    overflow: -moz-scrollbars-none; /* For Firefox (older versions) */
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
 }
+
+::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Edge */
+  }
 
 header {
     background-color: #333;
@@ -98,7 +105,7 @@ footer {
 }
 
 input {
-    text-align: center;
+    text-align: left;
     justify-content: center;
     align-items: center;
     border-radius: 30px;
@@ -106,8 +113,14 @@ input {
     padding:5px;
     display: inline-block;
     -ms-overflow-style: none; /* Hides scrollbars in IE and Edge */
+    background-color: rgb(81, 142, 177) !important;
+    color:white;
 
 
+}
+
+::placeholder {
+    color: white;
 }
 
 label{
@@ -117,19 +130,20 @@ label{
     border-radius: 30px;
     margin: 20px auto;
     padding:5px;
-    display: inline-block;
+    display: flex;
 
 
 }
 
 option {
-    text-align: center;
+    text-align: left;
     justify-content: center;
     align-items: center;
     border-radius: 30px;
     margin: 20px auto;
     padding:5px;
     display: inline-block;
+    color:white;
 
 
 }
