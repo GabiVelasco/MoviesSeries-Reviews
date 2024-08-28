@@ -1,19 +1,38 @@
 /* General Styles */
-body {
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    letter-spacing: 2px;
-    font-weight: lighter;
 
-    overflow: -moz-scrollbars-none; /* For Firefox (older versions) */
-  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+html  {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
-::-webkit-scrollbar {
-    display: none; /* For Chrome, Safari, and Edge */
-  }
+body {
+    width: 100%;
+    height: 100%;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0 auto;
+    padding: 0;
+    background-color: #f4f4f400;
+    letter-spacing: 2px;
+    font-weight: lighter;
+    display: block;
+    
+    
+
+   
+} 
+
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Edge} */
+  
 
 header {
     background-color: #333;
@@ -57,6 +76,9 @@ nav ul li a:hover {
 /* Main Content */
 main {
     padding: 20px;
+    width: 100%;
+    height:fit-content;
+    min-height: 100%;
 }
 
 #resultsInfo { margin-left:25px; color: grey; font-size: smaller; letter-spacing: 5px;}
@@ -89,10 +111,13 @@ footer {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 10px 0;
-    position: fixed;
+    padding: 5px 0;
+    position:relative;
     bottom: 0;
     width: 100%;
+    height: auto;
+    margin: 0 auto;
+    display: flex;
 }
 
 .uploadcsv {
@@ -140,9 +165,14 @@ label{
 /* Ensures all dropdown options are white */
 select option {
     color:rgb(0, 0, 0) !important;
-
     background-color: rgb(81, 142, 177) !important; /* Optional: Maintain consistency */
+  
 }
+
+
+
+select::-webkit-scrollbar {
+        display: none; /* For Chrome, Safari, and Edge */ }
 
 
 option {
@@ -171,18 +201,6 @@ option:hover {
 
 }
 
-/* label:hover {
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    border-radius: 30px;
-    margin: 20px auto;
-    padding:5px;
-    background-color: rgb(81, 142, 177) !important; }*/
-
-
-
-
 select{
     text-align: center;
     justify-content: center;
@@ -192,12 +210,14 @@ select{
     padding:5px;
     width: 50%;
     background-color: rgb(81, 142, 177) !important;
+    overflow: -moz-scrollbars-none; /* For Firefox (older versions) */
+    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
 
 
 }
 
 #resultsInfo:hover {
-    /* background-color: rgb(81, 142, 177) !important; */
+    /* withouth hover, please. */
 
 }
 
@@ -335,3 +355,35 @@ tbody tr:first-child td:last-child {
 }
 
 
+/* READ MORE */
+
+.movie-overview {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Ensure the text is displayed in a single line */
+    max-height: 3.6em; /* Adjust based on the number of lines you want */
+    line-height: 1.2em; /* Line height that should match your actual line height */
+}
+
+.truncate {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Number of lines to show */
+    -webkit-box-orient: vertical;
+    line-height: 1.2em; /* Adjust this to match your text line height */
+}
+
+.read-more {
+    color: blue;
+    cursor: pointer;
+    display: block;
+    margin-top: 5px;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+
+/* READ MORE OPTION END */
