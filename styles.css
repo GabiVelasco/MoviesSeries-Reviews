@@ -356,24 +356,26 @@ tbody tr:first-child td:last-child {
 
 
 /* READ MORE */
-
+/* CSS to handle text overflow */
 .movie-overview {
-    display: block;
+    align-items: justify;
+    display:block;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap; /* Ensure the text is displayed in a single line */
-    max-height: 3.6em; /* Adjust based on the number of lines you want */
-    line-height: 1.2em; /* Line height that should match your actual line height */
+    white-space: nowrap; /* Keep text in a single line */
+    max-height: 3.6em; /* Adjust based on your design */
+    line-height: 1.2em; /* Adjust to match your font size */
+    max-width: 400px;
 }
 
-.truncate {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Number of lines to show */
-    -webkit-box-orient: vertical;
-    line-height: 1.2em; /* Adjust this to match your text line height */
+/* CSS to show the full overview */
+.movie-overview.full {
+    white-space: normal; /* Allow text to wrap */
+    max-height: none; /* Remove height constraint */
+    align-items: justify;
 }
 
+/* Style for the Read More link */
 .read-more {
     color: blue;
     cursor: pointer;
@@ -384,6 +386,7 @@ tbody tr:first-child td:last-child {
 .read-more:hover {
     text-decoration: underline;
 }
+
 
 
 /* READ MORE OPTION END */

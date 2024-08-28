@@ -117,21 +117,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     
         movies.forEach(movie => {
-            // Format the release date
             const formattedDate = movie.release_date ? formatReleaseDate(movie.release_date) : '';
-    
+
             const movieRow = document.createElement('tr');
+            const overview = movie.overview || '';
+
             movieRow.innerHTML = `
                 <td><strong>${movie.title || ''}</strong></td>
                 <td>${movie.genre || ''}</td>
-                <td class="justify" >${movie.overview || ''}</td>
+                <td>
+                    <span class="movie-overview">${overview}</span>
+                    <a class="read-more">Read More</a>
+                </td>
                 <td>${movie.original_language || ''}</td>
                 <td>${formattedDate}</td>
                 <td>${movie.minutes || ''}</td>
                 <td><a href="${movie.homepage || '#'}">${movie.homepage ? 'Link' : ''}</a></td>
             `;
             movieList.appendChild(movieRow);
+
+            // Add click event to "Read More" link
+            movieRow.querySelector('.read-more').addEventListener('click', function () {
+                const overviewSpan = movieRow.querySelector('.movie-overview');
+                if (overviewSpan.classList.contains('full')) {
+                    overviewSpan.classList.remove('full');
+                    this.textContent = 'Read More';
+                } else {
+                    overviewSpan.classList.add('full');
+                    this.textContent = 'Read Less';
+                }
+            });
         });
+
     
         // Calculate total pages for filtered results
         const totalFilteredPages = Math.ceil(movies.length / itemsPerPage);
