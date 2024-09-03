@@ -140,7 +140,7 @@ input {
     text-align: left;
     justify-content: center;
     align-items: center;
-    border-radius: 30px;
+    border-radius: 10px;
     margin: 20px auto;
     padding:5px;
     display: inline-block;
@@ -160,7 +160,7 @@ label{
     text-align: center;
     justify-content: center;
     align-items: center;
-    border-radius: 30px;
+    border-radius: 10px;
     margin: 20px auto;
     padding:5px;
     display: flex;
@@ -185,7 +185,7 @@ option {
     text-align: left;
     justify-content: center;
     align-items: center;
-    border-radius: 30px;
+    border-radius: 10px;
     margin: 20px auto;
     padding:5px;
     display: inline-block;
@@ -199,7 +199,7 @@ option:hover {
     text-align: center;
     justify-content: center;
     align-items: center;
-    border-radius: 30px;
+    border-radius: 10px;
     margin: 20px auto;
     padding:5px;
     background-color: rgb(81, 142, 177) !important;
@@ -211,7 +211,7 @@ select{
     text-align: center;
     justify-content: center;
     align-items: center;
-    border-radius: 30px;
+    border-radius: 10px;
     margin: 20px auto;
     padding:5px;
     width: 50%;
@@ -238,13 +238,13 @@ select{
 }
 
 .border-left {
-    border-radius: 30px 0 0 0 !important;
+    border-radius: 10px 0 0 0 !important;
     border: 1px solid #eee;
 
 }
 
 .border-right {
-    border-radius: 0  30px  0 0 !important;
+    border-radius: 0  10px  0 0 !important;
     border: 1px solid #eee !important;
 
 }
@@ -278,12 +278,12 @@ table, thead, tr {border-radius: 30px !important;}
  body.dark-mode {
     background-color: #1212128e; /* Dark background for dark mode */
     color: #ffffff; /* Light text color for dark mode */
-    border-radius: 30px !important;
+    border-radius: 10px !important;
 }
 
 body.dark-mode table {
     border-color: #333; /* Darker border for dark mode */
-    border-radius: 30px !important;
+    border-radius: 10px !important;
 }
 
 body.dark-mode th {
@@ -311,14 +311,14 @@ body, table, th, td {
 }
 
 .dark-mode .border-left {
-    border-radius: 30px 0 0 0 !important;
+    border-radius: 10px 0 0 0 !important;
     border: 1px solid #eeeeee00 !important;
     z-index: 1;
 
 }
 
 .dark-mode .border-right {
-    border-radius: 0  30px  0 0 !important;
+    border-radius: 0  10px  0 0 !important;
     border: 1px solid #eeeeee00 !important;
     z-index: 1;
 
@@ -330,13 +330,13 @@ body, table, th, td {
     
   }
 
-  [data-bs-theme=dark] table, tr {border-radius: 30px;}
+  [data-bs-theme=dark] table, tr {border-radius: 10px;}
 /*  DARK MODUS ENDE */
 
 .darkmodus { 
  }
 
- tr {border-radius: 30px !important;}
+ tr {border-radius: 10px !important;}
 
  /* Movie Table */
 
@@ -345,7 +345,7 @@ body, table, th, td {
 
 /* Apply border-radius to the entire table */
 #movieTable {
-    border-radius: 30px !important;
+    border-radius: 10px !important;
     overflow: hidden; /* Ensure rounded corners are visible */
     border-collapse: separate; /* Prevents border radius issues */
 }
