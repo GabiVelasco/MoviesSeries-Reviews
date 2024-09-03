@@ -145,7 +145,7 @@ input {
     padding:5px;
     display: inline-block;
     -ms-overflow-style: none; /* Hides scrollbars in IE and Edge */
-    background-color: rgb(81, 142, 177) !important;
+    background-color: rgba(81, 142, 177, 0.11) !important;
     color:rgb(0, 0, 0) !important;
 
 
@@ -171,7 +171,7 @@ label{
 /* Ensures all dropdown options are white */
 select option {
     color:rgb(0, 0, 0) !important;
-    background-color: rgb(81, 142, 177) !important; /* Optional: Maintain consistency */
+    background-color: rgba(81, 142, 177, 0.11) !important;
   
 }
 
@@ -202,7 +202,7 @@ option:hover {
     border-radius: 10px;
     margin: 20px auto;
     padding:5px;
-    background-color: rgb(81, 142, 177) !important;
+    background-color: rgba(81, 142, 177, 0.11) !important;
 
 
 }
@@ -215,7 +215,7 @@ select{
     margin: 20px auto;
     padding:5px;
     width: 50%;
-    background-color: rgb(81, 142, 177) !important;
+    background-color: rgba(81, 142, 177, 0.11) !important;
     overflow: -moz-scrollbars-none; /* For Firefox (older versions) */
     -ms-overflow-style: none;  /* For Internet Explorer and Edge */
 
@@ -255,6 +255,7 @@ th, td {
     border-bottom: 1px solid #ddd !important;
     margin: fit-content !important;
     border: 1px solid #eee !important;
+    font-weight: 400;
 
     
    
@@ -286,10 +287,16 @@ body.dark-mode table {
     border-radius: 10px !important;
 }
 
+body.dark-mode select, body.dark-mode input::placeholder {
+color: white!important;}
+
+.dark-mode::placeholder {
+color: white!important;}
+    
+
 body.dark-mode th {
     background-color: #444; /* Darker header background */
     color: #ffffff; /* Light text color for headers in dark mode */
-    /* border-radius: 30px !important; */
 }
 
 body.dark-mode td {
@@ -298,7 +305,6 @@ body.dark-mode td {
 
 body.dark-mode th.asc::after {
     border-color: transparent transparent #ffffff transparent; /* White arrow for dark mode */
-    /* border-radius: 30px !important;*/
 } 
 
 body.dark-mode th.desc::after {
@@ -331,6 +337,14 @@ body, table, th, td {
   }
 
   [data-bs-theme=dark] table, tr {border-radius: 10px;}
+
+  [data-bs-theme=dark] ::placeholder {
+    color:white ! important;
+  }
+
+  [data-bs-theme=dark] select option, [data-bs-theme=dark] #filterGenre  {
+    color:white ! important;
+  }
 /*  DARK MODUS ENDE */
 
 .darkmodus { 
