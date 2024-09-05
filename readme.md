@@ -129,7 +129,4 @@ We welcome contributions to improve the Movies Series Reviews App! To contribute
 
 This project is licensed under the [MIT License](LICENSE).
 
-## Contact
-
-For any questions or issues, please contact [your-email@example.com](mailto:your-email@example.com).
 
