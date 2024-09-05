@@ -3,6 +3,8 @@
 
 ## Overview
 
+This is a web application for browsing, reviewing, and rating movies and TV series, created by the web developer Gabriela Velasco. The app allows users to explore various entertainment options, submit and read reviews, and manage their favorite movies and series. It features a user-friendly interface and is optimized for both desktop and mobile devices.
+
 The Movies Series Reviews App is a web application designed to allow users to browse, review, and rate movies and TV series. Users can explore a wide range of movies and series, read reviews from other users, and submit their own reviews. This app provides a user-friendly interface and comprehensive information about various entertainment options.
 
 ## Features
