@@ -96,16 +96,28 @@ main {
     text-align: justify;
 }
 
-.filter-section {
-    margin-bottom: 20px;
-    letter-spacing: 2px;
-    display: flex;
-    flex-direction: row;
-}
+/* Parent container styling */
+.filter-container {
+    display: flex; /* Makes the container a flex container */
+    justify-content: flex-end; /* Aligns child elements to the right */
+  }
+  
+  /* Filter section styling */
+  .filter-section {
+    margin-bottom: 20px; /* Adds space below the filter section */
+    letter-spacing: 2px; /* Increases letter spacing */
+    display: flex; /* Display as flex for potential internal layout */
+    flex-direction: row; /* Default direction, can be omitted */
+    flex-grow: 0; /* Prevents the item from growing */
+  }
 
 #filterGenre { display: inline-block;
-margin: 0 auto;     color:rgb(0, 0, 0) !important;
+margin: 0 auto;     color:#518EB1 !important;
 }
+
+#filterGenre:hover { display: inline-block;
+    margin: 0 auto;     color:#518EB1 !important;
+    }
 
 /* Movie Table */
 /* Movie Table */
@@ -147,12 +159,13 @@ input {
     -ms-overflow-style: none; /* Hides scrollbars in IE and Edge */
     background-color: rgba(81, 142, 177, 0.11) !important;
     color:rgb(0, 0, 0) !important;
+    border: 0.5px solid #518EB1 !important;;
 
 
 }
 
 ::placeholder {
-    color:rgb(0, 0, 0) !important;
+    color:#518EB1 !important;
 
 }
 
@@ -170,7 +183,7 @@ label{
 
 /* Ensures all dropdown options are white */
 select option {
-    color:rgb(0, 0, 0) !important;
+    color:#518EB1!important;
     background-color: rgba(81, 142, 177, 0.11) !important;
   
 }
@@ -189,9 +202,14 @@ option {
     margin: 20px auto;
     padding:5px;
     display: inline-block;
-    color:rgb(0, 0, 0) !important;
+    color:#518EB1 !important;
+    
     
 
+
+}
+
+.filterslabel {
 
 }
 
@@ -203,6 +221,7 @@ option:hover {
     margin: 20px auto;
     padding:5px;
     background-color: rgba(81, 142, 177, 0.11) !important;
+    color:#518EB1 !important;
 
 
 }
@@ -218,6 +237,9 @@ select{
     background-color: rgba(81, 142, 177, 0.11) !important;
     overflow: -moz-scrollbars-none; /* For Firefox (older versions) */
     -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+    min-width:150px;
+    color:#518EB1 !important;
+    border:#518EB1 1px solid !important;
 
 
 }
@@ -344,6 +366,7 @@ body, table, th, td {
 
   [data-bs-theme=dark] select option, [data-bs-theme=dark] #filterGenre  {
     color:white ! important;
+    background-color: #444 !important;
   }
 /*  DARK MODUS ENDE */
 
@@ -366,6 +389,8 @@ body, table, th, td {
 
 
 /* READ MORE */
+
+
 /* CSS to handle text overflow */
 .movie-overview {
     align-items: justify;
@@ -387,14 +412,17 @@ body, table, th, td {
 
 /* Style for the Read More link */
 .read-more {
-    color: blue;
+    color: #518EB1;
     cursor: pointer;
     display: block;
     margin-top: 5px;
+    text-decoration:none;
+    transition: all 3s ease-in-out;
 }
 
 .read-more:hover {
-    text-decoration: underline;
+    
+    transform: scale(1.0);
 }
 
 
