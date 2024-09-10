@@ -90,7 +90,7 @@ main {
 #resultsInfo { margin-left:25px; color: grey; font-size: smaller; letter-spacing: 5px;}
 
 .container { 
-    width: 80%; 
+    width: 100%; 
     margin: 0 auto; 
     justify-content: center;
     text-align: justify;
@@ -298,7 +298,7 @@ th {
 }
 table, thead, tr {border-radius: 30px !important;}
 
-td { min-width:170px; max-width: 400px;}
+td { min-width:170px; max-width: 300px;}
 
 
 
@@ -405,7 +405,7 @@ body, table, th, td {
     white-space: nowrap; /* Keep text in a single line */
     max-height: 3.6em; /* Adjust based on your design */
     line-height: 1.2em; /* Adjust to match your font size */
-    max-width: 400px;
+    max-width: 300px;
 }
 
 /* CSS to show the full overview */
@@ -440,7 +440,24 @@ body, table, th, td {
     white-space: nowrap; /* Keep text in a single line */
     max-height: 3.6em; /* Adjust based on your design */
     line-height: 1.2em; /* Adjust to match your font size */
-    max-width: 170px;
+    max-width: 120px !important;
+    min-width: 60px !important;
+}
+
+
+.movie-year {
+    max-width: 80px !important;
+    min-width: 50px !important;
+}
+
+.movie-min {
+    max-width: 80px !important;
+    min-width: 50px !important;
+}
+
+.movie-lan {
+    max-width: 80px !important;
+    min-width: 50px !important;
 }
 
 /* CSS to show the full overview */
@@ -448,6 +465,7 @@ body, table, th, td {
     white-space: normal; /* Allow text to wrap */
     max-height: none; /* Remove height constraint */
     align-items: justify;
+    max-width: 170px !important;
 }
 
 /* Style for the Read More link */
@@ -458,6 +476,7 @@ body, table, th, td {
     margin-top: 5px;
     text-decoration:none;
     transition: all 3s ease-in-out;
+    max-width: 150px !important;
 }
 
 .more-genre:hover {

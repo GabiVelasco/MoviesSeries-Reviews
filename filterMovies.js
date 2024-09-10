@@ -131,9 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="movie-overview">${overview}</span>
                     <a class="read-more">Read More</a>
                 </td>
-                <td>${movie.original_language || ''}</td>
-                <td>${formattedDate}</td>
-                <td>${movie.minutes || ''}</td>
+                <td class="movie-lan">${movie.original_language || ''}</td>
+                <td class="movie-year">${formattedDate}</td>
+                <td class="movie-min">${movie.minutes || ''}</td>
                 <td><a href="${movie.homepage || '#'}">${movie.homepage ? 'Link' : ''}</a></td>
             `;
             movieList.appendChild(movieRow);
