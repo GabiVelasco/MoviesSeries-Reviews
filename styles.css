@@ -90,7 +90,7 @@ main {
 #resultsInfo { margin-left:25px; color: grey; font-size: smaller; letter-spacing: 5px;}
 
 .container { 
-    width: 70%; 
+    width: 80%; 
     margin: 0 auto; 
     justify-content: center;
     text-align: justify;
@@ -257,7 +257,10 @@ select{
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     
+    
 }
+
+
 
 .border-left {
     border-radius: 10px 0 0 0 !important;
@@ -289,10 +292,13 @@ th {
     position: relative !important; /* Position relative for sorting indicator */
     cursor: pointer !important; /* Change cursor to pointer to indicate clickable */
     min-width: fit-content !important;
+    max-width: fit-content;
     
     
 }
 table, thead, tr {border-radius: 30px !important;}
+
+td { min-width:170px; max-width: 400px;}
 
 
 
@@ -370,8 +376,7 @@ body, table, th, td {
   }
 /*  DARK MODUS ENDE */
 
-.darkmodus { 
- }
+
 
  tr {border-radius: 10px !important;}
 
@@ -408,6 +413,7 @@ body, table, th, td {
     white-space: normal; /* Allow text to wrap */
     max-height: none; /* Remove height constraint */
     align-items: justify;
+    text-align: justify;
 }
 
 /* Style for the Read More link */
@@ -426,5 +432,50 @@ body, table, th, td {
 }
 
 
+.movie-genre {
+    align-items: justify;
+    display:block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Keep text in a single line */
+    max-height: 3.6em; /* Adjust based on your design */
+    line-height: 1.2em; /* Adjust to match your font size */
+    max-width: 170px;
+}
+
+/* CSS to show the full overview */
+.movie-genre.full {
+    white-space: normal; /* Allow text to wrap */
+    max-height: none; /* Remove height constraint */
+    align-items: justify;
+}
+
+/* Style for the Read More link */
+.more-genres {
+    color: #518EB1;
+    cursor: pointer;
+    display: block;
+    margin-top: 5px;
+    text-decoration:none;
+    transition: all 3s ease-in-out;
+}
+
+.more-genre:hover {
+    
+    transform: scale(1.0);
+}
+
+
 
 /* READ MORE OPTION END */
+
+
+.gradient {
+    font-size: 72px;
+    background: -webkit-linear-gradient(#eee, #333);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+

@@ -121,10 +121,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const movieRow = document.createElement('tr');
             const overview = movie.overview || '';
+            const genre = movie.genre || '';
 
             movieRow.innerHTML = `
                 <td><strong>${movie.title || ''}</strong></td>
-                <td>${movie.genre || ''}</td>
+                <td><span class="movie-genre">${genre}</span>
+                    <a class="more-genres">More...</a></td>
                 <td>
                     <span class="movie-overview">${overview}</span>
                     <a class="read-more">Read More</a>
@@ -139,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add click event to "Read More" link
             movieRow.querySelector('.read-more').addEventListener('click', function () {
                 const overviewSpan = movieRow.querySelector('.movie-overview');
+               
                 if (overviewSpan.classList.contains('full')) {
                     overviewSpan.classList.remove('full');
                     this.textContent = 'Read More';
@@ -146,10 +149,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     overviewSpan.classList.add('full');
                     this.textContent = 'Read Less';
                 }
+                
             });
-        });
+       
+        movieRow.querySelector('.more-genres').addEventListener('click', function () {
+        const overviewSpanGenre = movieRow.querySelector('.movie-genre');
+        if (overviewSpanGenre.classList.contains('full')) {
+            overviewSpanGenre.classList.remove('full');
+            this.textContent = 'More...';
+        } else {
+            overviewSpanGenre.classList.add('full');
+            this.textContent = 'Read Less';
+        }
 
-    
+    });
+});
+
+
         // Calculate total pages for filtered results
         const totalFilteredPages = Math.ceil(movies.length / itemsPerPage);
         resultsInfo.innerHTML = `Showing ${movies.length} results`;
