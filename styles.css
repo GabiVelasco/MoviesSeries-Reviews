@@ -50,6 +50,14 @@ header h1 {
  color:#518EB1;
 }
 
+.content-section { 
+    display: none;
+}
+
+#home:target, #reviews:target, #about:target {
+    display: block;
+}
+
 /* Navigation Styles */
 nav {
     background-color: #444;
@@ -112,8 +120,12 @@ main {
   }
 
 #filterGenre { display: inline-block;
-margin: 0 auto;     color:#518EB1 !important;
+margin: 5px auto;     color:#518EB1 !important;
 }
+
+#filterGenre { display: inline-block;
+    margin: 5px auto;     color:#518EB1 !important;
+    }
 
 #filterGenre:hover { display: inline-block;
     margin: 0 auto;     color:#518EB1 !important;
@@ -185,6 +197,7 @@ label{
 select option {
     color:#518EB1!important;
     background-color: rgba(81, 142, 177, 0.11) !important;
+    margin: 5px auto;
   
 }
 
@@ -248,6 +261,7 @@ select{
     /* withouth hover, please. */
 
 }
+
 
 
 .movietable, #movieTable, table, thead {
@@ -444,7 +458,7 @@ body, table, th, td {
     min-width: 60px !important;
 }
 
-
+th, img { margin: 0 5px 0 5px auto;}
 .movie-year {
     max-width: 80px !important;
     min-width: 50px !important;
