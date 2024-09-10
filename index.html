@@ -77,27 +77,23 @@
         </table>
     </div>
 
-    <div id="reviews"  class="content-section">
-
-        <div id="reviewSection" style="display: none;">
-            <h3>Add a Review for <span id="movieTitle"></span></h3>
-            <form id="reviewForm">
-                <input type="hidden" id="movieId" />
-                <textarea id="reviewText" placeholder="Write your review" required></textarea>
-                <select id="reviewRating" required>
-                    <option value="">Select Rating</option>
-                    <option value="1">1 Star</option>
-                    <option value="2">2 Stars</option>
-                    <option value="3">3 Stars</option>
-                    <option value="4">4 Stars</option>
-                    <option value="5">5 Stars</option>
-                </select>
-                <button type="submit">Submit Review</button>
-            </form>
-        </div>
-        
-
+    <div id="reviews" class="content-section" style="display: none;">
+        <h3>Add a Review for <span id="movieTitle"></span></h3>
+        <form id="reviewForm">
+            <input type="hidden" id="movieId" />
+            <textarea id="reviewText" placeholder="Write your review" required></textarea>
+            <select id="reviewRating" required>
+                <option value="">Select Rating</option>
+                <option value="1">1 Star</option>
+                <option value="2">2 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="5">5 Stars</option>
+            </select>
+            <button type="submit">Submit Review</button>
+        </form>
     </div>
+    
     <div id="about" class="content-section">
 
 About
@@ -114,7 +110,7 @@ About
     <script src="https://cdn.jsdelivr.net/npm/pocketbase@latest/dist/pocketbase.min.js"></script>
     <script src="filterMovies.js"></script>
     <script src="darkModus.js"></script>
-    <script src="addreviews.js"></script>
+    <script src="reviews.js"></script>
 </html>
 
 
