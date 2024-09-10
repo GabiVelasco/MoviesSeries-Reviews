@@ -1,3 +1,5 @@
+<!-- index..html -->
+    
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
@@ -67,8 +69,8 @@
                         <span class="inline"><th data-sort="original_language">Lang<img src="img/up-and-down-arrow.png" alt="" width="20px;"></th></span> 
                             <span class="inline"><th data-sort="release_date">Year<img src="img/up-and-down-arrow.png" alt="" width="20px;"></th></span> 
                                 <span class="inline"><th data-sort="minutes">Min<img src="img/up-and-down-arrow.png" alt="" width="20px;"></th></span> 
-                  <span> <th class="border-right"  data-sort="homepage">Homepage <img src="img/up-and-down-arrow.png" alt="" width="20px;"></th></span> 
-                  <span> <th class="border-right"  data-sort="homepage">Add Review <img src="img/up-and-down-arrow.png" alt="" width="20px;"></th></span> 
+                  <span> <th  data-sort="homepage">Homepage <img src="img/up-and-down-arrow.png" alt="" width="20px;"></th></span> 
+                  <span>  <th class="border-right">Add Review <img src="img/up-and-down-arrow.png" alt="" width="20px;"></th></span> 
                 </tr>
             </thead>
             <tbody class="table-group-divider" id="movieList">
@@ -77,29 +79,94 @@
         </table>
     </div>
 
-    <input type="hidden" id="movieId">
-    <span id="movieTitle"></span>
-    <div id="reviews" class="content-section" style="display: none;">
-        <h3>Add a Review for <span id="movieTitle"></span></h3>
+    <section id="reviews" class="content-section">
+        <div id="reviewFormContainer" style="display: none;">
+            <form id="reviewForm">
+                <div>
+                    <label for="movieTitle">Movie Title:</label>
+                    <input type="text" id="movieTitle" readonly>
+                    <span id="movieTitleSpan"></span>
+                </div>
+                <div>
+                    <label for="reviewText">Review:</label>
+                    <textarea id="reviewText" placeholder="Write your review here" required></textarea>
+                </div>
+                <div>
+                    <label for="reviewRating">Rating (0-5):</label>
+                    <input type="number" id="reviewRating" min="0" max="5" placeholder="Rating (0-5)" required>
+                </div>
+                <button type="submit">Submit Review</button>
+            </form>
+        </div>
+
+    </section>
+    <!-- Popup form -->
+<div id="reviewPopup" style="display: none;">
+    <div class="popup-content">
+        <span id="closePopup">&times;</span>
         <form id="reviewForm">
-            <input type="hidden" id="movieId" />
-            <textarea id="reviewText" placeholder="Write your review" required></textarea>
-            <select id="reviewRating" required>
-                <option value="">Select Rating</option>
-                <option value="1">1 Star</option>
-                <option value="2">2 Stars</option>
-                <option value="3">3 Stars</option>
-                <option value="4">4 Stars</option>
-                <option value="5">5 Stars</option>
-            </select>
+            <div>
+                <label for="movieTitle">Movie Title:</label>
+                <input type="text" id="movieTitle" readonly>
+                <span id="movieTitleSpan"></span>
+            </div>
+            <div>
+                <label for="reviewText">Review:</label>
+                <textarea id="reviewText" placeholder="Write your review here" required></textarea>
+            </div>
+            <div>
+                <label for="reviewRating">Rating (0-5):</label>
+                <input type="number" id="reviewRating" min="0" max="5" placeholder="Rating (0-5)" required>
+            </div>
             <button type="submit">Submit Review</button>
         </form>
     </div>
-    
-    <div id="about" class="content-section">
+</div>
 
-About
+
+    
+<section id="about" class="content-section">
+
+    <div class="about-container">
+        <h2>About</h2>
+        <p>
+            The <strong>Movies Series Reviews App</strong> is a comprehensive web application designed for browsing, reviewing, and rating movies and TV series. With an intuitive interface and seamless user experience, the app allows users to explore various entertainment options, submit and read reviews, and manage their favorite films and series.
+        </p>
+    
+        <h3>Key Features:</h3>
+        <ul>
+            <li><strong>Browse Movies & TV Series:</strong> Discover a wide range of movies and TV series with detailed information including title, genre, overview, release date, and more.</li>
+            <li><strong>Submit Reviews & Ratings:</strong> Share your thoughts on movies and TV series by writing detailed reviews and providing ratings from 0 to 5 stars.</li>
+            <li><strong>User-Friendly Interface:</strong> The app is optimized for both desktop and mobile devices, ensuring a smooth experience across different platforms.</li>
+            <li><strong>Dark Mode:</strong> Enjoy a comfortable viewing experience with an easy-to-toggle dark mode feature.</li>
+            <li><strong>Genre Filters:</strong> Quickly find movies and series that match your interests with genre-based filters.</li>
+            <li><strong>CSV Upload for Admins:</strong> Admin users can upload CSV files to manage and update the movie database efficiently.</li>
+        </ul>
+    
+        <h3>Technologies Used:</h3>
+        <ul>
+            <li><strong>Frontend:</strong> React.js, Bootstrap</li>
+            <li><strong>Backend:</strong> Node.js, Express</li>
+            <li><strong>Database:</strong> MongoDB</li>
+            <li><strong>Authentication:</strong> JWT, Passport.js</li>
+            <li><strong>API Integration:</strong> The Movie Database (TMDb) API, Pocketbase</li>
+            <li><strong>Additional Features:</strong> Dark mode, CSV file upload, genre filters</li>
+        </ul>
+    
+        <h3>How It Works:</h3>
+        <ul>
+            <li><strong>Movie Data:</strong> The app fetches movie and TV series data from the TMDb API and displays it in a user-friendly table.</li>
+            <li><strong>Review Submission:</strong> Users can click "Add Review" to open a popup form, where they can submit reviews and ratings for selected movies.</li>
+            <li><strong>Review Management:</strong> Submitted reviews are stored in Pocketbase and displayed in the reviews section, with options for filtering and viewing.</li>
+        </ul>
+    
+        <h3>Installation and Setup:</h3>
+        <p>
+            For detailed installation instructions and setup guidelines, please refer to the <a href="link-to-your-readme" target="_blank">README</a> file in the project repository.
+        </p>
     </div>
+</section>
+
     </main>
 
      <!-- Footer -->
@@ -109,11 +176,12 @@ About
    
 </body>
     <!-- JavaScript Libraries -->
+    <!-- <script src="reviews.js"></script> -->
+    <script src="main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pocketbase@latest/dist/pocketbase.min.js"></script>
-    <script src="filterMovies.js"></script>
     <script src="darkModus.js"></script>
-    <script src="reviews.js"></script>
 </html>
 
-
+ <!-- Use the global functions -->
+ 
 

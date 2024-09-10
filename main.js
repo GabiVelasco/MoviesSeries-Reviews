@@ -1,24 +1,85 @@
 document.addEventListener('DOMContentLoaded', () => {
     const API_URL = 'http://localhost:8090/api/collections/Movies/records'; // Your PocketBase API URL
+    const REVIEW_API_URL = 'http://localhost:8090/api/collections/Reviews/records';
     const AUTH_TOKEN = '120'; // Your PocketBase API token
 
     const filterGenre = document.getElementById('filterGenre');
     const filterTitle = document.getElementById('filterTitle');
     const movieList = document.getElementById('movieList');
-    const resultsInfo = document.getElementById('resultsInfo'); // Element to display pagination info
+    const reviewSection = document.getElementById('reviews');
+    const reviewForm = document.getElementById('reviewForm');
+    const reviewPopup = document.getElementById('reviewPopup');
+    const closePopup = document.getElementById('closePopup');
+
+    const movieTitleInput = document.getElementById('movieTitle');
+    const movieTitleSpan = document.getElementById('movieTitleSpan');
 
     let allMovies = [];
     let uniqueGenres = new Set();
     let uniqueTitles = new Set();
-    const itemsPerPage = 30; // Number of items per page
+    let currentSort = { column: 'title', direction: 'asc' };
 
-    let currentSort = {column: 'title', direction: 'acs' };
+    function openReviewPopup(movieTitle) {
+        movieTitleInput.value = movieTitle;
+        movieTitleSpan.textContent = movieTitle;
+        reviewPopup.style.display = 'flex';
+    }
+
+    closePopup.addEventListener('click', () => {
+        reviewPopup.style.display = 'none';
+    });
+
+    reviewForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const reviewText = document.getElementById('reviewText').value;
+        const reviewRating = document.getElementById('reviewRating').value;
+        const movieTitle = movieTitleInput.value;
+
+        const reviewData = { title: movieTitle, review_text: reviewText, ranking: reviewRating };
+        const success = await submitReview(reviewData);
+
+        if (success) {
+            reviewForm.reset();
+            reviewPopup.style.display = 'none'; // Hide form after submission
+        }
+    });
+
+    function setupReviewButton() {
+        document.querySelectorAll('.add-review').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const movieTitle = this.getAttribute('data-title');
+                openReviewPopup(movieTitle);
+            });
+        });
+    }
+
+    async function submitReview(reviewData) {
+        try {
+            const response = await fetch(REVIEW_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${AUTH_TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(reviewData)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to submit review: ${response.statusText}`);
+            }
+
+            return true;
+        } catch (error) {
+            console.error('Error submitting review:', error);
+            return false;
+        }
+    }
 
     async function fetchMovies() {
         let page = 1;
-        let totalPages = 1; // Set a default value for totalPages
+        let totalPages = 1;
 
-        // Fetch all pages of movies
         while (page <= totalPages) {
             try {
                 const response = await fetch(`${API_URL}?page=${page}`, {
@@ -30,56 +91,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 if (!response.ok) {
-                    throw new Error(`Failed to fetch movies: ${response.status}`);
+                    throw new Error(`Failed to fetch movies: ${response.statusText}`);
                 }
 
                 const data = await response.json();
                 allMovies = allMovies.concat(data.items);
 
-                if (page === 1) { // Set totalPages only on the first request
+                if (page === 1) {
                     totalPages = data.totalPages;
                 }
 
-                page++; // Increment page number
+                page++;
             } catch (error) {
                 console.error('Error fetching movies:', error);
-                break; // Exit loop if there is an error fetching data
+                break;
             }
         }
 
-        console.log('All movies:', allMovies); // Log to see all movies
-
+        console.log('All movies:', allMovies);
         if (allMovies.length === 0) {
             movieList.innerHTML = '<tr><td colspan="7">No movies found.</td></tr>';
-            resultsInfo.innerHTML = 'No results found.';
             return;
         }
 
         extractGenresAndTitles();
         populateFilters();
-        filterMovies(); // Apply filters after fetching all movies
+        filterMovies();
+        setupReviewButton();
     }
+
     function extractGenresAndTitles() {
         allMovies.forEach(movie => {
-            // Handle genres
             let genres = movie.genre ? movie.genre.split(',').map(g => g.trim()) : [];
-            
-            // Check if genres are empty or any genre has fewer than 3 characters
+
             if (genres.length === 0 || genres.every(g => g.length < 3)) {
-                movie.genre = 'Not Specified'; // Replace with "Not Specified"
+                movie.genre = 'Not Specified';
                 uniqueGenres.add('Not Specified');
             } else {
-                // Replace genres with "Not Specified" if any genre is invalid
                 genres = genres.map(g => g.length < 3 ? 'Not Specified' : g);
-                movie.genre = genres.join(', '); // Update movie.genre with new genres
+                movie.genre = genres.join(', ');
                 genres.forEach(g => {
                     if (g.length > 0) {
                         uniqueGenres.add(g);
                     }
                 });
             }
-            
-            // Handle titles
+
             if (movie.title) {
                 uniqueTitles.add(movie.title.trim());
             }
@@ -87,8 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function populateFilters() {
-        // Populate genre filter
-        filterGenre.innerHTML = '<option value="">All Genres</option>'; // Add "All Genres" option
+        filterGenre.innerHTML = '<option value="">All Genres</option>';
         uniqueGenres.forEach(genre => {
             const option = document.createElement('option');
             option.value = genre;
@@ -96,8 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             filterGenre.appendChild(option);
         });
 
-        // Populate title filter
-        filterTitle.innerHTML = '<option value="">All Titles</option>'; // Add "All Titles" option
+        filterTitle.innerHTML = '<option value="">All Titles</option>';
         uniqueTitles.forEach(title => {
             const option = document.createElement('option');
             option.value = title;
@@ -107,15 +162,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayMovies(movies) {
-        movieList.innerHTML = ''; // Clear current movies
-        resultsInfo.innerHTML = ''; // Clear any previous results info
-    
+        movieList.innerHTML = '';
         if (movies.length === 0) {
             movieList.innerHTML = '<tr><td colspan="5">No movies found.</td></tr>';
-            resultsInfo.innerHTML = 'No results found.';
             return;
         }
-    
+
         movies.forEach(movie => {
             const formattedDate = movie.release_date ? formatReleaseDate(movie.release_date) : '';
 
@@ -134,14 +186,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td class="movie-lan">${movie.original_language || ''}</td>
                 <td class="movie-year">${formattedDate}</td>
                 <td class="movie-min">${movie.minutes || ''}</td>
-                <td><a href="${movie.homepage || '#'}">${movie.homepage ? 'Link' : ''}</a></td>
+                 <td><a href="${movie.homepage || '#'}">${movie.homepage ? 'Link' : ''}</a></td>
+                <td><a href="#" class="add-review" data-title="${movie.title}">Add Review</a></td>
             `;
             movieList.appendChild(movieRow);
 
-            // Add click event to "Read More" link
             movieRow.querySelector('.read-more').addEventListener('click', function () {
                 const overviewSpan = movieRow.querySelector('.movie-overview');
-               
+
                 if (overviewSpan.classList.contains('full')) {
                     overviewSpan.classList.remove('full');
                     this.textContent = 'Read More';
@@ -149,41 +201,41 @@ document.addEventListener('DOMContentLoaded', () => {
                     overviewSpan.classList.add('full');
                     this.textContent = 'Read Less';
                 }
-                
             });
-       
-        movieRow.querySelector('.more-genres').addEventListener('click', function () {
-        const overviewSpanGenre = movieRow.querySelector('.movie-genre');
-        if (overviewSpanGenre.classList.contains('full')) {
-            overviewSpanGenre.classList.remove('full');
-            this.textContent = 'More...';
-        } else {
-            overviewSpanGenre.classList.add('full');
-            this.textContent = 'Read Less';
-        }
 
-    });
-});
+            movieRow.querySelector('.more-genres').addEventListener('click', function () {
+                const overviewSpanGenre = movieRow.querySelector('.movie-genre');
+                if (overviewSpanGenre.classList.contains('full')) {
+                    overviewSpanGenre.classList.remove('full');
+                    this.textContent = 'More...';
+                } else {
+                    overviewSpanGenre.classList.add('full');
+                    this.textContent = 'Read Less';
+                }
+            });
 
+            movieRow.querySelector('.add-review').addEventListener('click', function (e) {
+                e.preventDefault();
+                const movieTitle = this.getAttribute('data-title');
+                openReviewPopup(movieTitle);
+            });
+        });
 
-        // Calculate total pages for filtered results
-        const totalFilteredPages = Math.ceil(movies.length / itemsPerPage);
-        resultsInfo.innerHTML = `Showing ${movies.length} results`;
+             // Calculate total pages for filtered results
+     resultsInfo.innerHTML = `Showing ${movies.length} results`;
     }
     
-    // Function to format the release date
+
+
+
     function formatReleaseDate(dateString) {
         const date = new Date(dateString);
         if (isNaN(date.getTime())) {
-            return ''; // Return an empty string if the date is invalid
+            return '';
         }
-        // Format the date to YYYY-MM-DD
         const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
         return `${year}`;
     }
-
 
     function sortMovies(movies, column, direction) {
         return movies.slice().sort((a,b) => {
