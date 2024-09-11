@@ -145,6 +145,7 @@ async function addReview(movieId, title, reviewText, ranking) {
     } catch (error) {
         console.error('Failed to add review:', error);
     }
+    closeReviewPopup();
 }
 // // REVIEWSSUBMISSION END
 
