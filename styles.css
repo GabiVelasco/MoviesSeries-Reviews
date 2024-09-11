@@ -618,6 +618,17 @@ th, img { margin: 0 5px 0 5px auto;}
     cursor: pointer;
 }
 
+
+#reviews div {
+    text-align: justify;
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    display: block !important;
+    color: black;
+
+
+}
 #reviewForm {
     flex-direction: column;
     max-width: 400px !important;
@@ -625,7 +636,18 @@ th, img { margin: 0 5px 0 5px auto;}
     align-items: center !important;
     justify-content: center !important;
     display: block !important;
-    margin: 20px auto;
+    margin: 60px auto !important;
+    padding: 60px;
+
+}
+
+.review-form-container {
+    margin: 60px auto !important;
+    padding: 60px;
+
+width: 80%;
+display: block;
+
 }
 
 #add-review-form {   
