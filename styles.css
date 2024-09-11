@@ -123,9 +123,6 @@ main {
 margin: 5px auto;     color:#518EB1 !important;
 }
 
-#filterGenre { display: inline-block;
-    margin: 5px auto;     color:#518EB1 !important;
-    }
 
 #filterGenre:hover { display: inline-block;
     margin: 0 auto;     color:#518EB1 !important;
@@ -171,7 +168,7 @@ input {
     -ms-overflow-style: none; /* Hides scrollbars in IE and Edge */
     background-color: rgba(81, 142, 177, 0.11) !important;
     color:rgb(0, 0, 0) !important;
-    border: 0.5px solid #518EB1 !important;;
+    border: 0.5px solid #518EB1 !important;
 
 
 }
@@ -223,7 +220,7 @@ option {
 }
 
 .filterslabel {
-
+display:block;
 }
 
 option:hover {
@@ -257,10 +254,6 @@ select{
 
 }
 
-#resultsInfo:hover {
-    /* withouth hover, please. */
-
-}
 
 
 
@@ -506,8 +499,10 @@ th, img { margin: 0 5px 0 5px auto;}
 .gradient {
     font-size: 72px;
     background: -webkit-linear-gradient(#eee, #333);
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text; /* Standard für andere Browser */
+
 }
 
 
