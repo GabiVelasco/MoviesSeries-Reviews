@@ -94,27 +94,21 @@
                 <button type="submit">Submit Review</button>
             </form>
         </div>
-      <!-- Popup form -->
-<div id="reviewPopup" style="display: none;">
-    <div class="popup-content">
-        <span id="closePopup">&times;</span>
-        <form id="popupReviewForm">
-            <div>
-                <label for="popupMovieTitle">Movie Title:</label>
-                <input type="text" id="popupMovieTitle" readonly>
-                <span id="popupMovieTitleSpan"></span>
-            </div>
-            <div>
-                <label for="popupReviewText">Review:</label>
-                <textarea id="popupReviewText" placeholder="Write your review here" required></textarea>
-            </div>
-            <div>
-                <label for="popupReviewRating">Rating (0-5):</label>
-                <input type="number" id="popupReviewRating" min="0" max="5" placeholder="Rating (0-5)" required>
-            </div>
-            <button type="submit">Submit Review</button>
-        </form>
-    </div>
+<!-- Popup or section for adding reviews -->
+<div id="reviewPopup" style="display:none;">
+    <form id="add-review-form">
+        <input type="hidden" id="movie-id">
+        <label for="review-title">Title</label>
+        <input type="text" id="review-title" required>
+
+        <label for="review-text">Review</label>
+        <textarea id="review-text" required></textarea>
+
+        <label for="ranking">Ranking</label>
+        <input type="number" id="ranking" min="1" max="5" required>
+
+        <button type="submit">Submit Review</button>
+    </form>
 </div>
 
     </section>
