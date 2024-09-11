@@ -671,6 +671,8 @@ th, img { margin: 0 5px 0 5px auto;}
     margin: 20px auto;
     padding: 20px;
     width: 80%;
+    display: block !important;
+    color: black;
 }
 
 
