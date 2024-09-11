@@ -532,13 +532,13 @@ th, img { margin: 0 5px 0 5px auto;}
     max-height: 600px;
     align-items: center !important;
     justify-content: center !important;
-    display: block !important;
+    display: none;
     margin: 100px auto;
     border: 1px solid black;
     position: fixed;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.807);
+    background: rgba(255, 255, 255, 0.903);
     z-index: 2;
     padding: 40px;
 }
@@ -675,77 +675,6 @@ th, img { margin: 0 5px 0 5px auto;}
 
 
 /* making review section prettier */
-.content-section {
-    padding: 20px;
-    background-color: #f9f9f9;
-}
 
-.review-form-container,
-.review-popup {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 500px;
-    margin: auto;
-}
-
-.review-form h2 {
-    margin-top: 0;
-    font-size: 1.5em;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.form-control {
-    width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    font-size: 1em;
-}
-
-.form-info {
-    display: block;
-    margin-top: 5px;
-    font-size: 0.9em;
-    color: #666;
-}
-
-.submit-button {
-    background-color: #5c3979;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    font-size: 1em;
-    cursor: pointer;
-}
-
-.submit-button:hover {
-    background-color: #4b2a5a;
-}
-
-.close-button {
-    background-color: #ccc;
-    color: #333;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    font-size: 1em;
-    cursor: pointer;
-}
-
-.close-button:hover {
-    background-color: #bbb;
-}
 
 /* ENDE making review section prettier */
