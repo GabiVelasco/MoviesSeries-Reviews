@@ -120,13 +120,13 @@ main {
   }
 
 #filterGenre { display: inline-block;
-margin: 5px auto;     color:#518EB1 !important;
+margin: 0 auto;     color:#518EB1 !important;
 }
 
 
 #filterGenre:hover { display: inline-block;
     margin: 0 auto;     color:#518EB1 !important;
-    }
+}
 
 /* Movie Table */
 /* Movie Table */
@@ -162,7 +162,7 @@ input {
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    margin: 20px auto;
+    margin: 20px auto !important;    
     padding:5px;
     display: inline-block;
     -ms-overflow-style: none; /* Hides scrollbars in IE and Edge */
@@ -172,6 +172,8 @@ input {
 
 
 }
+
+
 
 ::placeholder {
     color:#518EB1 !important;
@@ -183,7 +185,7 @@ label{
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    margin: 20px auto;
+    margin: 20px auto !important;
     padding:5px;
     display: flex;
 
@@ -219,8 +221,9 @@ option {
 
 }
 
-.filterslabel {
+.filters {
 display:block;
+margin:10px;
 }
 
 option:hover {
@@ -241,7 +244,7 @@ select{
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    margin: 20px auto;
+    margin: 20px auto !important;
     padding:5px;
     width: 50%;
     background-color: rgba(81, 142, 177, 0.11) !important;
