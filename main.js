@@ -47,46 +47,85 @@ async function getAllReviews() {
 }
 
 // Function to display reviews inside the #reviews section
+// Function to display reviews inside the #reviews section
 function displayReviews(reviews) {
     const reviewsSection = document.getElementById('reviews');
     
+    // Clear existing content
+    reviewsSection.innerHTML = '';
+
+    // Create a container for the table
+    const tableContainer = document.createElement('div');
+    tableContainer.classList.add('reviews-table-container');
+
+    // Create a table
+    const table = document.createElement('table');
+    table.classList.add('reviews-table');
+
+    // Create table headers
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    
+    const titleHeader = document.createElement('th');
+    titleHeader.textContent = 'Title';
+    
+    const reviewHeader = document.createElement('th');
+    reviewHeader.textContent = 'Review';
+    
+    const starsHeader = document.createElement('th');
+    starsHeader.textContent = 'Stars';
+
+    headerRow.appendChild(titleHeader);
+    headerRow.appendChild(reviewHeader);
+    headerRow.appendChild(starsHeader);
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    // Create tbody for review entries
+    const tbody = document.createElement('tbody');
     reviews.forEach(review => {
-        // Create a div for each review
-        const reviewDiv = document.createElement('div');
-        reviewDiv.classList.add('review');
+        const row = document.createElement('tr');
 
-        // Create a title element
-        const title = document.createElement('h3');
-        title.textContent = review.title || 'No Title'; // Fallback if title is missing
+        // Create cell for the title
+        const titleCell = document.createElement('td');
+        titleCell.textContent = review.title || 'No Title'; // Fallback if title is missing
+        row.appendChild(titleCell);
 
-        // Create a paragraph for the review text
-        const reviewText = document.createElement('p');
-        reviewText.textContent = review.review_text || 'No review text available.';
+        // Create cell for the review text
+        const reviewTextCell = document.createElement('td');
+        reviewTextCell.textContent = review.review_text || 'No review text available.';
+        row.appendChild(reviewTextCell);
 
-        // Create a container for star ratings
+        // Create cell for star ratings
+        const starsCell = document.createElement('td');
         const starsContainer = document.createElement('div');
-        starsContainer.classList.add('stars');
+        starsContainer.classList.add('stars', 'left');
+        const rating = review.ranking || 0;
+        for (let i = 1; i <= 5; i++) {
+            const star = document.createElement('i');
+            star.classList.add('fa-solid', 'fa-star');
+            if (i <= rating) {
+                star.classList.add('rated');
+            }
+            starsContainer.appendChild(star);
+        }
+        starsCell.appendChild(starsContainer);
+        row.appendChild(starsCell);
 
-       // Determine the rating and create star elements
-       const rating = review.ranking || 0;
-       for (let i = 1; i <= 5; i++) {
-           const star = document.createElement('i');
-           star.classList.add('fa-solid', 'fa-star');
-           if (i <= rating) {
-               star.classList.add('rated');
-           }
-           starsContainer.appendChild(star);
-       }
-
-        // Append title, text, and ranking to the reviewDiv
-        reviewDiv.appendChild(title);
-        reviewDiv.appendChild(reviewText);
-        reviewDiv.appendChild(starsContainer);
-
-        // Append the reviewDiv to the reviewsSection
-        reviewsSection.appendChild(reviewDiv);
+        // Append the row to tbody
+        tbody.appendChild(row);
     });
+
+    // Append tbody to table
+    table.appendChild(tbody);
+
+    // Append table to container
+    tableContainer.appendChild(table);
+
+    // Append container to reviews section
+    reviewsSection.appendChild(tableContainer);
 }
+
 
 // Example usage: Fetch and display reviews when the page loads
 getAllReviews();
