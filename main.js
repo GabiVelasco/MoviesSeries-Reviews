@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const reviewSection = document.getElementById('reviews');
     const reviewForm = document.getElementById('reviewForm');
     const reviewPopup = document.getElementById('reviewPopup');
-    const closePopup = document.getElementById('closePopup');
+    const closePopupButton = document.getElementById('closePopup');
     const reviewTextArea = document.getElementById('reviewText');
     const movieTitleInput = document.getElementById('movieTitle');
     const movieTitleSpan = document.getElementById('movieTitleSpan');
@@ -85,7 +85,18 @@ function openReviewPopup(movieTitle) {
     document.getElementById('movieTitleSpan').textContent = movieTitle; // Set movie title in popup
     document.getElementById('movie-id').value = movieTitle; // Store movie title for review
 }
+// CLOSE POPUP // Function to close the review popup
+    function closeReviewPopup() {
+        reviewPopup.style.display = 'none'; // Hide the popup
+    }
 
+    // Event listener for the close button
+    closePopupButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeReviewPopup();
+    });
+
+// CLOSE POPUP ENDE
 
 // REVIEWSSUBMISSION
 // Handle form submission
