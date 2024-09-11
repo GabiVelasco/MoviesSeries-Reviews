@@ -698,3 +698,33 @@ display: block;
 }
 
 
+/* adding stars */
+/* Star Rating Style */
+.stars {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0;
+    width: 100px;
+    height: 50px;
+}
+
+.stars input[type="radio"] {
+    display: none; /* Hide radio buttons */
+}
+
+.stars label {
+    font-size: 2em;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.stars label:hover,
+.stars label:hover ~ label {
+    color: #f5c518; /* Color when hovering over stars */
+}
+
+.stars input[type="radio"]:checked ~ label {
+    color: #f5c518; /* Color for selected stars */
+}
+
+/* adding stars ende */

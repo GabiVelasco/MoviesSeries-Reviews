@@ -63,14 +63,25 @@ function displayReviews(reviews) {
         const reviewText = document.createElement('p');
         reviewText.textContent = review.review_text || 'No review text available.';
 
-        // Create a ranking element
-        const ranking = document.createElement('p');
-        ranking.textContent = `Ranking: ${review.ranking || 'N/A'}`;
+        // Create a container for star ratings
+        const starsContainer = document.createElement('div');
+        starsContainer.classList.add('stars');
+
+       // Determine the rating and create star elements
+       const rating = review.ranking || 0;
+       for (let i = 1; i <= 5; i++) {
+           const star = document.createElement('i');
+           star.classList.add('fa-solid', 'fa-star');
+           if (i <= rating) {
+               star.classList.add('rated');
+           }
+           starsContainer.appendChild(star);
+       }
 
         // Append title, text, and ranking to the reviewDiv
         reviewDiv.appendChild(title);
         reviewDiv.appendChild(reviewText);
-        reviewDiv.appendChild(ranking);
+        reviewDiv.appendChild(starsContainer);
 
         // Append the reviewDiv to the reviewsSection
         reviewsSection.appendChild(reviewDiv);
@@ -107,7 +118,9 @@ document.getElementById('add-review-form').addEventListener('submit', async func
     const movieId = document.getElementById('movie-id').value;
     const reviewTitle = document.getElementById('review-title').value;
     const reviewText = document.getElementById('review-text').value;
-    const ranking = document.getElementById('ranking').value;
+    // const ranking = document.getElementById('ranking').value;
+    // Get the selected star rating
+    const ranking = document.querySelector('input[name="ranking"]:checked').value;
 
     await addReview(movieId, reviewTitle, reviewText, ranking);
 });
@@ -137,6 +150,8 @@ async function addReview(movieId, title, reviewText, ranking) {
 
         const result = await response.json();
         console.log('Review added:', result);
+
+        document.getElementById('add-review-form').reset(); // Clear the form
 
         // Optionally hide the form after submission
         document.getElementById('add-review-form').style.display = 'none';
