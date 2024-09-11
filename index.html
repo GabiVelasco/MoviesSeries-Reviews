@@ -1,6 +1,5 @@
-<!-- index..html -->
-    
 <!DOCTYPE html>
+<!-- index..html -->
 <html lang="en" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
@@ -39,7 +38,7 @@
                 </section>
               
                 <section>
-                    <label for="filterGenre"></label>
+                    <label for="filterGenre"> </label>
                     <select  id="filterGenre">
                         <option value="">Select Genre</option>
                         <!-- Options will be populated dynamically -->
@@ -81,48 +80,48 @@
 
     <section id="reviews" class="content-section">
         <div id="reviewFormContainer" style="display: none;">
-            <form id="reviewForm">
+            <form id="staticReviewForm">
                 <div>
-                    <label for="movieTitle">Movie Title:</label>
-                    <input type="text" id="movieTitle" readonly>
-                    <span id="movieTitleSpan"></span>
+                    <label for="staticMovieTitle">Movie Title:</label>
+                    <input type="text" id="staticMovieTitle" readonly>
+                    <span id="staticMovieTitleSpan"></span>
                 </div>
                 <div>
-                    <label for="reviewText">Review:</label>
-                    <textarea id="reviewText" placeholder="Write your review here" required></textarea>
+                    <label for="staticReviewText">Review:</label>
+                    <textarea id="staticReviewText" placeholder="Write your review here" required></textarea>
                 </div>
                 <div>
-                    <label for="reviewRating">Rating (0-5):</label>
-                    <input type="number" id="reviewRating" min="0" max="5" placeholder="Rating (0-5)" required>
+                    <label for="staticReviewRating">Rating (0-5):</label>
+                    <input type="number" id="staticReviewRating" min="0" max="5" placeholder="Rating (0-5)" required>
                 </div>
                 <button type="submit">Submit Review</button>
             </form>
         </div>
-
-    </section>
-    <!-- Popup form -->
+      <!-- Popup form -->
 <div id="reviewPopup" style="display: none;">
     <div class="popup-content">
         <span id="closePopup">&times;</span>
-        <form id="reviewForm">
+        <form id="popupReviewForm">
             <div>
-                <label for="movieTitle">Movie Title:</label>
-                <input type="text" id="movieTitle" readonly>
-                <span id="movieTitleSpan"></span>
+                <label for="popupMovieTitle">Movie Title:</label>
+                <input type="text" id="popupMovieTitle" readonly>
+                <span id="popupMovieTitleSpan"></span>
             </div>
             <div>
-                <label for="reviewText">Review:</label>
-                <textarea id="reviewText" placeholder="Write your review here" required></textarea>
+                <label for="popupReviewText">Review:</label>
+                <textarea id="popupReviewText" placeholder="Write your review here" required></textarea>
             </div>
             <div>
-                <label for="reviewRating">Rating (0-5):</label>
-                <input type="number" id="reviewRating" min="0" max="5" placeholder="Rating (0-5)" required>
+                <label for="popupReviewRating">Rating (0-5):</label>
+                <input type="number" id="popupReviewRating" min="0" max="5" placeholder="Rating (0-5)" required>
             </div>
             <button type="submit">Submit Review</button>
         </form>
     </div>
 </div>
 
+    </section>
+    
 
     
 <section id="about" class="content-section">
@@ -135,8 +134,8 @@
     
         <h3>Key Features:</h3>
         <ul>
-            <li><strong>Browse Movies & TV Series:</strong> Discover a wide range of movies and TV series with detailed information including title, genre, overview, release date, and more.</li>
-            <li><strong>Submit Reviews & Ratings:</strong> Share your thoughts on movies and TV series by writing detailed reviews and providing ratings from 0 to 5 stars.</li>
+            <li><strong>Browse Movies [&] TV Series:</strong> Discover a wide range of movies and TV series with detailed information including title, genre, overview, release date, and more.</li>
+            <li><strong>Submit Reviews [&] Ratings:</strong> Share your thoughts on movies and TV series by writing detailed reviews and providing ratings from 0 to 5 stars.</li>
             <li><strong>User-Friendly Interface:</strong> The app is optimized for both desktop and mobile devices, ensuring a smooth experience across different platforms.</li>
             <li><strong>Dark Mode:</strong> Enjoy a comfortable viewing experience with an easy-to-toggle dark mode feature.</li>
             <li><strong>Genre Filters:</strong> Quickly find movies and series that match your interests with genre-based filters.</li>
