@@ -22,7 +22,64 @@ document.addEventListener('DOMContentLoaded', () => {
     let uniqueTitles = new Set();
     let currentSort = { column: 'title', direction: 'asc' };
 
-   
+//    reviews
+
+async function getAllReviews() {
+    try {
+        const response = await fetch(REVIEW_API_URL, {
+            method: 'GET',
+            headers: {
+                'Authorization': AUTH_TOKEN
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const result = await response.json();
+        displayReviews(result.items); // Pass the reviews to the display function
+    } catch (error) {
+        console.error('Failed to fetch reviews:', error);
+    }
+}
+
+// Function to display reviews inside the #reviews section
+function displayReviews(reviews) {
+    const reviewsSection = document.getElementById('reviews');
+    
+    reviews.forEach(review => {
+        // Create a div for each review
+        const reviewDiv = document.createElement('div');
+        reviewDiv.classList.add('review');
+
+        // Create a title element
+        const title = document.createElement('h3');
+        title.textContent = review.title || 'No Title'; // Fallback if title is missing
+
+        // Create a paragraph for the review text
+        const reviewText = document.createElement('p');
+        reviewText.textContent = review.review_text || 'No review text available.';
+
+        // Create a ranking element
+        const ranking = document.createElement('p');
+        ranking.textContent = `Ranking: ${review.ranking || 'N/A'}`;
+
+        // Append title, text, and ranking to the reviewDiv
+        reviewDiv.appendChild(title);
+        reviewDiv.appendChild(reviewText);
+        reviewDiv.appendChild(ranking);
+
+        // Append the reviewDiv to the reviewsSection
+        reviewsSection.appendChild(reviewDiv);
+    });
+}
+
+// Example usage: Fetch and display reviews when the page loads
+getAllReviews();
+// END Reviews
+
+
     async function fetchMovies() {
         let page = 1;
         let totalPages = 1;
