@@ -529,15 +529,16 @@ th, img { margin: 0 5px 0 5px auto;}
 #reviewPopup {
     max-width: 700px !important;
     min-height:fit-content;
-    max-height: 600px;
+    max-height: fit-content;
+    height: fit-content;
     align-items: center !important;
     justify-content: center !important;
-    display: none;
-    margin: 100px auto;
+    display: block !important;
+    margin: 0 100px 0 100px auto;
     border: 1px solid black;
     position: fixed;
     width: 100%;
-    height: 100%;
+    
     background: rgba(255, 255, 255, 0.903);
     z-index: 2;
     padding: 40px;
@@ -703,9 +704,10 @@ display: block;
 .stars {
     display: flex;
     justify-content: center;
-    margin: 5px 0;
+    margin: -20px 40px 40px 20px;
     width: 100px;
-    height: 50px;
+    height: 10px;
+    padding: 0 40px 40px 40px;
 }
 
 .stars input[type="radio"] {
@@ -713,7 +715,7 @@ display: block;
 }
 
 .stars label {
-    font-size: 2em;
+    font-size: 1em;
     color: #ccc;
     cursor: pointer;
 }
