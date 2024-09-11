@@ -75,9 +75,13 @@ function displayReviews(reviews) {
     const starsHeader = document.createElement('th');
     starsHeader.textContent = 'Stars';
 
+    const actionsHeader = document.createElement('th');
+    actionsHeader.textContent = 'Actions'; // New header for actions
+
     headerRow.appendChild(titleHeader);
     headerRow.appendChild(reviewHeader);
     headerRow.appendChild(starsHeader);
+    headerRow.appendChild(actionsHeader); // Add actions header to delete and update
     thead.appendChild(headerRow);
     table.appendChild(thead);
 
@@ -87,7 +91,7 @@ function displayReviews(reviews) {
         const row = document.createElement('tr');
 
         // Create cell for the title
-        const titleCell = document.createElement('td');
+        const titleCell = document.createElement('td','titelTd');
         titleCell.textContent = review.title || 'No Title'; // Fallback if title is missing
         row.appendChild(titleCell);
 
@@ -112,6 +116,15 @@ function displayReviews(reviews) {
         starsCell.appendChild(starsContainer);
         row.appendChild(starsCell);
 
+        // Create cell for actions (delete button)
+        const actionsCell = document.createElement('td');
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.classList.add('delete-button');
+        deleteButton.addEventListener('click', () => deleteReview(review.id)); // Assume each review has a unique 'id'
+        actionsCell.appendChild(deleteButton);
+        row.appendChild(actionsCell);
+
         // Append the row to tbody
         tbody.appendChild(row);
     });
@@ -124,6 +137,24 @@ function displayReviews(reviews) {
 
     // Append container to reviews section
     reviewsSection.appendChild(tableContainer);
+}
+
+// Function to delete a review
+function deleteReview(reviewId) {
+    // Perform DELETE request to backend API to remove the review
+    fetch(`${REVIEW_API_URL}/${reviewId}`, {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to delete review');
+        }
+        // Refresh reviews after deletion
+        getAllReviews();
+    })
+    .catch(error => {
+        console.error('Error deleting review:', error);
+    });
 }
 
 

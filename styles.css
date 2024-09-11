@@ -533,7 +533,7 @@ th, img { margin: 0 5px 0 5px auto;}
     height: fit-content;
     align-items: center !important;
     justify-content: center !important;
-    display: block !important;
+    display: none;
     margin: 0 100px 0 100px auto;
     border: 1px solid black;
     position: fixed;
@@ -624,7 +624,7 @@ th, img { margin: 0 5px 0 5px auto;}
     text-align: justify;
     margin: 20px auto;
     padding: 20px;
-    width: 80%;
+    width: 90%;
     display: block !important;
     color: black;
 
@@ -746,6 +746,7 @@ display: block;
 .reviews-table-container {
     margin: 20px auto;
     max-width: 1200px;
+  
 }
 
 /* Style for the reviews table */
@@ -759,12 +760,15 @@ display: block;
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    min-width: 300px;
 }
 
 .reviews-table th {
     background-color: #f4f4f4;
     font-weight: bold;
 }
+
+.titelTd {font-size: 50px !important; font-weight: bold !important; display: block;}
 
 
 
@@ -780,3 +784,21 @@ display: block;
 
 
 /* REVIEWS TABLE ENDE */
+
+/* DELETE-BUTTON REVIEWS */
+.delete-button {
+    background-color: #ff4d4d; /* Red background */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 5px 10px; /* Some padding */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 3px; /* Rounded corners */
+}
+
+.delete-button:hover {
+    background-color: #cc0000; /* Darker red on hover */
+}
+
+
+/* ENDE DELETE-BUTTON REVIEWS */
+
