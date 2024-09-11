@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const reviewTextArea = document.getElementById('reviewText');
     const movieTitleInput = document.getElementById('movieTitle');
     const movieTitleSpan = document.getElementById('movieTitleSpan');
+    const reviewTitleInput = document.getElementById('review-title');
 
     let allMovies = [];
     let uniqueGenres = new Set();
@@ -83,7 +84,7 @@ getAllReviews();
 function openReviewPopup(movieTitle) {
     document.getElementById('reviewPopup').style.display = 'block'; // Show the popup
     document.getElementById('movieTitleSpan').textContent = movieTitle; // Set movie title in popup
-    document.getElementById('movie-id').value = movieTitle; // Store movie title for review
+    reviewTitleInput.value = movieTitle; // Set the movie title in the input field
 }
 // CLOSE POPUP // Function to close the review popup
     function closeReviewPopup() {
