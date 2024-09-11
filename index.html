@@ -36,7 +36,7 @@
  <section class="popReviews">
 
     <div id="reviewPopup" style="display:none;">
-        <h2>Add Review for: <span id="movieTitleSpan"></span></h2>
+        <h2>Add Review for: <br><span id="movieTitleSpan"></span></h2>
         <form id="add-review-form">
             <input type="hidden" id="movie-id"> <!-- Movie ID should be hidden -->
             <label for="review-title">Title:</label>
@@ -56,8 +56,9 @@
     </div>
 
  </section>
+<!-- END  Popup or section for adding reviews -->
 
-<!-- Popup or section for adding reviews -->
+
         <div class="filter-container">
             <div class="filter-section">
                 <section class="filters">
@@ -76,11 +77,7 @@
                         <input type="text" id="filterTitle" placeholder="Search by title">
                 </section>
                 </div>
-
         </div>
-
-                
-
         <div id="resultsInfo">Result Infos</div>
 
         <!-- Movie List Table -->
@@ -104,28 +101,25 @@
     </div>
 
     <section id="reviews" class="content-section">
-        <div id="reviewFormContainer" style="display: none;">
-            <form id="staticReviewForm">
-                <div>
+        <div id="reviewFormContainer" class="review-form-container" style="display: none;">
+            <form id="staticReviewForm" class="review-form">
+                <h2>Submit Your Review</h2>
+                <div class="form-group">
                     <label for="staticMovieTitle">Movie Title:</label>
-                    <input type="text" id="staticMovieTitle" readonly>
-                    <span id="staticMovieTitleSpan"></span>
+                    <input type="text" id="staticMovieTitle" readonly class="form-control">
+                    <span id="staticMovieTitleSpan" class="form-info"></span>
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="staticReviewText">Review:</label>
-                    <textarea id="staticReviewText" placeholder="Write your review here" required></textarea>
+                    <textarea id="staticReviewText" placeholder="Write your review here" required class="form-control"></textarea>
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="staticReviewRating">Rating (0-5):</label>
-                    <input type="number" id="staticReviewRating" min="0" max="5" placeholder="Rating (0-5)" required>
+                    <input type="number" id="staticReviewRating" min="0" max="5" placeholder="Rating (0-5)" required class="form-control">
                 </div>
-                <button type="submit">Submit Review</button>
+                <button type="submit" class="submit-button">Submit Review</button>
             </form>
         </div>
-
-
-
-    </section>
     
 
     
