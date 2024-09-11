@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //    reviews
 
+
 async function getAllReviews() {
     try {
         const response = await fetch(REVIEW_API_URL, {
@@ -77,6 +78,65 @@ function displayReviews(reviews) {
 
 // Example usage: Fetch and display reviews when the page loads
 getAllReviews();
+
+// Function to open the review popup/form
+function openReviewPopup(movieTitle) {
+    document.getElementById('reviewPopup').style.display = 'block'; // Show the popup
+    document.getElementById('movieTitleSpan').textContent = movieTitle; // Set movie title in popup
+    document.getElementById('movie-id').value = movieTitle; // Store movie title for review
+}
+
+
+// REVIEWSSUBMISSION
+// Handle form submission
+document.getElementById('add-review-form').addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const movieId = document.getElementById('movie-id').value;
+    const reviewTitle = document.getElementById('review-title').value;
+    const reviewText = document.getElementById('review-text').value;
+    const ranking = document.getElementById('ranking').value;
+
+    await addReview(movieId, reviewTitle, reviewText, ranking);
+});
+
+// Function to add a review via POST request
+async function addReview(movieId, title, reviewText, ranking) {
+    const reviewData = {
+        movie_id: movieId,
+        title: title,
+        review_text: reviewText,
+        ranking: ranking
+    };
+
+    try {
+        const response = await fetch(REVIEW_API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': AUTH_TOKEN
+            },
+            body: JSON.stringify(reviewData)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const result = await response.json();
+        console.log('Review added:', result);
+
+        // Optionally hide the form after submission
+        document.getElementById('add-review-form').style.display = 'none';
+
+        // Optionally refresh the reviews section
+        await getAllReviews();
+    } catch (error) {
+        console.error('Failed to add review:', error);
+    }
+}
+// // REVIEWSSUBMISSION END
+
 // END Reviews
 
 
@@ -219,20 +279,35 @@ getAllReviews();
                     this.textContent = 'Read Less';
                 }
             });
-
+// REVIEW
             movieRow.querySelector('.add-review').addEventListener('click', function (e) {
                 e.preventDefault();
                 const movieTitle = this.getAttribute('data-title');
                 openReviewPopup(movieTitle);
             });
+          
         });
+// END REVIEW
 
              // Calculate total pages for filtered results
      resultsInfo.innerHTML = `Showing ${movies.length} results`;
     }
     
+    // REVIEW
+    // Show the review form with the selected movie's title
+    function showReviewForm(movieTitle, movieId) {
+        const reviewForm = document.getElementById('add-review-form');
+        const titleElement = document.getElementById('movie-title');
+        const movieIdInput = document.getElementById('movie-id');
 
+        // Set the movie title and ID in the form
+        titleElement.textContent = movieTitle;
+        movieIdInput.value = movieId;
 
+        // Show the form
+        reviewForm.style.display = 'block';
+    }
+  // END REVIEW
 
     function formatReleaseDate(dateString) {
         const date = new Date(dateString);
