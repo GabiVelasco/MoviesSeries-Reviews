@@ -24,8 +24,58 @@ document.addEventListener('DOMContentLoaded', () => {
     let uniqueTitles = new Set();
     let currentSort = { column: 'title', direction: 'asc' };
 
+    function calculateAverageRanking(reviews, movieId) {
+        const movieReviews = reviews.filter(review => review.movie_id === movieId);
+        console.log('Reviews for movie ID:', movieId, movieReviews); // Debugging: Log reviews for the movie
+    
+        if (movieReviews.length === 0) return 0; // Return 0 if no reviews
+    
+        const totalRanking = movieReviews.reduce((sum, review) => sum + parseFloat(review.ranking || 0), 0);
+        const averageRanking = totalRanking / movieReviews.length;
+        console.log('Total ranking:', totalRanking, 'Average ranking:', averageRanking); // Debugging: Log totals and average
+    
+        return averageRanking;
+    }
+    
+    
+    function getStarRatingHtml(averageRanking) {
+        let starsHtml = '';
+        for (let i = 1; i <= 5; i++) {
+            const starClass = i <= averageRanking ? 'fa-solid fa-star rated' : 'fa-solid fa-star';
+            starsHtml += `<i class="${starClass}"></i>`;
+        }
+        return starsHtml;
+    }
+    
+    
 
 //   REVIEWS
+
+async function fetchReviews() {
+    try {
+        const response = await fetch(REVIEW_API_URL, {
+            method: 'GET',
+            headers: {
+                'Authorization': AUTH_TOKEN
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const result = await response.json();
+        console.log('Fetched reviews:', result.items); // Debugging: Log fetched reviews
+        return result.items;
+
+    } catch (error) {
+        console.error('Failed to fetch reviews:', error);
+        return [];
+    }
+}
+
+
+
 
 // EDITING REVIEWS
 
@@ -132,7 +182,7 @@ function displayReviews(reviews) {
         
         const editButton = document.createElement('button');
         editButton.textContent = 'Edit';
-        editButton.classList.add('edit-button');
+        editButton.classList.add('edit-button', 'hide');
         editButton.dataset.reviewId = review.id; // Add review ID to the button's data attributes
         editButton.addEventListener('click', (e) => {
             const reviewId = e.target.dataset.reviewId; // Retrieve the review ID
@@ -359,7 +409,9 @@ async function addReview(movieId, title, reviewText, ranking) {
         });
     }
 
-    function displayMovies(movies) {
+    async function displayMovies(movies) {
+        
+        const reviews = await fetchReviews(); // Fetch all reviews
         movieList.innerHTML = '';
         if (movies.length === 0) {
             movieList.innerHTML = '<tr><td colspan="5">No movies found.</td></tr>';
@@ -368,14 +420,17 @@ async function addReview(movieId, title, reviewText, ranking) {
 
         movies.forEach(movie => {
             const formattedDate = movie.release_date ? formatReleaseDate(movie.release_date) : '';
+            const averageRanking = calculateAverageRanking(reviews, movie.id); // Calculate average ranking for the movie
+            const starRatingHtml = getStarRatingHtml(averageRanking); // Get star rating HTML
+
 
             const movieRow = document.createElement('tr');
             const overview = movie.overview || '';
             const genre = movie.genre || '';
 
             movieRow.innerHTML = `
-                <td><strong>${movie.title || ''}</strong></td>
-                <td><span class="movie-genre">${genre}</span>
+                <td class="movie-title"><strong>${movie.title || ''}</strong></td>
+                <td class="movie-genre_"><span class="movie-genre">${genre}</span>
                     <a class="more-genres">More...</a></td>
                 <td>
                     <span class="movie-overview">${overview}</span>
@@ -384,7 +439,10 @@ async function addReview(movieId, title, reviewText, ranking) {
                 <td class="movie-lan">${movie.original_language || ''}</td>
                 <td class="movie-year">${formattedDate}</td>
                 <td class="movie-min">${movie.minutes || ''}</td>
-                 <td><a href="${movie.homepage || '#'}">${movie.homepage ? 'Link' : ''}</a></td>
+                <td class="movie-ranking">${starRatingHtml} (${averageRanking.toFixed(1)})</td> <!-- Display average ranking as stars -->
+                 
+                 
+   
                 <td><a href="#" class="add-review" data-title="${movie.title}">Add Review</a></td>
             `;
             movieList.appendChild(movieRow);
