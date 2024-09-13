@@ -516,14 +516,14 @@ th, img { margin: 0 5px 0 5px auto;}
 
 /* Popup styles */
 
-/* .popReviews {
+.popReviews {
     max-width: 800px !important;
     max-height: 800px !important;
     align-items: center !important;
     justify-content: center !important;
     display: block !important;
 
-} */
+} 
 
 
 #reviewPopup {
@@ -532,17 +532,18 @@ th, img { margin: 0 5px 0 5px auto;}
     max-height: fit-content;
     height: fit-content;
     align-items: center !important;
+    display:none;
     justify-content: center !important;
-    display: none;
     margin: 0 100px 0 100px auto;
     border: 1px solid black;
     position: fixed;
     width: 100%;
-    
-    background: rgba(255, 255, 255, 0.903);
+    background: rgb(252, 252, 252);
     z-index: 2;
     padding: 40px;
 }
+
+.hide {display: none;}
 
 #movieTitleSpan {
     font-weight: lighter;
@@ -793,6 +794,8 @@ display: block;
     padding: 5px 10px; /* Some padding */
     cursor: pointer; /* Pointer cursor on hover */
     border-radius: 3px; /* Rounded corners */
+    margin: 20px auto;
+    display: inline-block;
 }
 
 .delete-button:hover {
@@ -802,3 +805,53 @@ display: block;
 
 /* ENDE DELETE-BUTTON REVIEWS */
 
+/* EDIT-BUTTON */
+
+#editReviewPopup {
+    max-width: 700px !important;
+    min-height:fit-content;
+    max-height: fit-content;
+    height: fit-content;
+    align-items: center !important;
+    display:none;
+    justify-content: center !important;
+    margin: 0 100px 0 100px auto;
+    border: 1px solid black;
+    position: fixed;
+    width: 100%;
+    background: rgba(220, 231, 232, 0.959);
+    z-index: 2;
+    padding: 40px;
+}
+
+
+
+
+/* Style for the Edit button */
+.edit-button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 5px 10px; /* Some padding */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 3px; /* Rounded corners */
+    margin: 10px auto;
+}
+
+.edit-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+/* ENDE EDITING BUTTON */
+
+/* Add some basic styles */
+#editPopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

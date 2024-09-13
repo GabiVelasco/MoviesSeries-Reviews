@@ -1,6 +1,7 @@
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Constants
     const API_URL = 'http://localhost:8090/api/collections/Movies/records'; // Your PocketBase API URL
     const REVIEW_API_URL = 'http://localhost:8090/api/collections/Reviews/records';
     const AUTH_TOKEN = '120'; // Your PocketBase API token
@@ -23,9 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let uniqueTitles = new Set();
     let currentSort = { column: 'title', direction: 'asc' };
 
-//    reviews
 
+//   REVIEWS
 
+// EDITING REVIEWS
+
+// END EDITING REIEWS 
+
+// GETTING REVIEWS
 async function getAllReviews() {
     try {
         const response = await fetch(REVIEW_API_URL, {
@@ -45,9 +51,12 @@ async function getAllReviews() {
         console.error('Failed to fetch reviews:', error);
     }
 }
+// GETTING REVIEWS ENDE
+
+
 
 // Function to display reviews inside the #reviews section
-// Function to display reviews inside the #reviews section
+
 function displayReviews(reviews) {
     const reviewsSection = document.getElementById('reviews');
     
@@ -118,10 +127,26 @@ function displayReviews(reviews) {
 
         // Create cell for actions (delete button)
         const actionsCell = document.createElement('td');
+
+        // Edit Button
+        
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.classList.add('edit-button');
+        editButton.dataset.reviewId = review.id; // Add review ID to the button's data attributes
+        editButton.addEventListener('click', (e) => {
+            const reviewId = e.target.dataset.reviewId; // Retrieve the review ID
+            openEditPopup(reviewTitle); // Call the function with the review ID
+        });
+
+        
+        // Delete Button
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.classList.add('delete-button');
         deleteButton.addEventListener('click', () => deleteReview(review.id)); // Assume each review has a unique 'id'
+
+        actionsCell.appendChild(editButton);
         actionsCell.appendChild(deleteButton);
         row.appendChild(actionsCell);
 
@@ -137,7 +162,14 @@ function displayReviews(reviews) {
 
     // Append container to reviews section
     reviewsSection.appendChild(tableContainer);
+
+
+    
 }
+
+getAllReviews();
+ //
+
 
 // Function to delete a review
 function deleteReview(reviewId) {
@@ -194,6 +226,8 @@ document.getElementById('add-review-form').addEventListener('submit', async func
 
     await addReview(movieId, reviewTitle, reviewText, ranking);
 });
+
+
 
 // Function to add a review via POST request
 async function addReview(movieId, title, reviewText, ranking) {

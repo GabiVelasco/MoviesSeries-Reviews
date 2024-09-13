@@ -10,6 +10,41 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 </head>
+<style>
+
+    #editReviewPopup {
+        max-width: 700px !important;
+        min-height:fit-content;
+        max-height: fit-content;
+        height: fit-content;
+        align-items: center !important;
+        display:none;
+        justify-content: center !important;
+        margin: 0 100px 0 100px auto;
+        border: 1px solid black;
+        position: fixed;
+        width: 100%;
+        background: rgba(220, 231, 232, 0.959);
+        z-index: 2;
+        padding: 40px;
+    }
+    .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        justify-content: center;
+        align-items: center;
+    }
+    .popup-content {
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+    }
+</style>
     <body>   
     <!-- Header -->
     <header class="gradient">
@@ -116,31 +151,45 @@
         </table>
     </div>
 
-    <section id="reviews" class="content-section">
-        <!-- <div id="reviewFormContainer" class="review-form-container" style="display: none;">
-            <form id="staticReviewForm" class="review-form">
-                <h2>Submit Your Review</h2>
-                <div class="form-group">
-                    <label for="staticMovieTitle">Movie Title:</label>
-                    <input type="text" class="form-control">
-                    <span id="staticMovieTitleSpan" class="form-info"></span>
-                </div>
-                <div class="form-group">
-                    <label for="staticReviewText">Review:</label>
-                    <textarea id="staticReviewText" placeholder="Write your review here" required class="form-control"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="staticReviewRating">Rating (0-5):</label>
-                    <input type="number" id="staticReviewRating" min="0" max="5" placeholder="Rating (0-5)" required class="form-control">
-                </div>
-                <button type="submit" class="submit-button">Submit Review</button> <br><br> <br> -->
+<section id="reviews" class="content-section" >
 
-                <h1>Reviews</h1>
-            </form>
-        </div>
-    </section>
+<section><br><br>
+<h1>Reviews</h1>
+</section> 
 
+
+<section id="editReviewPopup" style="display:none !important;">
+
+        <form id="edit-review-form">
+           
+            <label for="review-title">Title:</label>
+            <input type="text" id="edit-review-title" required><br>
+
+             <label>Rating:</label>
+             <div class="stars">
+                 <input type="radio" id="editstar5" name="ranking" value="5" />
+                 <label for="star5" class="fa-solid fa-star"></label>
+                 <input type="radio" id="editstar4" name="ranking" value="4" />
+                 <label for="star4" class="fa-solid fa-star"></label>
+                 <input type="radio" id="editstar3" name="ranking" value="3" />
+                 <label for="star3" class="fa-solid fa-star"></label>
+                 <input type="radio" id="editstar2" name="ranking" value="2" />
+                 <label for="star2" class="fa-solid fa-star"></label>
+                 <input type="radio" id="editstar1" name="ranking" value="1" />
+                 <label for="star1" class="fa-solid fa-star"></label>
+             </div>
     
+            <label for="review-text">Review:</label> <br>
+            <textarea id="edit-review-text" required></textarea> <br>
+    
+           <br>
+    
+            <button class="submit" type="submit">Submit Review</button>
+        </form>
+        <button id="closeEditPopup">Close</button>
+    </section>
+</section>
+
 <section id="about" class="content-section">
 
     <div class="about-container">
@@ -183,19 +232,21 @@
     </div>
 </section>
 
-    </main>
+</main>
 
-     <!-- Footer -->
-     <footer>
-        <p>&copy; 2024 moViews. All rights reserved.</p>
-    </footer> 
+<!-- Footer -->
+<footer>
+<p>&copy; 2024 moViews. All rights reserved. Made by Gabriela Velasco</p>
+</footer> 
    
 </body>
+
     <!-- JavaScript Libraries -->
     <!-- <script src="reviews.js"></script> -->
     <script src="main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pocketbase@latest/dist/pocketbase.min.js"></script>
     <script src="darkModus.js"></script>
+   
 </html>
 
  <!-- Use the global functions -->
