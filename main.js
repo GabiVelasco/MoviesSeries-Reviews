@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterTitle = document.getElementById('filterTitle');
     const movieList = document.getElementById('movieList');
 
-    const reviewSection = document.getElementById('reviews');
-    const reviewForm = document.getElementById('reviewForm');
     const reviewPopup = document.getElementById('reviewPopup');
     const closePopupButton = document.getElementById('closePopup');
+    const reviewSection = document.getElementById('reviews');
+    const reviewForm = document.getElementById('reviewForm');
     const reviewTextArea = document.getElementById('reviewText');
     const movieTitleInput = document.getElementById('movieTitle');
     const movieTitleSpan = document.getElementById('movieTitleSpan');
@@ -24,18 +24,28 @@ document.addEventListener('DOMContentLoaded', () => {
     let uniqueTitles = new Set();
     let currentSort = { column: 'title', direction: 'asc' };
 
+    // AVARAGE RANKING 'NOT WORKING'
+
     function calculateAverageRanking(reviews, movieId) {
         const movieReviews = reviews.filter(review => review.movie_id === movieId);
-        console.log('Reviews for movie ID:', movieId, movieReviews); // Debugging: Log reviews for the movie
+        console.log('Filtered Reviews:', movieReviews); // Debugging
     
         if (movieReviews.length === 0) return 0; // Return 0 if no reviews
     
-        const totalRanking = movieReviews.reduce((sum, review) => sum + parseFloat(review.ranking || 0), 0);
+        let totalRanking = 0;
+        movieReviews.forEach(review => {
+            const ranking = parseFloat(review.ranking);
+            console.log('Processing review:', review, 'Ranking:', ranking); // Debugging
+            totalRanking += isNaN(ranking) ? 0 : ranking; // Ensure invalid rankings are handled
+        });
+    
         const averageRanking = totalRanking / movieReviews.length;
-        console.log('Total ranking:', totalRanking, 'Average ranking:', averageRanking); // Debugging: Log totals and average
+        console.log('Total Ranking:', totalRanking, 'Average Ranking:', averageRanking); // Debugging
     
         return averageRanking;
     }
+    
+   
     
     
     function getStarRatingHtml(averageRanking) {
@@ -48,9 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     
+ // AVARAGE RANKING ENDE
 
 //   REVIEWS
-
+// FETCH REVIEWS
 async function fetchReviews() {
     try {
         const response = await fetch(REVIEW_API_URL, {
@@ -74,13 +85,7 @@ async function fetchReviews() {
     }
 }
 
-
-
-
-// EDITING REVIEWS
-
-// END EDITING REIEWS 
-
+// FETCH REVIEWS ENDE
 // GETTING REVIEWS
 async function getAllReviews() {
     try {
@@ -101,10 +106,11 @@ async function getAllReviews() {
         console.error('Failed to fetch reviews:', error);
     }
 }
+
+getAllReviews();
 // GETTING REVIEWS ENDE
 
-
-
+// DISPLAY REVIEWS WITH EDIT AND DELETE BUTTON
 // Function to display reviews inside the #reviews section
 
 function displayReviews(reviews) {
@@ -217,10 +223,14 @@ function displayReviews(reviews) {
     
 }
 
-getAllReviews();
- //
 
+// DISPLAY REVIEWS WITH EDIT AND DELETE BUTTON ENDE
 
+// EDITING REVIEWS 'NOT WORKING'
+
+// EDITING REIEWS END
+
+// DELETE REVIEW
 // Function to delete a review
 function deleteReview(reviewId) {
     // Perform DELETE request to backend API to remove the review
@@ -239,16 +249,29 @@ function deleteReview(reviewId) {
     });
 }
 
+// DELETE REVIEW
 
-// Example usage: Fetch and display reviews when the page loads
-getAllReviews();
-
+// REVIEW POPUP
+// OPEN REVIEW POPUP
 // Function to open the review popup/form
-function openReviewPopup(movieTitle) {
+// function openReviewPopup(movieId, movieTitle) {
+//     document.getElementById('reviewPopup').style.display = 'block'; // Show the popup
+//     document.getElementById('movieTitleSpan').textContent = movieTitle; // Set movie title in popup
+//     // document.getElementById('movie-id').value = movieId; // Set the movie ID in the hidden input field
+//     reviewTitleInput.value = movieTitle; // Set the movie title in the input field
+
+//     // Set the movie title in the review title input field
+//     // document.getElementById('review-title').value = movieTitle;
+// }
+
+function openReviewPopup(movieId, movieTitle) {
     document.getElementById('reviewPopup').style.display = 'block'; // Show the popup
     document.getElementById('movieTitleSpan').textContent = movieTitle; // Set movie title in popup
+    document.getElementById('movie-id').value = movieId; // Set the movie ID in the hidden input field
     reviewTitleInput.value = movieTitle; // Set the movie title in the input field
 }
+// OPEN REVIEW POPUP ENDE
+
 // CLOSE POPUP // Function to close the review popup
     function closeReviewPopup() {
         reviewPopup.style.display = 'none'; // Hide the popup
@@ -261,6 +284,7 @@ function openReviewPopup(movieTitle) {
     });
 
 // CLOSE POPUP ENDE
+// REVIEW POPUP ENDE
 
 // REVIEWSSUBMISSION
 // Handle form submission
@@ -270,7 +294,7 @@ document.getElementById('add-review-form').addEventListener('submit', async func
     const movieId = document.getElementById('movie-id').value;
     const reviewTitle = document.getElementById('review-title').value;
     const reviewText = document.getElementById('review-text').value;
-    // const ranking = document.getElementById('ranking').value;
+    //const ranking = document.getElementById('ranking').value;
     // Get the selected star rating
     const ranking = document.querySelector('input[name="ranking"]:checked').value;
 
@@ -285,7 +309,8 @@ async function addReview(movieId, title, reviewText, ranking) {
         movie_id: movieId,
         title: title,
         review_text: reviewText,
-        ranking: ranking
+        ranking: ranking,
+        created: new Date().toISOString(),
     };
 
     try {
@@ -408,7 +433,7 @@ async function addReview(movieId, title, reviewText, ranking) {
             filterTitle.appendChild(option);
         });
     }
-
+// DISPLAY MOVIES WITH ADD REVIEW
     async function displayMovies(movies) {
         
         const reviews = await fetchReviews(); // Fetch all reviews
@@ -439,11 +464,8 @@ async function addReview(movieId, title, reviewText, ranking) {
                 <td class="movie-lan">${movie.original_language || ''}</td>
                 <td class="movie-year">${formattedDate}</td>
                 <td class="movie-min">${movie.minutes || ''}</td>
-                <td class="movie-ranking">${starRatingHtml} (${averageRanking.toFixed(1)})</td> <!-- Display average ranking as stars -->
-                 
-                 
-   
-                <td><a href="#" class="add-review" data-title="${movie.title}">Add Review</a></td>
+                <td class="movie-ranking">${starRatingHtml} (${averageRanking.toFixed(1)})</td> <!-- Display average ranking as stars -->  
+                <td><a href="#" class="add-review" data-id="${movie.movie_id}" data-title="${movie.title}">Add Review</a></td>
             `;
             movieList.appendChild(movieRow);
 
@@ -469,19 +491,39 @@ async function addReview(movieId, title, reviewText, ranking) {
                     this.textContent = 'Read Less';
                 }
             });
-// REVIEW
-            movieRow.querySelector('.add-review').addEventListener('click', function (e) {
-                e.preventDefault();
-                const movieTitle = this.getAttribute('data-title');
-                openReviewPopup(movieTitle);
-            });
+// DISPLAY MOVIES WITH ADD REVIEW ENDE
+// REVIEW ARGUMENTS FOR OPENREVIEW POPUP
+        //     movieRow.querySelector('.add-review').addEventListener('click', function (e) {
+        //         e.preventDefault();
+        //         const movieTitle = this.getAttribute('data-title');
+        //         openReviewPopup(movieTitle);
+        //     });
           
+        // });
+
+        
+        movieRow.querySelector('.add-review').addEventListener('click', function (e) {
+            e.preventDefault();
+        
+            // Get both movieId and movieTitle from data attributes
+            const movieId = this.getAttribute('data-id');
+            const movieTitle = this.getAttribute('data-title');
+        
+            // Pass both movieId and movieTitle to the function
+            openReviewPopup(movieId, movieTitle);
         });
+    });  
+    
+// REVIEW ARGUMENTS FOR OPENREVIEW POPUP ENDE
+
+
 // END REVIEW
 
+// RESULT INFOS LENGTH
              // Calculate total pages for filtered results
      resultsInfo.innerHTML = `Showing ${movies.length} results`;
     }
+// RESULT INFOS LENGTH ENDE
     
     // REVIEW
     // Show the review form with the selected movie's title
