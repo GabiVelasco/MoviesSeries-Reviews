@@ -18,11 +18,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const movieTitleInput = document.getElementById('movieTitle');
     const movieTitleSpan = document.getElementById('movieTitleSpan');
     const reviewTitleInput = document.getElementById('review-title');
+        // Other constants
+
+        const titleInputId = 'edit-review-title';
+        const editReviewTextId = 'edit-review-text';
+        const formId = 'edit-review-form';
+        const popupId = 'editReviewPopup';
+
 
     let allMovies = [];
     let uniqueGenres = new Set();
     let uniqueTitles = new Set();
     let currentSort = { column: 'title', direction: 'asc' };
+
+    console.log('Document ready');
+    // console.log('Fetching review data from:', url);
 
     // AVARAGE RANKING 'NOT WORKING'
 
@@ -188,11 +198,11 @@ function displayReviews(reviews) {
         
         const editButton = document.createElement('button');
         editButton.textContent = 'Edit';
-        editButton.classList.add('edit-button', 'hide');
+        editButton.classList.add('edit-button');
         editButton.dataset.reviewId = review.id; // Add review ID to the button's data attributes
         editButton.addEventListener('click', (e) => {
             const reviewId = e.target.dataset.reviewId; // Retrieve the review ID
-            openEditPopup(reviewTitle); // Call the function with the review ID
+            openEditPopup(reviewId); // Call the function with the review ID
         });
 
         
@@ -227,6 +237,113 @@ function displayReviews(reviews) {
 // DISPLAY REVIEWS WITH EDIT AND DELETE BUTTON ENDE
 
 // EDITING REVIEWS 'NOT WORKING'
+
+// EDIT POPUP
+async function openEditPopup(reviewId) {
+    try {
+        const url = `${REVIEW_API_URL}/${reviewId}`;
+        console.log('Fetching review data from:', url);
+
+        const response = await fetch(url, {
+            headers: {
+                'Authorization': AUTH_TOKEN
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`Failed to fetch review data: ${response.status} ${response.statusText}`);
+        }
+        const review = await response.json();
+        console.log('Fetched review:', review);
+
+        // Get form elements
+        const titleInput = document.getElementById(titleInputId);
+        const rankingInputs = document.querySelectorAll('input[name="ranking"]');
+        const editReviewText = document.getElementById(editReviewTextId);
+        const form = document.getElementById(formId);
+        const popup = document.getElementById(popupId);
+
+        // Check if elements exist before setting values
+        if (titleInput && editReviewText && form && popup) {
+            // Set the values of the form fields
+            titleInput.value = review.title || '';
+            editReviewText.value = review.review_text || '';
+
+            // Set the ranking input
+            rankingInputs.forEach(input => {
+                input.checked = parseInt(input.value) === review.ranking;
+            });
+
+            // Store the review ID in the form's data attribute
+            form.dataset.reviewId = reviewId;
+
+            // Display the popup
+            popup.style.display = 'block';
+        } else {
+            console.error('One or more elements are missing from the DOM.');
+            console.log('titleInput:', titleInput);
+            console.log('editReviewText:', editReviewText);
+            console.log('form:', form);
+            console.log('popup:', popup);
+            console.log('rankingInputs:', rankingInputs);
+        }
+    } catch (error) {
+        console.error('Error opening edit popup:', error);
+    }
+}
+
+// EDIT POPUP ENDE
+
+
+
+// EDIT SUBMISSION HANDLER
+document.getElementById('edit-review-form').addEventListener('submit', async function (event) {
+    event.preventDefault();
+    
+    const id = this.dataset.reviewId; // Use the correct ID
+    const title = document.getElementById('edit-review-title').value;
+    const reviewText = document.getElementById('edit-review-text').value;
+    const ranking = document.querySelector('input[name="ranking"]:checked').value;
+    
+    const updatedReview = {
+        movie_id: movie_id, // Ensure movie_id is correctly set
+        title: title,
+        review_text: reviewText,
+        ranking: ranking
+    };
+    
+    try {
+        const response = await fetch(`${REVIEW_API_URL}/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': AUTH_TOKEN
+            },
+            body: JSON.stringify(updatedReview)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const result = await response.json();
+        console.log('Review updated:', result);
+
+        document.getElementById('edit-review-form').reset();
+        document.getElementById('editReviewPopup').style.display = 'none';
+
+        await getAllReviews(); // Refresh reviews
+    } catch (error) {
+        console.error('Failed to update review:', error);
+    }
+});
+// EDIT SUBMISSION HANDLER ENDE
+
+
+// CLOSE EDIT POPUP
+document.getElementById('closeEditPopup').addEventListener('click', () => {
+    document.getElementById('editReviewPopup').style.display = 'none'; // Hide the popup
+});
+// CLOSE EDIT POPUP ENDE
 
 // EDITING REIEWS END
 
