@@ -936,10 +936,14 @@ input[type="text"], textarea {
     outline: none !important;
     resize: none !important; /* Prevents resizing of text area */
     height: fit-content;
-    min-height: 200px !important;
+   
     text-align: center !important;
     vertical-align: middle !important; /* Aligns content vertically */
     align-items: center !important;
+}
+
+.review-textarea {
+    min-height: 200px !important;
 }
 
 .star-rating {
