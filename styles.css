@@ -914,15 +914,20 @@ th, img { margin: 0 5px 0 5px auto;}
 table {
     width: 80%;
     border-collapse: collapse;
-    margin: 0 auto;
+    margin: 10px auto;
+    text-align: center !important;
+    align-items: center !important;
+
 }
 
 th, td {
     border: 1px solid #ddd !important;
     padding: 8px !important;
-    text-align: left !important;
+    text-align: center !important;
     vertical-align: middle !important; /* Aligns content vertically */
     height: fit-content !important;
+    align-items: center !important;
+
 }
 
 input[type="text"], textarea {
@@ -931,10 +936,17 @@ input[type="text"], textarea {
     outline: none !important;
     resize: none !important; /* Prevents resizing of text area */
     height: fit-content;
+    min-height: 200px !important;
+    text-align: center !important;
+    vertical-align: middle !important; /* Aligns content vertically */
+    align-items: center !important;
 }
 
 .star-rating {
     display: flex !important;
+    align-items: center !important;
+    text-align: center !important;
+    vertical-align: middle !important; /* Aligns content vertically */
     align-items: center !important;
 }
 
@@ -951,10 +963,48 @@ input[type="text"], textarea {
 .buttons-container {
     display: flex !important;
     gap: 8px !important; /* Space between buttons */
+    text-align: center !important;
+    vertical-align: middle !important; /* Aligns content vertically */
+    align-items: center !important;
 }
 
 .edit-btn, .save-btn {
     cursor: pointer !important;
     padding: 5px 10px !important;
+    
 }
 
+
+
+/* Align buttons and inputs within review-container */
+button.edit-btn, button.save-btn, .buttons {
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 10px;
+    height: auto;
+    width: 100%;
+    font-size: 28px;
+    border: none;
+    background: transparent;
+    color: goldenrod;
+    font-weight: bold;
+    transition: transform 0.3s ease !important;
+    display: block;
+}
+
+button.edit-btn, button.save-btn, .buttons {
+    transform: scale(1.2); }
+
+
+.delete-btn { 
+    background-color: goldenrod;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0.5px solid white;
+
+
+
+}

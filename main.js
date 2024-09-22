@@ -811,6 +811,7 @@ reviewRow.innerHTML = `
         <div class="buttons-container">
             <button type="button" class="edit-btn">Edit</button>
             <button type="button" class="save-btn" style="display: none;">Save</button>
+            <br> <br><button type="button" class="delete-btn">Delete</button>
         </div>
     </td>
 `;
@@ -847,6 +848,9 @@ reviewsForm.appendChild(reviewRow);
                     console.error('Error updating review:', error);
                 }
             });
+
+            const deleteButton = reviewRow.querySelector('.delete-btn');
+            deleteButton.addEventListener('click', () => deleteReview(review.id));
 
             // Setup star rating for this review
             const starRating = reviewRow.querySelector('.star-rating');
@@ -888,6 +892,28 @@ function setupStarRating(starRating) {
         }
     });
 }
+
+// Function to delete a review
+async function deleteReview(reviewId) {
+    if (confirm('Are you sure you want to delete this review?')) {
+        try {
+            const response = await fetch(`${API_URL}/${reviewId}`, {
+                method: 'DELETE',
+                headers: getHeaders(),
+            });
+
+            if (response.ok) {
+                alert('Review deleted successfully!');
+                fetchReviews(); // Refresh the reviews list
+            } else {
+                alert('Failed to delete the review. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error deleting review:', error);
+        }
+    }
+}
+
 
 // Initial fetch of reviews when the page loads
 document.addEventListener('DOMContentLoaded', fetchReviews);
