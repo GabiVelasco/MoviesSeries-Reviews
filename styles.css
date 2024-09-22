@@ -898,3 +898,63 @@ th, img { margin: 0 5px 0 5px auto;}
     color: #ff0;
 }
 /* AVARAGE-RANKING */
+
+
+
+
+
+
+/* EDIT FROM TEST */
+
+
+#reviews-form-container {
+    margin: 20px;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+th, td {
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
+    text-align: left !important;
+    vertical-align: middle !important; /* Aligns content vertically */
+    height: fit-content !important;
+}
+
+input[type="text"], textarea {
+    width: 100% !important;
+    border: none !important;
+    outline: none !important;
+    resize: none !important; /* Prevents resizing of text area */
+    height: fit-content;
+}
+
+.star-rating {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.star-rating i {
+    font-size: 24px !important;
+    color: #ddd !important; /* Default star color */
+    cursor: pointer !important;
+}
+
+.star-rating .checked {
+    color: #f39c12 !important; /* Checked star color */
+}
+
+.buttons-container {
+    display: flex !important;
+    gap: 8px !important; /* Space between buttons */
+}
+
+.edit-btn, .save-btn {
+    cursor: pointer !important;
+    padding: 5px 10px !important;
+}
+
