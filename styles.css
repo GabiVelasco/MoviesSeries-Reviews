@@ -916,7 +916,9 @@ table {
     border-collapse: collapse;
     margin: 10px auto;
     text-align: center !important;
+    vertical-align: middle !important; /* Aligns content vertically */
     align-items: center !important;
+    justify-content: center !important;
 
 }
 
@@ -927,6 +929,10 @@ th, td {
     vertical-align: middle !important; /* Aligns content vertically */
     height: fit-content !important;
     align-items: center !important;
+    text-align: center !important;
+    vertical-align: middle !important; /* Aligns content vertically */
+    align-items: center !important;
+    justify-content: center !important;
 
 }
 
@@ -940,10 +946,15 @@ input[type="text"], textarea {
     text-align: center !important;
     vertical-align: middle !important; /* Aligns content vertically */
     align-items: center !important;
+    justify-content: center !important;
 }
 
 .review-textarea {
     min-height: 200px !important;
+    text-align: center !important;
+    vertical-align: middle !important; /* Aligns content vertically */
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 .star-rating {
@@ -1011,4 +1022,32 @@ button.edit-btn, button.save-btn, .buttons {
 
 
 
+}
+
+
+
+
+/* RANKING TRYING */
+
+.star-rating {
+    font-size: 24px; /* Adjust the size of the stars */
+    color: #ddd !important; /* Color for empty stars */
+    display: inline-block; /* Align stars in a row */
+}
+
+.star-rating .fa-star {
+    cursor: pointer; /* Change cursor on hover */
+}
+
+.star-rating .fa-star.checked {
+    color: #f39c12 !important; /* Color for half stars */
+}
+
+.star-rating .fa-star-half-alt.checked {
+    color: #f39c12 !important; /* Color for half stars */
+}
+
+/* Optional: Hover effects */
+.star-rating .fa-star:hover {
+    color: #f39c12 !important; /* Color for half stars */
 }

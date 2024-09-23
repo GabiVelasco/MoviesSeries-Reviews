@@ -32,43 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSort = { column: 'title', direction: 'asc' };
 
     console.log('Document ready');
-    // console.log('Fetching review data from:', url);
 
-    // AVARAGE RANKING 'NOT WORKING'
-
-    function calculateAverageRanking(reviews, movieId) {
-        const movieReviews = reviews.filter(review => review.movie_id === movieId);
-        console.log('Filtered Reviews:', movieReviews); // Debugging
-    
-        if (movieReviews.length === 0) return 0; // Return 0 if no reviews
-    
-        let totalRanking = 0;
-        movieReviews.forEach(review => {
-            const ranking = parseFloat(review.ranking);
-            console.log('Processing review:', review, 'Ranking:', ranking); // Debugging
-            totalRanking += isNaN(ranking) ? 0 : ranking; // Ensure invalid rankings are handled
-        });
-    
-        const averageRanking = totalRanking / movieReviews.length;
-        console.log('Total Ranking:', totalRanking, 'Average Ranking:', averageRanking); // Debugging
-    
-        return averageRanking;
-    }
-    
-   
-    
-    
-    function getStarRatingHtml(averageRanking) {
-        let starsHtml = '';
-        for (let i = 1; i <= 5; i++) {
-            const starClass = i <= averageRanking ? 'fa-solid fa-star rated' : 'fa-solid fa-star';
-            starsHtml += `<i class="${starClass}"></i>`;
-        }
-        return starsHtml;
-    }
-    
-    
- // AVARAGE RANKING ENDE
 
 //   REVIEWS
 // FETCH REVIEWS
@@ -224,7 +188,9 @@ async function addReview(movieId, title, reviewText, ranking) {
         extractGenresAndTitles();
         populateFilters();
         filterMovies();
-  
+
+
+             
     }
 
   
@@ -269,10 +235,84 @@ async function addReview(movieId, title, reviewText, ranking) {
             filterTitle.appendChild(option);
         });
     }
+
+
+
+    // AVARAGE RANKING NEEEDS TO WORK
+    // Calculate average ranking for a specific movie
+     function calculateAverageRanking(reviews, movieId) {
+        const movieReviews = reviews.filter(review => review.movie_id === movieId);
+        console.log('1. Reviews for Movie ID', movieId, ':', movieReviews); // Log reviews for the movie
+        
+        if (movieReviews.length === 0) return 0; // No reviews for this movie
+    
+        const totalRanking = movieReviews.reduce((sum, review) => {
+            console.log('Review Ranking:', review.ranking); // Log each review ranking
+            return sum + review.ranking;
+        }, 0);
+    
+        const average = totalRanking / movieReviews.length;
+        console.log('1. Average Ranking for Movie ID', movieId, ':', average); // Log the average
+        return average;
+    }
+    
+
+        
+    function getStarRatingHtml(averageRanking) {
+        let starHtml = '';
+        const maxStars = 5;
+
+        for (let i = 1; i <= maxStars; i++) {
+            if (i <= Math.floor(averageRanking)) {
+                // Full star
+                starHtml += '<i class="fa fa-star checked"></i>';
+            } else if (i - averageRanking < 1 && i - averageRanking > 0) {
+                // Half star
+                starHtml += '<i class="fa fa-star-half-alt checked"></i>';
+            } else {
+                // Empty star
+                starHtml += '<i class="fa fa-star"></i>';
+            }
+        }
+
+        return starHtml;
+    }
+
+        
+// Fetch and calculate average rankings for each movie_id
+const calculateAverageRankings = (reviews) => {
+    const averageRatings = {};
+
+    reviews.forEach(review => {
+        const movieId = review.movie_id;  // Assumes reviews have a movie_id field
+        const ranking = review.ranking;   // Assumes reviews have a ranking field
+
+        if (!averageRatings[movieId]) {
+            averageRatings[movieId] = { total: 0, count: 0 };
+        }
+        averageRatings[movieId].total += ranking;
+        averageRatings[movieId].count += 1;
+    });
+
+    // Compute the average ranking for each movie_id
+    Object.keys(averageRatings).forEach(movieId => {
+        averageRatings[movieId] = (averageRatings[movieId].total / averageRatings[movieId].count).toFixed(2);
+    });
+
+    return averageRatings;
+};
+
+// AVARAGE RANKING ENDE
+
+
 // DISPLAY MOVIES WITH ADD REVIEW
     async function displayMovies(movies) {
         
         const reviews = await fetchReviews(); // Fetch all reviews
+        const averageRankings = calculateAverageRankings(reviews);  // Store the average rankings in a constant
+
+        console.log("1. Average Rankings:", averageRankings);
+
         movieList.innerHTML = '';
         if (movies.length === 0) {
             movieList.innerHTML = '<tr><td colspan="5">No movies found.</td></tr>';
@@ -281,13 +321,18 @@ async function addReview(movieId, title, reviewText, ranking) {
 
         movies.forEach(movie => {
             const formattedDate = movie.release_date ? formatReleaseDate(movie.release_date) : '';
-            const averageRanking = calculateAverageRanking(reviews, movie.id); // Calculate average ranking for the movie
+            const averageRanking = averageRankings[movie.movie_id] || 0; // Get the average ranking for this movie
             const starRatingHtml = getStarRatingHtml(averageRanking); // Get star rating HTML
 
 
             const movieRow = document.createElement('tr');
             const overview = movie.overview || '';
             const genre = movie.genre || '';
+
+            
+
+            console.log("2. Average Ranking:", averageRanking, starRatingHtml);
+            console.log('Fetched Reviews:', reviews); // Check the structure here
 
             movieRow.innerHTML = `
                 <td class="movie-title"><strong>${movie.title || ''}</strong></td>
@@ -300,7 +345,7 @@ async function addReview(movieId, title, reviewText, ranking) {
                 <td class="movie-lan">${movie.original_language || ''}</td>
                 <td class="movie-year">${formattedDate}</td>
                 <td class="movie-min">${movie.minutes || ''}</td>
-                <td class="movie-ranking">${starRatingHtml} (${averageRanking.toFixed(1)})</td> <!-- Display average ranking as stars -->  
+                <td class="movie-ranking">${starRatingHtml} (${averageRanking})</td>
                 <td><a href="#" class="add-review" data-id="${movie.movie_id}" data-title="${movie.title}">Add Review</a></td>
             `;
             movieList.appendChild(movieRow);
@@ -627,3 +672,5 @@ async function deleteReview(reviewId) {
 
 // Initial fetch of reviews when the page loads
 document.addEventListener('DOMContentLoaded', fetchReviews);
+
+
