@@ -557,19 +557,25 @@ reviewRow.innerHTML = `
     <td><input class="review-title" type="text" value="${review.title}" readonly /></td>
     <td><textarea class="review-textarea" readonly>${review.review_text}</textarea></td>
     <td>
+           
         <div class="star-rating readonly" data-id="${review.id}" data-rating="${review.ranking}">
             ${[1, 2, 3, 4, 5].map(star => `
                 <i class="fa fa-star ${star <= review.ranking ? 'checked' : ''}" data-star="${star}"></i>
             `).join('')}
         </div>
+ <div class="buttons-container">
+         <button type="button" class="edit-btn">Edit</button>
+        <button type="button" class="save-btn" style="display: none;">Save</button>
+        <br><br><button type="button" class="delete-btn">Delete</button>
+ </div>
     </td>
-    <td class="buttons-column">
+    <!-- <td class="buttons-column">
         <div class="buttons-container">
             <button type="button" class="edit-btn">Edit</button>
             <button type="button" class="save-btn" style="display: none;">Save</button>
             <br> <br><button type="button" class="delete-btn">Delete</button>
         </div>
-    </td>
+    </td> -->
 `;
 reviewsForm.appendChild(reviewRow);
             // Add event listener to the "Edit" button

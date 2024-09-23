@@ -392,6 +392,10 @@ body, table, th, td {
     color:white ! important;
   }
 
+  [data-bs-theme=dark] .review-title {
+    color:white ! important;
+  }
+
   [data-bs-theme=dark] select option, [data-bs-theme=dark] #filterGenre  {
     color:white ! important;
     background-color: #444 !important;
@@ -1006,6 +1010,7 @@ input[type="text"], textarea {
 .review-title {
     background-color: transparent !important;
     font-weight: bold !important;
+    letter-spacing: 2px;
 }
 
 .buttons-container {
@@ -1027,12 +1032,14 @@ input[type="text"], textarea {
     background: transparent !important;
     color: black !important;
     border: none !important;
+    bottom: 0 !important;
 }
 
 .edit-btn, .save-btn {
     cursor: pointer !important;
     padding: 5px 10px !important;
     flex:auto;
+    bottom: 0 !important;
     
     
 }
@@ -1044,7 +1051,7 @@ button.edit-btn, button.save-btn, .buttons {
     margin: 0 auto;
     justify-content: center;
     text-align: center;
-    align-items: center;
+    align-items:last baseline;
     padding: 10px;
     height: auto;
     width: 100%;
@@ -1057,6 +1064,8 @@ button.edit-btn, button.save-btn, .buttons {
     letter-spacing: 3px;
     transition: transform 0.3s ease !important;
     display: block;
+    bottom: 0 !important;
+    display: flex;
 }
 
 button.edit-btn:hover, button.save-btn:hover, .buttons:hover {
@@ -1078,7 +1087,55 @@ button.edit-btn:hover, button.save-btn:hover, .buttons:hover {
 }
 
 
-.review-table {
-    border-radius: 10px !important;
+table .review-table {
+    border-radius: 30px !important;
     min-width: 1000px !important;
+    margin: 20px auto !important;
+}
+
+
+
+
+
+/* Common button styling */
+button.edit-btn, button.save-btn, .delete-btn {
+    cursor: pointer !important;
+    padding: 10px;
+    width: 100%; /* Ensures buttons take up full width */
+    font-size: 16px;
+    border: none;
+    background: transparent;
+    color: rgb(33, 62, 180);
+    text-decoration: underline;
+    letter-spacing: 2px;
+    transition: transform 0.3s ease;
+    display: block;
+    margin-top: auto; /* Allows the button to stick to the bottom */
+}
+
+/* Hover effects for all buttons */
+button.edit-btn:hover, button.save-btn:hover, .delete-btn:hover {
+    transform: scale(1.2);
+}
+
+/* Additional styling for delete button */
+.delete-btn { 
+    border-radius: 5px;
+    border: 0.5px solid white;
+    background-color: transparent; /* No background color */
+    color: rgb(180, 33, 33); /* Different color for delete */
+}
+
+/* Positioning the buttons at the bottom of the table cell */
+.buttons-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Aligns buttons at the bottom */
+    height: 100%;
+    padding: 10px;
+}
+
+/* Optional: spacing between buttons */
+button + button {
+    margin-top: 10px;
 }
