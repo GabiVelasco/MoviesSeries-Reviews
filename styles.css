@@ -1039,7 +1039,7 @@ button.edit-btn, button.save-btn, .buttons {
     font-size: 20px;
     border: none;
     background: transparent;
-    color: goldenrod;
+    color: rgb(22, 54, 160);
     font-weight: bold;
     transition: transform 0.3s ease !important;
     display: block;
