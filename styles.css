@@ -1108,12 +1108,24 @@ button.edit-btn:hover, button.save-btn:hover, .buttons:hover {
 
 
 table .review-table {
-    border-radius: 30px !important;
+    border-radius: 10px !important;
     min-width: 1000px !important;
     margin: 20px auto !important;
 }
 
+.review-table {
+    border-radius: 10px !important;
+    min-width: 1000px !important;
+    margin: 20px auto !important;
+    border: 1px solid #ccc !important;
+    border-collapse: separate !important; /* Ensure borders are treated separately */
+    border-spacing: 0 !important; /* Remove any gaps between borders */
+}
 
+.review-table th {
+    border-radius: 10px !important;
+    margin: 20px auto !important;
+}
 
 
 
