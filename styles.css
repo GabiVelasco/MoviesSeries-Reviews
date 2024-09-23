@@ -424,25 +424,41 @@ body, table, th, td {
 
 
 /* CSS to handle text overflow */
+
+.td-movie-overview {
+    align-items: center !important;
+    text-align: justify !important;
+    justify-content: center !important;
+    margin: 10px auto !important;
+    padding:0 !important;
+}
 .movie-overview {
-    align-items: justify;
-    display:block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; /* Keep text in a single line */
-    max-height: 3.6em; /* Adjust based on your design */
-    line-height: 1.2em; /* Adjust to match your font size */
+    align-items: center !important;
+    display: block !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important; /* Keep text in a single line */
+    max-height: 3.6em !important; /* Adjust based on your design */
+    line-height: 1.2em !important; /* Adjust to match your font size */
     max-width: 220px !important;
-    min-width: 160px;
+    min-width: 160px !important;
+    text-align: justify !important;
+    align-items: center !important;
+    text-align: justify !important;
+    justify-content: center;
+    margin: 5px auto !important;
 }
 
 /* CSS to show the full overview */
 .movie-overview.full {
-    white-space: normal; /* Allow text to wrap */
-    max-height: none; /* Remove height constraint */
-    align-items: justify;
-    text-align: justify;
+    white-space: normal !important; /* Allow text to wrap */
+    max-height: none !important; /* Remove height constraint */
+    align-items: center !important;
+    text-align: justify !important;
+    justify-content: center;
+    margin: 5px auto !important;
 }
+
 
 /* Style for the Read More link */
 .read-more {
@@ -452,6 +468,10 @@ body, table, th, td {
     margin-top: 5px;
     text-decoration:none;
     transition: all 3s ease-in-out;
+    justify-content: center !important;
+    margin: 5px auto !important;
+    padding: 5px;
+    align-items: center !important;
 }
 
 .read-more:hover {

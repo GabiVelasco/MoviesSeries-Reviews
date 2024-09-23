@@ -339,7 +339,7 @@ const calculateAverageRankings = (reviews) => {
                 <td class="movie-title"><strong>${movie.title || ''}</strong></td>
                 <td class="movie-genre_"><span class="movie-genre">${genre}</span>
                     <a class="more-genres">More...</a></td>
-                <td>
+                <td class="td-movie-overview">
                     <span class="movie-overview">${overview}</span>
                     <a class="read-more">Read More</a>
                 </td>
