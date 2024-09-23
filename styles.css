@@ -735,11 +735,12 @@ th, img { margin: 0 5px 0 5px auto;}
 /* Star Rating Style */
 .star-rating {
     display: flex;
-    font-size: 24px; /* Adjust star size */
+    font-size: 20px; /* Adjust star size */
     color: #ddd; /* Default color for empty stars */
     cursor: pointer;
     justify-content: center;
     align-items: center;
+    width: 200px !important;
 }
 
 .star-rating .fa-star,
@@ -956,7 +957,7 @@ table {
 
 th, td {
     border: 1px solid #ddd !important;
-    padding: 8px !important;
+    padding: 5px !important;
     text-align: center !important;
     vertical-align: middle !important; /* Aligns content vertically */
     height: fit-content !important;
@@ -982,13 +983,33 @@ input[type="text"], textarea {
 }
 
 .review-textarea {
-    min-height: 200px !important;
-    text-align: center !important;
-    vertical-align: middle !important; /* Aligns content vertically */
-    align-items: center !important;
-    justify-content: center !important;
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    min-width: 300px;
+    text-align: center;
+    border: none;
+    resize: none; /* Disable manual resizing */
+    padding: 0;
+    margin: 0;
+    overflow: hidden; /* Hide scrollbars */
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
+/* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+.review-textarea::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+}
+
+/* Hide scrollbar for Firefox */
+.review-textarea {
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+.review-title {
+    background-color: transparent !important;
+    font-weight: bold !important;
+}
 
 .buttons-container {
     display: flex !important;
@@ -1015,7 +1036,7 @@ button.edit-btn, button.save-btn, .buttons {
     padding: 10px;
     height: auto;
     width: 100%;
-    font-size: 28px;
+    font-size: 20px;
     border: none;
     background: transparent;
     color: goldenrod;
@@ -1038,7 +1059,3 @@ button.edit-btn, button.save-btn, .buttons {
 
 
 }
-
-
-
-

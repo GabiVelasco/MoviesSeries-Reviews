@@ -554,7 +554,7 @@ async function fetchReviews() {
         reviews.forEach(review => {
             const reviewRow = document.createElement('tr');
 reviewRow.innerHTML = `
-    <td><input type="text" value="${review.title}" readonly /></td>
+    <td><input class="review-title" type="text" value="${review.title}" readonly /></td>
     <td><textarea class="review-textarea" readonly>${review.review_text}</textarea></td>
     <td>
         <div class="star-rating readonly" data-id="${review.id}" data-rating="${review.ranking}">
