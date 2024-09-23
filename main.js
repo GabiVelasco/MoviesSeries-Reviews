@@ -261,12 +261,12 @@ async function addReview(movieId, title, reviewText, ranking) {
     function getStarRatingHtml(averageRanking) {
         let starHtml = '';
         const maxStars = 5;
-
+    
         for (let i = 1; i <= maxStars; i++) {
             if (i <= Math.floor(averageRanking)) {
                 // Full star
                 starHtml += '<i class="fa fa-star checked"></i>';
-            } else if (i - averageRanking < 1 && i - averageRanking > 0) {
+            } else if (i - averageRanking <= 0.5 && i - averageRanking > 0) {
                 // Half star
                 starHtml += '<i class="fa fa-star-half-alt checked"></i>';
             } else {
@@ -274,9 +274,10 @@ async function addReview(movieId, title, reviewText, ranking) {
                 starHtml += '<i class="fa fa-star"></i>';
             }
         }
-
+    
         return starHtml;
     }
+    
 
         
 // Fetch and calculate average rankings for each movie_id

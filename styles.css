@@ -725,45 +725,103 @@ th, img { margin: 0 5px 0 5px auto;}
     color: black;
 }
 
-
-/* adding stars */
-/* Star Rating Style */
-.stars {
-    display: flex;
-    direction: rtl !important; /* Right-to-left direction for the stars */
-    justify-content: center;
-    margin: -20px 40px 40px 20px;
-    width: 100px;
-    height: 10px;
-    padding: 0 40px 40px 40px;
-    color: #f5c518 !important;
-    left: 0 !important;
-
-}
+/* STARS */
 
 .left { margin: 0 auto; align-items: left !important; left: 0 !important; display: flex;
     direction:ltr !important; justify-content: left !important;} 
+
+
+
+/* Star Rating Style */
+.star-rating {
+    display: flex;
+    font-size: 24px; /* Adjust star size */
+    color: #ddd; /* Default color for empty stars */
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+
+.star-rating .fa-star,
+.star-rating .fa-star-half-alt {
+    color: #ddd; /* Default empty star color */
+    transition: color 0.2s;
+}
+
+.star-rating .fa-star.checked,
+.star-rating .fa-star-half-alt.checked {
+    color: #f39c12; /* Gold color for full and half stars */
+}
+
+
+
+/* Hover effect for interactive stars */
+.star-rating .fa-star:hover,
+.star-rating .fa-star.checked:hover,
+.star-rating .fa-star-half-alt:hover {
+    color: #f39c12!important; /* Hover color for all stars */
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 120px; /* Adjust as needed */
+}
+
+.stars label {
+    font-size: 24px; /* Adjust size for stars */
+    color: #ddd; /* Default color */
+    cursor: pointer;
+    margin: 0 2px;
+}
 
 .stars input[type="radio"] {
     display: none; /* Hide radio buttons */
 }
 
-.stars label {
-    font-size: 1em;
-    color: #ccc;
-    cursor: pointer;
+.stars input[type="radio"]:checked ~ label {
+    color: #f39c12; /* Color for selected stars */
 }
 
 .stars label:hover,
 .stars label:hover ~ label {
-    color: #f5c518; /* Color when hovering over stars */
+    color: #f39c12; /* Color when hovering */
 }
 
-.stars input[type="radio"]:checked ~ label {
-    color: #f5c518; /* Color for selected stars */
+
+
+/* IMPORTANT WORKING RANKING STAR STYLES */
+
+i.fa.fa-star-half-alt.checked::before {
+    color: #f39c12!important;
 }
 
-/* adding stars ende */
+i.fa.fa-star-half-alt::before {
+    color: #ddd !important;
+    content: "\f089";
+
+}
+
+i.fa.fa-star.checked::before {
+    color: #f39c12!important;
+
+}
+
+i.fa.fa-star::before {
+    color: #ddd !important;
+
+}
+
+.star-rating .fa-star-half-alt:before {
+    content: "\f089" !important; /* FontAwesome code for half-star */
+    color: #ddd !important;
+}
+
+/* IMPORTANT WORKING RANKING STAR STYLES */
+
+/* STARS ENDE */
+
 
 
 /* REVIEWS TABLE */
@@ -797,17 +855,6 @@ th, img { margin: 0 5px 0 5px auto;}
 
 .titelTd {font-size: 50px !important; font-weight: bold !important; display: block;}
 
-
-
-.stars i {
-    font-size: 1.0em;
-    color: #ccc; /* Default color for unselected stars */
-}
-
-.stars i.rated {
-    color: #f5c518; /* Color for selected stars */
-    direction: rtl !important;
-}
 
 
 /* REVIEWS TABLE ENDE */
@@ -883,21 +930,6 @@ th, img { margin: 0 5px 0 5px auto;}
 }
 
 
-/* AVARAGE-RANKING */
-.fa-star {
-    color: #ccc; /* Default color for empty stars */
-}
-
-.fa-star.rated {
-    color: #ff0; /* Color for rated stars */
-}
-
-.fa-star.half::after {
-    content: '\f089'; /* FontAwesome half-star icon */
-    position: absolute;
-    color: #ff0;
-}
-/* AVARAGE-RANKING */
 
 
 
@@ -957,23 +989,6 @@ input[type="text"], textarea {
     justify-content: center !important;
 }
 
-.star-rating {
-    display: flex !important;
-    align-items: center !important;
-    text-align: center !important;
-    vertical-align: middle !important; /* Aligns content vertically */
-    align-items: center !important;
-}
-
-.star-rating i {
-    font-size: 24px !important;
-    color: #ddd !important; /* Default star color */
-    cursor: pointer !important;
-}
-
-.star-rating .checked {
-    color: #f39c12 !important; /* Checked star color */
-}
 
 .buttons-container {
     display: flex !important;
@@ -1027,27 +1042,3 @@ button.edit-btn, button.save-btn, .buttons {
 
 
 
-/* RANKING TRYING */
-
-.star-rating {
-    font-size: 24px; /* Adjust the size of the stars */
-    color: #ddd !important; /* Color for empty stars */
-    display: inline-block; /* Align stars in a row */
-}
-
-.star-rating .fa-star {
-    cursor: pointer; /* Change cursor on hover */
-}
-
-.star-rating .fa-star.checked {
-    color: #f39c12 !important; /* Color for half stars */
-}
-
-.star-rating .fa-star-half-alt.checked {
-    color: #f39c12 !important; /* Color for half stars */
-}
-
-/* Optional: Hover effects */
-.star-rating .fa-star:hover {
-    color: #f39c12 !important; /* Color for half stars */
-}
