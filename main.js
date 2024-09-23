@@ -297,7 +297,7 @@ const calculateAverageRankings = (reviews) => {
 
     // Compute the average ranking for each movie_id
     Object.keys(averageRatings).forEach(movieId => {
-        averageRatings[movieId] = (averageRatings[movieId].total / averageRatings[movieId].count).toFixed(2);
+        averageRatings[movieId] = (averageRatings[movieId].total / averageRatings[movieId].count).toFixed(1);
     });
 
     return averageRatings;
@@ -346,7 +346,7 @@ const calculateAverageRankings = (reviews) => {
                 <td class="movie-lan">${movie.original_language || ''}</td>
                 <td class="movie-year">${formattedDate}</td>
                 <td class="movie-min">${movie.minutes || ''}</td>
-                <td class="movie-ranking">${starRatingHtml} (${averageRanking})</td>
+                <td class="movie-ranking">${starRatingHtml} <p>${averageRanking}/5</p></td>
                 <td><a href="#" class="add-review" data-id="${movie.movie_id}" data-title="${movie.title}">Add Review</a></td>
             `;
             movieList.appendChild(movieRow);
@@ -563,7 +563,7 @@ reviewRow.innerHTML = `
             `).join('')}
         </div>
     </td>
-    <td>
+    <td class="buttons-column">
         <div class="buttons-container">
             <button type="button" class="edit-btn">Edit</button>
             <button type="button" class="save-btn" style="display: none;">Save</button>
