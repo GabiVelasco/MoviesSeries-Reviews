@@ -555,15 +555,19 @@ th, img { margin: 0 5px 0 5px auto;}
 
 
 /* READ MORE OPTION END */
-
+header {
+    background: rgb(8,59,131);
+    background: linear-gradient(90deg, rgba(8,59,131,1) 0%, rgba(9,109,121,1) 35%, rgba(0,212,255,1) 100%) !important;
+    z-index: 1 !important;
+}
 
 .gradient {
     font-size: 72px;
-    background: -webkit-linear-gradient(#eee, #333);
+    background: -webkit-linear-gradient(#f7f5f5, #3333333a);
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     background-clip: text; /* Standard für andere Browser */
-
+  
 }
 
 
