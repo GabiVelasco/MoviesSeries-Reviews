@@ -63,12 +63,18 @@ header h1 {
     display: block; /* Home section is shown initially */
 }
 
-/* Show only the targeted section */
-/* #home:target,
-#reviews:target,
-#about:target {
-    display: block; 
-} */
+.nav-link {
+    color:#518EB1 !important;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out !important;
+    display:flex;
+}
+
+
+.nav-link:hover {
+    color:white !important;
+    text-decoration: none;
+    transform: scale(1.1) !important;
+}
 
 
 /* ROUTES ENDE */
