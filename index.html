@@ -33,15 +33,40 @@
             <div class="darkmodus">
                 <button class="transparent" id="themeToggle"><img src="img/brightness.png" width="30px" alt=""></button>
             </div>
+            <li id="authLinkContainer">
+                <a href="#" id="loginLink">Login</a>
+                <a href="#" id="logoutLink" style="display:none;">Logout</a> <!-- Logout link -->
+            </li>
         </ul>
     </nav>
-
-   
+    <li id="authLinkContainer" style="text-decoration:none !important; list-style-type: none; padding: 20px;">
+        <span id="welcomeMessage" style="display:none; text-decoration:none !important;"></span> <!-- Welcome message -->
+    </li>
+    
 
 <main class="container">
 <div id="home" class="content-section">
 
-            
+
+<!-- Login Popup -->
+<div id="loginPopup" class="login-popup">
+    <div class="login-popup-content">
+        <span class="login-close">&times;</span>
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+            <button type="submit">Login</button>
+            <div id="message"></div>
+        </form>
+    </div>
+</div>
+
+
+
+
 <!-- Popup for adding reviews -->
  <section class="popReviews">
 

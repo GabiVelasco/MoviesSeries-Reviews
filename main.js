@@ -33,7 +33,100 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('Document ready');
 
+// LOGIN POPUP
 
+document.getElementById('loginLink').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default anchor behavior
+    document.getElementById('loginPopup').style.display = 'block'; // Show the popup
+});
+
+document.querySelector('.login-close').addEventListener('click', function() {
+    document.getElementById('loginPopup').style.display = 'none'; // Hide the popup
+});
+
+// Close the popup if the user clicks anywhere outside of it
+window.onclick = function(event) {
+    const popup = document.getElementById('loginPopup');
+    if (event.target === popup) {
+        popup.style.display = 'none';
+    }
+};
+
+document.getElementById('loginForm').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    const messageDiv = document.getElementById('message');
+
+    try {
+        const response = await fetch('http://localhost:8090/api/collections/users/auth-with-password', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ identity: email, password: password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || 'Login failed');
+        }
+
+        // Handle successful login
+        console.log('Login successful', data);
+        messageDiv.innerText = 'Login successful!';
+        messageDiv.style.color = 'green';
+       
+
+        // Store the token (optional)
+        localStorage.setItem('pb_auth_token', data.token);
+
+           // Display welcome message
+           const username = email.split('@')[0]; // Extract username from email
+           const welcomeMessage =  document.getElementById('welcomeMessage');
+           welcomeMessage.innerText = `Welcome ${username}! You are logged in.`;
+           welcomeMessage.style.color = 'green'; 
+           welcomeMessage.style.textDecoration = 'none'; 
+           welcomeMessage.style.display = 'inline'; // Show welcome message
+           alert(`Welcome ${username}! You are logged in.`);
+
+   
+           // Show logout link and hide login link
+           document.getElementById('logoutLink').style.display = 'inline';
+           document.getElementById('loginLink').style.display = 'none';
+
+        // Close the popup
+        document.getElementById('loginPopup').style.display = 'none';
+
+        // Redirect or load user-specific content here
+        // window.location.href = 'dashboard.html'; // Redirect to a protected page
+
+    } catch (error) {
+        console.error('Error during login:', error);
+        messageDiv.innerText = error.message;
+    }
+});
+
+
+// Logout functionality
+document.getElementById('logoutLink').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default anchor behavior
+
+    // Clear user data from local storage
+    localStorage.removeItem('pb_auth_token');
+
+    // Update UI to show login link again and hide welcome message and logout link
+    const loginLink = document.getElementById('loginLink');
+    document.getElementById('welcomeMessage').style.display = 'none';
+    document.getElementById('logoutLink').style.display = 'none';
+    loginLink.style.display = 'inline';
+    console.log('Logged out successfully');
+    alert("Logged out successfully");
+});
+// LOGIN POPUP ENDE
 
 // ROUTES
 
