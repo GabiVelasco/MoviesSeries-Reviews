@@ -51,14 +51,29 @@ header h1 {
  color:#518EB1;
 }
 
+
+/* ROUTES */
 .content-section { 
-    display: none;
-    margin:0 auto;
+    display: none; /* Hide all sections by default */
+    margin: 0 auto; /* Centering if needed */
 }
 
-#home:target, #reviews:target, #about:target {
-    display: block;
+/* Show home by default */
+#home {
+    display: block; /* Home section is shown initially */
 }
+
+/* Show only the targeted section */
+/* #home:target,
+#reviews:target,
+#about:target {
+    display: block; 
+} */
+
+
+/* ROUTES ENDE */
+
+
 
 /* Navigation Styles */
 nav {

@@ -34,6 +34,30 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Document ready');
 
 
+
+// ROUTES
+
+showSection("home");
+
+const navLinks = document.querySelectorAll('.nav-link');
+navLinks.forEach(link => {
+    link.addEventListener("click", function(e) {
+        e.preventDefault();
+        const target = this.getAttribute('data-target');
+        showSection(target);
+    });
+});
+
+function showSection(sectionId) {
+    const sections = document.querySelectorAll(".content-section");
+    sections.forEach(section => {
+        section.style.display = "none";
+    });
+    document.getElementById(sectionId).style.display = "block";
+}
+
+// ROUTES ENDE
+
 //   REVIEWS
 // FETCH REVIEWS
 async function fetchReviews() {
