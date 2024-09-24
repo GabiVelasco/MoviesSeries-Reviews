@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Document ready');
 
 // LOGIN POPUP
+// LOGIN POPUP
 
 document.getElementById('loginLink').addEventListener('click', function(event) {
     event.preventDefault(); // Prevent the default anchor behavior
@@ -51,6 +52,41 @@ window.onclick = function(event) {
         popup.style.display = 'none';
     }
 };
+
+// Check login status on page load
+async function checkLoginStatus() {
+    const token = localStorage.getItem('pb_auth_token');
+    if (token) {
+        await fetchUserInfo(token); // Fetch user info if logged in
+    }
+}
+
+// Fetch user info to get the avatar and name
+async function fetchUserInfo(token) {
+    try {
+        const response = await fetch('http://localhost:8090/api/collections/users/auth', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Display the user's avatar
+            const avatarUrl = data.avatar ? data.avatar[0].url : 'default-avatar.png'; // Adjust based on your avatar response structure
+            document.getElementById('userAvatar').src = avatarUrl; // Set the user's avatar
+            document.getElementById('welcomeMessage').innerText = `Welcome ${data.name || ''}! You are logged in.`;
+            document.getElementById('welcomeMessage').style.display = 'inline';
+        } else {
+            console.error('Failed to fetch user info:', data);
+        }
+    } catch (error) {
+        console.error('Error fetching user info:', error);
+    }
+}
 
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent the default form submission
@@ -79,37 +115,34 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         console.log('Login successful', data);
         messageDiv.innerText = 'Login successful!';
         messageDiv.style.color = 'green';
-       
 
-        // Store the token (optional)
+        // Store the token
         localStorage.setItem('pb_auth_token', data.token);
 
-           // Display welcome message
-           const username = email.split('@')[0]; // Extract username from email
-           const welcomeMessage =  document.getElementById('welcomeMessage');
-           welcomeMessage.innerText = `Welcome ${username}! You are logged in.`;
-           welcomeMessage.style.color = 'green'; 
-           welcomeMessage.style.textDecoration = 'none'; 
-           welcomeMessage.style.display = 'inline'; // Show welcome message
-           alert(`Welcome ${username}! You are logged in.`);
+        // Fetch user info to display avatar
+        await fetchUserInfo(data.token);
 
-   
-           // Show logout link and hide login link
-           document.getElementById('logoutLink').style.display = 'inline';
-           document.getElementById('loginLink').style.display = 'none';
+        // Display welcome message
+        const username = email.split('@')[0]; // Extract username from email
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        welcomeMessage.innerText = `Welcome ${username}! You are logged in.`;
+        welcomeMessage.style.color = 'green'; 
+        welcomeMessage.style.textDecoration = 'none'; 
+        welcomeMessage.style.display = 'inline'; // Show welcome message
+        alert(`Welcome ${username}! You are logged in.`);
+
+        // Show logout link and hide login link
+        document.getElementById('logoutLink').style.display = 'inline';
+        document.getElementById('loginLink').style.display = 'none';
 
         // Close the popup
         document.getElementById('loginPopup').style.display = 'none';
-
-        // Redirect or load user-specific content here
-        // window.location.href = 'dashboard.html'; // Redirect to a protected page
 
     } catch (error) {
         console.error('Error during login:', error);
         messageDiv.innerText = error.message;
     }
 });
-
 
 // Logout functionality
 document.getElementById('logoutLink').addEventListener('click', function(event) {
@@ -126,6 +159,10 @@ document.getElementById('logoutLink').addEventListener('click', function(event) 
     console.log('Logged out successfully');
     alert("Logged out successfully");
 });
+
+// Check login status on page load
+checkLoginStatus();
+
 // LOGIN POPUP ENDE
 
 // ROUTES
