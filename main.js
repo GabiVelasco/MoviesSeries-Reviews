@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterTitle = document.getElementById('filterTitle');
     const movieList = document.getElementById('movieList');
 
-    const reviewPopup = document.getElementById('reviewPopup');
+    const reviewPopup = document.getElementById('review-popup-container');
     const closePopupButton = document.getElementById('closePopup');
     const reviewSection = document.getElementById('reviews');
     const reviewForm = document.getElementById('reviewForm');
@@ -219,12 +219,21 @@ async function fetchReviews() {
 // REVIEW POPUP
 
 function openReviewPopup(movieId, movieTitle) {
-    document.getElementById('reviewPopup').style.display = 'block'; // Show the popup
+    document.getElementById('review-popup-container').style.display = 'block'; // Show the popup
     document.getElementById('movieTitleSpan').textContent = movieTitle; // Set movie title in popup
     document.getElementById('movie-id').value = movieId; // Set the movie ID in the hidden input field
     reviewTitleInput.value = movieTitle; // Set the movie title in the input field
 }
 // OPEN REVIEW POPUP ENDE
+
+// Close the popup if the user clicks anywhere outside of it
+window.onclick = function(event) {
+    const popup = document.getElementById('review-popup-container');
+    if (event.target === popup) {
+        popup.style.display = 'none';
+    }
+};
+
 
 // CLOSE POPUP // Function to close the review popup
     function closeReviewPopup() {
