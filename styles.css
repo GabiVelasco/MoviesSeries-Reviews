@@ -1212,7 +1212,7 @@ button + button {
     padding: 20px;
     background: white;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
 }
 
 #message {
@@ -1231,6 +1231,8 @@ button + button {
     height: 100%;
     overflow: auto; /* Enable scroll if needed */
     background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 }
 
 .login-popup-content {
@@ -1240,6 +1242,8 @@ button + button {
     border: 1px solid #888;
     width: 300px;
     border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 }
 
 .login-close {
@@ -1247,6 +1251,7 @@ button + button {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 .login-close:hover,
@@ -1254,6 +1259,21 @@ button + button {
     color: black;
     text-decoration: none;
     cursor: pointer;
+    
+}
+
+.login-submit-button {
+     padding: 10px;
+     border-radius: 10px;
+     background-color: #ECF3F6;
+     border: 0.5px solid #087584 !important;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     transition: transform 0.3s ease, font-weight 0.3s ease;
+}
+
+.login-submit-button:hover {
+    transform: scale(1.05);
+    font-weight: bolder;
 }
 
 #authLinkContainer {
