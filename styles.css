@@ -546,6 +546,10 @@ body, table, th, td {
 }
 
 th, img { margin: 0 5px 0 5px auto;}
+
+#userAvatar {
+    width: 80px !important;
+}
 .movie-year {
     max-width: 80px !important;
     min-width: 50px !important;
