@@ -91,10 +91,18 @@ async function fetchUserInfo(token) {
 
         const data = await response.json();
         if (response.ok) {
-            // Construct the avatar URL from the filename
+            // Construct the correct avatar URL
+            const avatarFilename = data.avatar;
+            if (avatarFilename) {
+                // Correct format of avatar URL using user ID and token
+                const avatarUrl = `http://localhost:8090/api/files/_pb_users_auth_/${userId}/${avatarFilename}?token=${token}`;
+                document.getElementById('userAvatar').src = avatarUrl;
+                console.log('userAvatar URL:', avatarUrl);
+            } else {
+                // If avatar is not available, use a default avatar
+                document.getElementById('userAvatar').src = 'default-avatar.png';
+            }
             
-            const avatarUrl = data.avatar ? `http://localhost:8090/avatars/${data.avatar}` : 'default-avatar.png';
-            document.getElementById('userAvatar').src = avatarUrl;
             document.getElementById('welcomeMessage').innerText = `Welcome ${data.name || ''}! You are logged in.`;
             console.log(`Welcome ${data.name || ''}! You are logged in.`);
             document.getElementById('welcomeMessage').style.display = 'inline';
@@ -105,6 +113,7 @@ async function fetchUserInfo(token) {
         console.error('Error fetching user info:', error);
     }
 }
+
 
 // Login form submission
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
