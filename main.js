@@ -32,15 +32,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSort = { column: 'title', direction: 'asc' };
 
     console.log('Document ready');
-
-// LOGIN POPUP
 // LOGIN POPUP
 
+// Show login popup when "Login" is clicked
 document.getElementById('loginLink').addEventListener('click', function(event) {
     event.preventDefault(); // Prevent the default anchor behavior
     document.getElementById('loginPopup').style.display = 'block'; // Show the popup
 });
 
+// Close login popup
 document.querySelector('.login-close').addEventListener('click', function() {
     document.getElementById('loginPopup').style.display = 'none'; // Hide the popup
 });
@@ -56,15 +56,32 @@ window.onclick = function(event) {
 // Check login status on page load
 async function checkLoginStatus() {
     const token = localStorage.getItem('pb_auth_token');
+    const loginLink = document.getElementById('loginLink');
+    const logoutLink = document.getElementById('logoutLink');
+
     if (token) {
+
         await fetchUserInfo(token); // Fetch user info if logged in
+        // Show logout link and hide login link
+        loginLink.style.display = 'none';
+        logoutLink.style.display = 'inline';
+    } else {
+        // If not logged in, show login link and hide logout link
+        loginLink.style.display = 'inline';
+        logoutLink.style.display = 'none';
     }
 }
 
 // Fetch user info to get the avatar and name
 async function fetchUserInfo(token) {
+    const userId = localStorage.getItem('user_id');
+    if (!userId) {
+        console.error('User ID is undefined. Please log in first.');
+        return; // Exit the function if userId is not defined
+    }
+
     try {
-        const response = await fetch('http://localhost:8090/api/collections/users/auth', {
+        const response = await fetch(`http://localhost:8090/api/collections/users/records/${userId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -73,12 +90,13 @@ async function fetchUserInfo(token) {
         });
 
         const data = await response.json();
-
         if (response.ok) {
-            // Display the user's avatar
-            const avatarUrl = data.avatar ? data.avatar[0].url : 'default-avatar.png'; // Adjust based on your avatar response structure
-            document.getElementById('userAvatar').src = avatarUrl; // Set the user's avatar
+            // Construct the avatar URL from the filename
+            
+            const avatarUrl = data.avatar ? `http://localhost:8090/avatars/${data.avatar}` : 'default-avatar.png';
+            document.getElementById('userAvatar').src = avatarUrl;
             document.getElementById('welcomeMessage').innerText = `Welcome ${data.name || ''}! You are logged in.`;
+            console.log(`Welcome ${data.name || ''}! You are logged in.`);
             document.getElementById('welcomeMessage').style.display = 'inline';
         } else {
             console.error('Failed to fetch user info:', data);
@@ -88,16 +106,16 @@ async function fetchUserInfo(token) {
     }
 }
 
+// Login form submission
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent the default form submission
 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-
     const messageDiv = document.getElementById('message');
 
     try {
-        const response = await fetch('http://localhost:8090/api/collections/users/auth-with-password', {
+        const response = await fetch(`http://localhost:8090/api/collections/users/auth-with-password`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -106,41 +124,32 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         });
 
         const data = await response.json();
+        if (response.ok) {
+            const token = data.token; // Store this for future authenticated requests
+            const userId = data.record.id; // This is the user's ID
+            localStorage.setItem('pb_auth_token', token);
+            localStorage.setItem('user_id', userId); // Store the user ID for future use
 
-        if (!response.ok) {
+            // Handle successful login
+            messageDiv.innerText = 'Login successful!';
+            messageDiv.style.color = 'green';
+
+            // Fetch user info to display avatar and welcome message
+            await fetchUserInfo(token);
+
+            // Show logout link and hide login link
+            document.getElementById('logoutLink').style.display = 'inline';
+            document.getElementById('loginLink').style.display = 'none';
+
+            // Close the popup
+            document.getElementById('loginPopup').style.display = 'none';
+
+        } else {
             throw new Error(data.message || 'Login failed');
         }
-
-        // Handle successful login
-        console.log('Login successful', data);
-        messageDiv.innerText = 'Login successful!';
-        messageDiv.style.color = 'green';
-
-        // Store the token
-        localStorage.setItem('pb_auth_token', data.token);
-
-        // Fetch user info to display avatar
-        await fetchUserInfo(data.token);
-
-        // Display welcome message
-        const username = email.split('@')[0]; // Extract username from email
-        const welcomeMessage = document.getElementById('welcomeMessage');
-        welcomeMessage.innerText = `Welcome ${username}! You are logged in.`;
-        welcomeMessage.style.color = 'green'; 
-        welcomeMessage.style.textDecoration = 'none'; 
-        welcomeMessage.style.display = 'inline'; // Show welcome message
-        alert(`Welcome ${username}! You are logged in.`);
-
-        // Show logout link and hide login link
-        document.getElementById('logoutLink').style.display = 'inline';
-        document.getElementById('loginLink').style.display = 'none';
-
-        // Close the popup
-        document.getElementById('loginPopup').style.display = 'none';
-
     } catch (error) {
-        console.error('Error during login:', error);
         messageDiv.innerText = error.message;
+        console.error('Error during login:', error);
     }
 });
 
@@ -150,12 +159,13 @@ document.getElementById('logoutLink').addEventListener('click', function(event) 
 
     // Clear user data from local storage
     localStorage.removeItem('pb_auth_token');
+    localStorage.removeItem('user_id');
 
     // Update UI to show login link again and hide welcome message and logout link
-    const loginLink = document.getElementById('loginLink');
     document.getElementById('welcomeMessage').style.display = 'none';
     document.getElementById('logoutLink').style.display = 'none';
-    loginLink.style.display = 'inline';
+    document.getElementById('loginLink').style.display = 'inline';
+
     console.log('Logged out successfully');
     alert("Logged out successfully");
 });
@@ -164,6 +174,10 @@ document.getElementById('logoutLink').addEventListener('click', function(event) 
 checkLoginStatus();
 
 // LOGIN POPUP ENDE
+
+
+
+
 
 // ROUTES
 
@@ -204,7 +218,7 @@ async function fetchReviews() {
         }
 
         const result = await response.json();
-        console.log('Fetched reviews:', result.items); // Debugging: Log fetched reviews
+        // console.log('Fetched reviews:', result.items); // Debugging: Log fetched reviews
         return result.items;
 
     } catch (error) {
@@ -342,7 +356,7 @@ async function addReview(movieId, title, reviewText, ranking) {
             }
         }
 
-        console.log('All movies:', allMovies);
+        // console.log('All movies:', allMovies);
         if (allMovies.length === 0) {
             movieList.innerHTML = '<tr><td colspan="7">No movies found.</td></tr>';
             return;
@@ -415,7 +429,7 @@ async function addReview(movieId, title, reviewText, ranking) {
         }, 0);
     
         const average = totalRanking / movieReviews.length;
-        console.log('1. Average Ranking for Movie ID', movieId, ':', average); // Log the average
+        // console.log('1. Average Ranking for Movie ID', movieId, ':', average); // Log the average
         return average;
     }
     
@@ -495,8 +509,8 @@ const calculateAverageRankings = (reviews) => {
 
             
 
-            console.log("2. Average Ranking:", averageRanking, starRatingHtml);
-            console.log('Fetched Reviews:', reviews); // Check the structure here
+            // console.log("2. Average Ranking:", averageRanking, starRatingHtml);
+            // console.log('Fetched Reviews:', reviews); // Check the structure here
 
             movieRow.innerHTML = `
                 <td class="movie-title"><strong>${movie.title || ''}</strong></td>
@@ -668,11 +682,11 @@ const calculateAverageRankings = (reviews) => {
 
         // Apply genre filter
         filteredMovies = filterByGenre(filteredMovies, selectedGenre);
-        console.log('Movies after genre filter:', filteredMovies); // Debugging log
+        // console.log('Movies after genre filter:', filteredMovies); // Debugging log
 
         // Apply title filter
         filteredMovies = filterByTitle(filteredMovies, searchTitle);
-        console.log('Movies after title filter:', filteredMovies); // Debugging log
+        // console.log('Movies after title filter:', filteredMovies); // Debugging log
 
         // Display the filtered movies
         displayMovies(filteredMovies);
