@@ -1158,9 +1158,7 @@ button.edit-btn, button.save-btn, .buttons {
     font-weight: light;
     letter-spacing: 3px;
     transition: transform 0.3s ease !important;
-    display: block;
     bottom: 0 !important;
-    display: flex;
 }
 
 button.edit-btn:hover, button.save-btn:hover, .buttons:hover {

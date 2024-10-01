@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSort = { column: 'title', direction: 'asc' };
 
     console.log('Document ready');
-// LOGIN POPUP
 
+// LOGIN POPUP
 // Show login popup when "Login" is clicked
 document.getElementById('loginLink').addEventListener('click', function(event) {
     event.preventDefault(); // Prevent the default anchor behavior
@@ -58,6 +58,14 @@ async function checkLoginStatus() {
     const token = localStorage.getItem('pb_auth_token');
     const loginLink = document.getElementById('loginLink');
     const logoutLink = document.getElementById('logoutLink');
+    let userAvatar = document.getElementById('userAvatar');
+    let editButton = document.querySelector('.edit-btn');
+    let saveButton = document.querySelector('.save-btn');
+    let deleteButton = document.querySelector('.delete-btn');
+    let editButtonId = document.getElementById('edit-btn');
+    let saveButtonId = document.getElementById('save-btn');
+    let deleteButtonId = document.getElementById('delete-btn');
+    
 
     if (token) {
 
@@ -65,19 +73,79 @@ async function checkLoginStatus() {
         // Show logout link and hide login link
         loginLink.style.display = 'none';
         logoutLink.style.display = 'inline';
-        let userAvatar = document.getElementById('userAvatar');
-      
-            userAvatar.style.display = 'block'; // Hide the avatar when not logged in 
+        userAvatar.style.display = 'block'; // Hide the avatar when not logged in 
+
+        // Show buttons when logged in
+        if (editButton) {
+            editButton.style.visibility = 'visible'; // Show edit button
+        }
+        if (saveButton) {
+            saveButton.style.visibility = 'visible'; // Show save button
+        }
+        if (deleteButton) {
+            deleteButton.style.visibility = 'visible'; // Show delete button
+        }
+
+        if (editButtonId) {
+            editButton.style.visibility = 'visible'; // Show edit button
+        }
+        if (saveButtonId) {
+            saveButton.style.visibility = 'visible'; // Show save button
+        }
+        if (deleteButtonId) {
+            deleteButton.style.visibility = 'visible'; // Show delete button
+        }
+    
             
     } else {
         // If not logged in, show login link and hide logout link
         loginLink.style.display = 'inline';
         logoutLink.style.display = 'none';
-        let userAvatar = document.getElementById('userAvatar');
-       
-            userAvatar.style.display = 'none'; // Hide the avatar when not logged in
+        userAvatar.style.display = 'none'; // Hide the avatar when not logged in
+       // User is logged out, hide the buttons
+     // Hide buttons when not logged in
+    if (editButton) {
+        editButton.style.visibility = 'hidden !important'; // Hide edit button
+        editButton.classList.add('hidden'); // Hide edit button
+
     }
-}
+    if (saveButton) {
+        saveButton.style.visibility = 'hidden !important'; // Hide save button
+        saveButton.classList.add('hidden'); // Hide edit button
+
+    }
+    if (deleteButton) {
+        deleteButton.style.visibility = 'hidden !important'; // Hide delete button
+        deleteButton.classList.add('hidden'); // Hide edit button
+
+    }
+
+    if (editButtonId) {
+        editButtonId.style.visibility = 'hidden !important'; // Hide edit button
+        editButtonId.classList.add('hidden'); // Hide edit button
+
+    }
+    if (saveButtonId) {
+        saveButtonId.style.visibility = 'hidden !important'; // Hide save button
+        saveButtonId.classList.add('hidden'); // Hide edit button
+
+    }
+    if (deleteButtonId) {
+        deleteButtonId.style.visibility = 'hidden !important'; // Hide delete button
+        deleteButtonId.classList.add('hidden'); // Hide edit button
+
+    }
+
+        // Hide buttons
+        const buttons = [editButton, saveButton, deleteButton, editButtonId, saveButtonId, deleteButtonId];
+        buttons.forEach(button => {
+            if (button) {
+                button.classList.add('hidden'); // Use the hidden class
+            }
+        });
+    
+    
+    }}
 
 // Fetch user info to get the avatar and name
 async function fetchUserInfo(token) {
@@ -161,6 +229,37 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             let userAvatar = document.getElementById('userAvatar');
             userAvatar.style.display = 'block'; // Hide the avatar when not logged in 
 
+             // Show buttons when logged in
+
+             let editButton = document.querySelector('.edit-btn');
+             let saveButton = document.querySelector('.save-btn');
+             let deleteButton = document.querySelector('.delete-btn');
+             let editButtonId = document.getElementById('edit-btn');
+             let saveButtonId = document.getElementById('save-btn');
+             let deleteButtonId = document.getElementById('delete-btn');
+             editButton.style.visibility = 'visible'; // Show edit button
+
+
+            if (editButton) {
+                editButton.style.visibility = 'visible'; // Show edit button
+            }
+            if (saveButton) {
+                saveButton.style.visibility = 'visible'; // Show save button
+            }
+            if (deleteButton) {
+                deleteButton.style.visibility = 'visible'; // Show delete button
+            }
+
+            if (editButtonId) {
+                editButton.style.visibility = 'visible'; // Show edit button
+            }
+            if (saveButtonId) {
+                saveButton.style.visibility = 'visible'; // Show save button
+            }
+            if (deleteButtonId) {
+                deleteButton.style.visibility = 'visible'; // Show delete button
+            }
+
             // Close the popup
             document.getElementById('loginPopup').style.display = 'none';
 
@@ -187,12 +286,44 @@ document.getElementById('logoutLink').addEventListener('click', function(event) 
     document.getElementById('logoutLink').style.display = 'none';
     document.getElementById('loginLink').style.display = 'inline';
     document.getElementById('userAvatar').style.display = 'hidden';
+    editButton.style.visibility = 'hidden'; // Show edit button
+
+
+
+    
     
     // Reset user avatar to the default image
     let userAvatar = document.getElementById('userAvatar');
     if (userAvatar) {
-        // userAvatar.src = 'img/default-avatar.png'; // Update with the path to your default avatar image
         userAvatar.style.display ='none';
+    }
+
+    let editButton = document.querySelector('.edit-btn');
+    let saveButton = document.querySelector('.save-btn');
+    let deleteButton = document.querySelector('.delete-btn');
+    let editButtonId = document.getElementById('edit-btn');
+    let saveButtonId = document.getElementById('save-btn');
+    let deleteButtonId = document.getElementById('delete-btn');
+    
+    
+    if (editButton) {
+        editButton.style.visibility = 'hidden !important'; // Hide edit button
+    }
+    if (saveButton) {
+        saveButton.style.visibility = 'hidden !important'; // Hide save button
+    }
+    if (deleteButton) {
+        deleteButton.style.visibility = 'hidden !important'; // Hide delete button
+    }
+
+    if (editButtonId) {
+        editButton.style.visibility = 'hidden !important'; // Hide edit button
+    }
+    if (saveButtonId) {
+        saveButton.style.visibility = 'hidden !important'; // Hide save button
+    }
+    if (deleteButtonId) {
+        deleteButton.style.visibility = 'hidden !important'; // Hide delete button
     }
 
     console.log('Logged out successfully');
@@ -234,6 +365,8 @@ function showSection(sectionId) {
 //   REVIEWS
 // FETCH REVIEWS
 async function fetchReviews() {
+
+   
     try {
         const response = await fetch(REVIEW_API_URL, {
             method: 'GET',
@@ -515,6 +648,7 @@ const calculateAverageRankings = (reviews) => {
 // DISPLAY MOVIES WITH ADD REVIEW
     async function displayMovies(movies) {
         
+        
         const reviews = await fetchReviews(); // Fetch all reviews
         const averageRankings = calculateAverageRankings(reviews);  // Store the average rankings in a constant
 
@@ -746,7 +880,11 @@ function getHeaders() {
 }
 
 async function fetchReviews() {
+
+
+    
     try {
+        const token = localStorage.getItem('pb_auth_token');
         const response = await fetch(API_URL, {
             method: 'GET',
             headers: getHeaders()
@@ -772,65 +910,63 @@ reviewRow.innerHTML = `
             `).join('')}
         </div>
  <div class="buttons-container">
-         <button type="button" class="edit-btn">Edit</button>
-        <button type="button" class="save-btn" style="display: none;">Save</button>
-        <br><br><button type="button" class="delete-btn">Delete</button>
+         <button type="button" id="edit-btn" class="edit-btn" >Edit</button>
+        <button type="button" id="save-btn" class="save-btn" style="display: none;" >Save</button>
+        <br><br><button type="button" id="delete-btn" class="delete-btn" >Delete</button>
  </div>
     </td>
-    <!-- <td class="buttons-column">
-        <div class="buttons-container">
-            <button type="button" class="edit-btn">Edit</button>
-            <button type="button" class="save-btn" style="display: none;">Save</button>
-            <br> <br><button type="button" class="delete-btn">Delete</button>
-        </div>
-    </td> -->
 `;
 reviewsForm.appendChild(reviewRow);
-            // Add event listener to the "Edit" button
-            const editButton = reviewRow.querySelector('.edit-btn');
-            editButton.addEventListener('click', () => {
-                toggleEditMode(reviewRow, true);
-                editButton.style.display = 'none';
-                reviewRow.querySelector('.save-btn').style.display = 'inline'; // Show save button
+if (token) {
+    // Add event listener to the "Edit" button
+    const editButton = reviewRow.querySelector('.edit-btn');
+    editButton.addEventListener('click', () => {
+        toggleEditMode(reviewRow, true);
+        editButton.style.display = 'none';
+        reviewRow.querySelector('.save-btn').style.display = 'inline'; // Show save button
+    });
+
+    // Add event listener to the "Save" button
+    const saveButton = reviewRow.querySelector('.save-btn');
+    saveButton.addEventListener('click', async () => {
+        const id = reviewRow.querySelector('.star-rating').dataset.id;
+        const title = reviewRow.querySelector('input').value;
+        const reviewText = reviewRow.querySelector('textarea').value;
+        const ranking = reviewRow.querySelector('.star-rating').dataset.rating;
+
+        try {
+            await fetch(`${API_URL}/${id}`, {
+                method: 'PATCH',
+                headers: getHeaders(),
+                body: JSON.stringify({
+                    title,
+                    review_text: reviewText,
+                    ranking
+                })
             });
+            alert('Review updated successfully!');
+            fetchReviews(); // Refresh the reviews list
+        } catch (error) {
+            console.error('Error updating review:', error);
+        }
+    });
 
-            // Add event listener to the "Save" button
-            const saveButton = reviewRow.querySelector('.save-btn');
-            saveButton.addEventListener('click', async () => {
-                const id = reviewRow.querySelector('.star-rating').dataset.id;
-                const title = reviewRow.querySelector('input').value;
-                const reviewText = reviewRow.querySelector('textarea').value;
-                const ranking = reviewRow.querySelector('.star-rating').dataset.rating;
-
-                try {
-                    await fetch(`${API_URL}/${id}`, {
-                        method: 'PATCH',
-                        headers: getHeaders(),
-                        body: JSON.stringify({
-                            title,
-                            review_text: reviewText,
-                            ranking
-                        })
-                    });
-                    alert('Review updated successfully!');
-                    fetchReviews(); // Refresh the reviews list
-                } catch (error) {
-                    console.error('Error updating review:', error);
-                }
-            });
-
-            const deleteButton = reviewRow.querySelector('.delete-btn');
-            deleteButton.addEventListener('click', () => deleteReview(review.id));
-
-            // Setup star rating for this review
-            const starRating = reviewRow.querySelector('.star-rating');
-            setupStarRating(starRating);
-        });
-    } catch (error) {
-        console.error('Error fetching reviews:', error);
-    }
+    const deleteButton = reviewRow.querySelector('.delete-btn');
+    deleteButton.addEventListener('click', () => deleteReview(review.id));
+} else {
+    // Hide buttons if not logged in
+    const buttons = reviewRow.querySelectorAll('.buttons-container button');
+    buttons.forEach(button => button.style.display = 'none');
 }
 
+// Setup star rating for this review
+const starRating = reviewRow.querySelector('.star-rating');
+setupStarRating(starRating);
+});
+} catch (error) {
+console.error('Error fetching reviews:', error);
+}
+}
 
 // FETCH REVIEWS ENDE
 
@@ -886,6 +1022,98 @@ async function deleteReview(reviewId) {
 
 
 // Initial fetch of reviews when the page loads
-document.addEventListener('DOMContentLoaded', fetchReviews);
+document.addEventListener('DOMContentLoaded', fetchReviews, checkLoginStatus);
 
+// Check login status on page load
+async function checkLoginStatus() {
+    const token = localStorage.getItem('pb_auth_token');
+    const loginLink = document.getElementById('loginLink');
+    const logoutLink = document.getElementById('logoutLink');
+    let userAvatar = document.getElementById('userAvatar');
+    let editButton = document.querySelector('.edit-btn');
+    let saveButton = document.querySelector('.save-btn');
+    let deleteButton = document.querySelector('.delete-btn');
+    let editButtonId = document.getElementById('edit-btn');
+    let saveButtonId = document.getElementById('save-btn');
+    let deleteButtonId = document.getElementById('delete-btn');
+    
 
+    if (token) {
+
+        await fetchUserInfo(token); // Fetch user info if logged in
+        // Show logout link and hide login link
+        loginLink.style.display = 'none';
+        logoutLink.style.display = 'inline';
+        userAvatar.style.display = 'block'; // Hide the avatar when not logged in 
+
+        // Show buttons when logged in
+        if (editButton) {
+            editButton.style.visibility = 'visible'; // Show edit button
+        }
+        if (saveButton) {
+            saveButton.style.visibility = 'visible'; // Show save button
+        }
+        if (deleteButton) {
+            deleteButton.style.visibility = 'visible'; // Show delete button
+        }
+
+        if (editButtonId) {
+            editButton.style.visibility = 'visible'; // Show edit button
+        }
+        if (saveButtonId) {
+            saveButton.style.visibility = 'visible'; // Show save button
+        }
+        if (deleteButtonId) {
+            deleteButton.style.visibility = 'visible'; // Show delete button
+        }
+    
+            
+    } else {
+        // If not logged in, show login link and hide logout link
+        loginLink.style.display = 'inline';
+        logoutLink.style.display = 'none';
+        userAvatar.style.display = 'none'; // Hide the avatar when not logged in
+       // User is logged out, hide the buttons
+     // Hide buttons when not logged in
+    if (editButton) {
+        editButton.style.visibility = 'hidden !important'; // Hide edit button
+        editButton.classList.add('hidden'); // Hide edit button
+
+    }
+    if (saveButton) {
+        saveButton.style.visibility = 'hidden !important'; // Hide save button
+        saveButton.classList.add('hidden'); // Hide edit button
+
+    }
+    if (deleteButton) {
+        deleteButton.style.visibility = 'hidden !important'; // Hide delete button
+        deleteButton.classList.add('hidden'); // Hide edit button
+
+    }
+
+    if (editButtonId) {
+        editButtonId.style.visibility = 'hidden !important'; // Hide edit button
+        editButtonId.classList.add('hidden'); // Hide edit button
+
+    }
+    if (saveButtonId) {
+        saveButtonId.style.visibility = 'hidden !important'; // Hide save button
+        saveButtonId.classList.add('hidden'); // Hide edit button
+
+    }
+    if (deleteButtonId) {
+        deleteButtonId.style.visibility = 'hidden !important'; // Hide delete button
+        deleteButtonId.classList.add('hidden'); // Hide edit button
+
+    }
+
+        // Hide buttons
+        const buttons = [editButton, saveButton, deleteButton, editButtonId, saveButtonId, deleteButtonId];
+        buttons.forEach(button => {
+            if (button) {
+                button.classList.add('hidden'); // Use the hidden class
+            }
+        });
+    
+    
+    }}
