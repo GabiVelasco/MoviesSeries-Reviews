@@ -65,10 +65,17 @@ async function checkLoginStatus() {
         // Show logout link and hide login link
         loginLink.style.display = 'none';
         logoutLink.style.display = 'inline';
+        let userAvatar = document.getElementById('userAvatar');
+      
+            userAvatar.style.display = 'block'; // Hide the avatar when not logged in 
+            
     } else {
         // If not logged in, show login link and hide logout link
         loginLink.style.display = 'inline';
         logoutLink.style.display = 'none';
+        let userAvatar = document.getElementById('userAvatar');
+       
+            userAvatar.style.display = 'none'; // Hide the avatar when not logged in
     }
 }
 
@@ -150,6 +157,9 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             document.getElementById('logoutLink').style.display = 'inline';
             document.getElementById('loginLink').style.display = 'none';
 
+            let userAvatar = document.getElementById('userAvatar');
+            userAvatar.style.display = 'block'; // Hide the avatar when not logged in 
+
             // Close the popup
             document.getElementById('loginPopup').style.display = 'none';
 
@@ -169,11 +179,20 @@ document.getElementById('logoutLink').addEventListener('click', function(event) 
     // Clear user data from local storage
     localStorage.removeItem('pb_auth_token');
     localStorage.removeItem('user_id');
+    
 
     // Update UI to show login link again and hide welcome message and logout link
     document.getElementById('welcomeMessage').style.display = 'none';
     document.getElementById('logoutLink').style.display = 'none';
     document.getElementById('loginLink').style.display = 'inline';
+    document.getElementById('userAvatar').style.display = 'hidden';
+    
+    // Reset user avatar to the default image
+    let userAvatar = document.getElementById('userAvatar');
+    if (userAvatar) {
+        // userAvatar.src = 'img/default-avatar.png'; // Update with the path to your default avatar image
+        userAvatar.style.display ='none';
+    }
 
     console.log('Logged out successfully');
     alert("Logged out successfully");
