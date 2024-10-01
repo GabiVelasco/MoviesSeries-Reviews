@@ -109,10 +109,11 @@ async function fetchUserInfo(token) {
                 // If avatar is not available, use a default avatar
                 document.getElementById('userAvatar').src = 'default-avatar.png';
             }
-            
-            document.getElementById('welcomeMessage').innerText = `Welcome ${data.name || ''}! You are logged in.`;
+            let welcomeMessage = document.getElementById('welcomeMessage');
+            welcomeMessage.innerText = `Welcome ${data.name || ''}! You are logged in.`;
+            welcomeMessage.style.color = 'blue';
             console.log(`Welcome ${data.name || ''}! You are logged in.`);
-            document.getElementById('welcomeMessage').style.display = 'inline';
+            welcomeMessage.style.display = 'inline';
         } else {
             console.error('Failed to fetch user info:', data);
         }
