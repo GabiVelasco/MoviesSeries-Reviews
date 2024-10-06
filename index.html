@@ -45,9 +45,15 @@
             </li>
         </ul>
     </div>
-        <div class="nav-right">
-            <img id="userAvatar" src="img/default-avatar.png" alt="User Avatar" width="80px"/>
+    <div class="nav-right">
+        <div class="dropdown">
+            <img id="userAvatar" src="img/default-avatar.png" alt="User Avatar" width="80px" data-bs-toggle="dropdown" aria-expanded="false" />
+            <ul class="dropdown-menu" id="avatarMenu" aria-labelledby="userAvatar">
+                <li><a class="dropdown-item" href="#" id="viewMyReviews">View My Reviews</a></li>
+                <li><a class="dropdown-item" href="#" id="logoutButton">Logout</a></li>
+            </ul>
         </div>
+    </div>
     </div>
     </nav>
     <li id="authLinkContainer" style="text-decoration:none !important; list-style-type: none; padding: 20px;">

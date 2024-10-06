@@ -1117,3 +1117,41 @@ async function checkLoginStatus() {
     
     
     }}
+
+
+
+    // FOTO AVATAR MENU
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const avatar = document.getElementById('userAvatar');
+        const avatarMenu = document.getElementById('avatarMenu');
+        const viewMyReviews = document.getElementById('viewMyReviews');
+        const logoutButton = document.getElementById('logoutButton');
+    
+        // Toggle dropdown visibility
+        avatar.addEventListener('click', function() {
+            avatarMenu.classList.toggle('show');
+        });
+    
+        // Close dropdown if clicked outside
+        window.addEventListener('click', function(event) {
+            if (!event.target.matches('#userAvatar')) {
+                avatarMenu.classList.remove('show');
+            }
+        });
+    
+        // Handle "View My Reviews" click
+        viewMyReviews.addEventListener('click', function() {
+            // Logic to display only the user's reviews
+            console.log('Displaying only user reviews');
+            // Implement your function to show user's reviews here
+        });
+    
+        // Handle logout
+        logoutButton.addEventListener('click', function() {
+            console.log('Logging out');
+            // Implement your logout functionality here
+            // E.g., clear session and redirect to login page
+        });
+    });
+// FOTO AVATAR MENU ENDE    

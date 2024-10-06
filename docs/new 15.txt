@@ -1,3 +1,7 @@
-gabriela.luppe@gmail.com
+- gabriela.luppe@gmail.com
 
-Code$_Pocketbase_2024
+- Code$_Pocketbase_2024    / mnbvcxy1
+
+
+- Falls Passwort nicht funktioniert: 
+ ./pocketbase admin update gabriela.luppe@gmail.com mnbvcxy1
